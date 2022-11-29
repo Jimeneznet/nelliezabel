@@ -3,7 +3,7 @@ import { AuthProvider } from './lib/context/auth.context';
 import Header from './components/Header';
 import React from 'react';
 import ProtectedRoute from './components/utils/ProtectedRoute'
-import Dictionary from './pages/admin/Dictionary';
+import Word from './pages/admin/Word';
 import Game from './pages/admin/Game';
 import News from './pages/admin/News';
 import Users from './pages/admin/Users';
@@ -19,7 +19,7 @@ function App() {
             <Route path='/login' element={ <Login /> }/>
             <Route path='/admin/dictionary' element={
               <ProtectedRoute>
-                <Dictionary />
+                <Word />
               </ProtectedRoute>
             }/>
             <Route path='/admin/news' element={

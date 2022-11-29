@@ -2,15 +2,15 @@ import React from "react";
 import Layout from "../../components/Layout";
 import Header from "../../components/Header";
 
-const dictionary = () => {
+const Word = () => {
   return (
     <div>
       <div className="">
         <Header>Centro de Administracion</Header>
-        <Layout>Diccionario</Layout>
+        <Layout>CRUD de Palabras</Layout>
       </div>
     </div>
   );
 };
 
-export default dictionary;
+export default Word;
