@@ -7,6 +7,8 @@ import Dictionary from './pages/admin/Dictionary';
 import Game from './pages/admin/Game';
 import News from './pages/admin/News';
 import Users from './pages/admin/Users';
+import Home from './pages/Home';
+import { Login } from './pages/Login';
 
 function App() {
   return (
@@ -35,7 +37,7 @@ function App() {
                 <Game />
               </ProtectedRoute>
             }/>
-            <Route path='*' component={<h1>404 Page Not Found</h1>}/>
+            <Route path='*' element={<h1>404 Page Not Found</h1>}/>
           </Routes>
       </Router>
     </AuthProvider>
