@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 
 export const Login = () => {
-  //const { login } = useAuth()
+  //const { user, signIn } = useAuth()
 
 /*   const navigate = useNavigate();
 

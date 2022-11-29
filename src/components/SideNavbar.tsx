@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from "react";
 import ClassNames from "classnames";
 import { Link, useLocation } from "react-router-dom";
-import user from "../assets/victoria.png";
+import handsIconAsset from "../assets/victoria.png";
 import CollapsIcon from "./icons/CollapsIcon";
 import ArticleIcon from "./icons/ArticleIcon";
 import UserIcon from "./icons/UserIcon";
@@ -73,7 +73,7 @@ const SideNavbar = () => {
       <div className="flex flex-col bg-light ">
         <div className="flex items-center justify-between bg-light relative">
           <div className="flex items-center bg-light pl-1 gap-4">
-            <img src={user} className={logo} />
+            <img src={handsIconAsset} className={logo} alt=""/>
             <span
               className={ClassNames(
                 "mt-2 text-lg bg-light font-medium text-text-light",
