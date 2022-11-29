@@ -1,14 +1,13 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { AuthProvider } from './lib/context/auth.context';
-import Header from './components/Header';
-import React from 'react';
 import ProtectedRoute from './components/utils/ProtectedRoute'
-import Dictionary from './pages/admin/Dictionary';
+import Word from './pages/admin/Word';
 import Game from './pages/admin/Game';
 import News from './pages/admin/News';
 import Users from './pages/admin/Users';
 import Home from './pages/Home';
 import { Login } from './pages/Login';
+import Dictionary from 'pages/Dictionary';
 
 function App() {
   return (
@@ -17,9 +16,10 @@ function App() {
       <Routes>
             <Route path='/' element={ <Home /> }/>
             <Route path='/login' element={ <Login /> }/>
+            <Route path='/dictionary' element={ <Dictionary /> }/>
             <Route path='/admin/dictionary' element={
               <ProtectedRoute>
-                <Dictionary />
+                <Word />
               </ProtectedRoute>
             }/>
             <Route path='/admin/news' element={
