@@ -1,6 +1,6 @@
 import React from "react";
-import Layout from "../../components/Layout.js";
-import Header from "../../components/Header.js";
+import Layout from "../../components/Layout";
+import Header from "../../components/Header";
 
 const Game = () => {
   return (
