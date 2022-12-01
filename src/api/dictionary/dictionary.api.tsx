@@ -20,6 +20,7 @@ export const useGetWords = async (
     word: doc.data().word,
     description: doc.data().description,
     video: doc.data().video,
+    category: doc.data().category,
   }));
 
   return cleanData;
