@@ -1,4 +1,4 @@
-import { db } from "@lib/config/firebase.config";
+import { db } from "../../lib/config/firebase.config";
 import { Word } from "@lib/types/word.types";
 import {
   collection,
