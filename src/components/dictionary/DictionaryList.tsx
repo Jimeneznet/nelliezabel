@@ -6,6 +6,14 @@ import Pagination from "../dictionary/Pagination";
 const DictionaryList = ({ words }: { words: Word[] }) => {
   const { currentWords, wordsPerPage, currentPage, paginate } =
     usePagination(words);
+
+  if (currentWords.length === 0) {
+    return (
+      <div className="flex justify-center mt-10">
+        <progress className="progress w-1/2 progress-primary" />
+      </div>
+    );
+  }
   return (
     <div>
       <div className="flex justify-center">
