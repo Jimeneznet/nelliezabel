@@ -15,6 +15,17 @@ const firebaseConfig = {
     appId: "1:258464120558:web:bca8504cbaed6d8358fdff",
     measurementId: "G-L81KF505QW"
   };
+
+// Firebase Luis Cubillos
+// const firebaseConfig = {
+//   apiKey: "AIzaSyCG1lk1q8deAllV4MY7BoOfX0Akui7rSLU",
+//   authDomain: "nelliezabel.firebaseapp.com",
+//   projectId: "nelliezabel",
+//   storageBucket: "nelliezabel.appspot.com",
+//   messagingSenderId: "83106487872",
+//   appId: "1:83106487872:web:88ccf517a39d3edd0109a5",
+//   measurementId: "G-Q55BR6RRDC"
+// };
   
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
