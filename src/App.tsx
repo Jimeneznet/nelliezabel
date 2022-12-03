@@ -9,6 +9,9 @@ import Home from './pages/Home';
 import { Login } from './pages/Login';
 import Dictionary from 'pages/Dictionary';
 
+//import {CrudDictionary} from './pages/admin/CrudDictionary';
+import CrudDictionary from "./pages/admin/CrudDictionary";
+
 function App() {
   return (
     <AuthProvider>
@@ -17,6 +20,10 @@ function App() {
             <Route path='/' element={ <Home /> }/>
             <Route path='/login' element={ <Login /> }/>
             <Route path='/dictionary' element={ <Dictionary /> }/>
+
+            <Route path='/crud-dictionary' element={ <CrudDictionary /> }/>
+
+            
             <Route path='/admin/dictionary' element={
               <ProtectedRoute>
                 <Word />
