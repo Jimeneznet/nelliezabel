@@ -6,8 +6,9 @@ import Game from './pages/admin/Game';
 import News from './pages/admin/News';
 import Users from './pages/admin/Users';
 import Home from './pages/Home';
-import { Login } from './pages/Login';
+import Login from './pages/Login';
 import Dictionary from 'pages/Dictionary';
+import Register from 'pages/Register';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path='/' element={ <Home /> }/>
             <Route path='/login' element={ <Login /> }/>
             <Route path='/dictionary' element={ <Dictionary /> }/>
+            <Route path='/register' element={ <Register /> }/>
             <Route path='/admin/dictionary' element={
               <ProtectedRoute>
                 <Word />
