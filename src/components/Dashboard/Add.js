@@ -1,102 +1,101 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 
-const Add = ({ employees, setEmployees, setIsAdding }) => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [salary, setSalary] = useState('');
-  const [date, setDate] = useState('');
+const Add = ({ words, setWords, setIsAdding }) => {
+  const [id, setId] = useState('');
+  const [word, setWord] = useState('');
+  const [description, setDescription] = useState('');
+  const [category, setCategory] = useState('');
+  const [video, setVideo] = useState('');
 
   const handleAdd = e => {
     e.preventDefault();
 
-    if (!firstName || !lastName || !email || !salary || !date) {
+    if (!id || !word || !description || !category || !video) {
       return Swal.fire({
         icon: 'error',
         title: 'Error!',
-        text: 'All fields are required.',
+        text: 'Todos los campos son requeridos',
         showConfirmButton: true,
       });
     }
-
-    const id = employees.length + 1;
-    const newEmployee = {
+    //aca deberia de haber conexion a firebase para introducir nueva palabra creo qe esta todo 
+    const id = words.length + 1;
+    const newWord = {
       id,
-      firstName,
-      lastName,
-      email,
-      salary,
-      date,
+      word,
+      description,
+      category,
+      video,
     };
 
-    employees.push(newEmployee);
-    localStorage.setItem('employees_data', JSON.stringify(employees));
-    setEmployees(employees);
+    words.push(newWord);
+    localStorage.setItem('employees_data', JSON.stringify(words));//
+    setWords(words);
     setIsAdding(false);
 
     Swal.fire({
       icon: 'success',
       title: 'Added!',
-      text: `${firstName} ${lastName}'s data has been Added.`,
+      text: `La palabra ${word} ha sido añadida`,
       showConfirmButton: false,
       timer: 1500,
     });
   };
 
   return (
-    <div className="small-container">
-      <form onSubmit={handleAdd}>
-        <h1>Add Employee</h1>
-        <label htmlFor="firstName">First Name</label>
+    
+    <div className="container">
+      <div>
+        
+      </div>  
+      <form className="w-5/6 m-8" onSubmit={handleAdd}>
+        
+        <h1 className="bg-[#976DD0]  h-[7rem] shadow-2xl z-1 text-left font-bold indent-12 text-white align-baseline">Nueva palabra</h1>
+        <div className='flex items-baseline space-x-5' > 
+        <label className="" htmlFor="word">Palabra</label>
         <input
-          id="firstName"
+          id="word"
           type="text"
-          name="firstName"
-          value={firstName}
-          onChange={e => setFirstName(e.target.value)}
+          name="word"
+          value={word}
+          onChange={e => setWord(e.target.value)}
         />
-        <label htmlFor="lastName">Last Name</label>
+        </div>
+        <div className='flex items-baseline space-x-5'>
+        <label htmlFor="description">Descripción</label>
         <input
-          id="lastName"
+          className="bg-white"
+          id="description"
           type="text"
-          name="lastName"
-          value={lastName}
-          onChange={e => setLastName(e.target.value)}
+          name="description"
+          value={description}
+          onChange={e => setDescription(e.target.value)}
         />
-        <label htmlFor="email">Email</label>
+        </div>
+        <div className='flex items-baseline space-x-5'>
+        <label htmlFor="category">Categoría</label>
         <input
-          id="email"
-          type="email"
-          name="email"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
+          id="category"
+          type="text"
+          name="category"
+          value={category}
+          onChange={e => setCategory(e.target.value)}
         />
-        <label htmlFor="salary">Salary ($)</label>
+        </div>
+        <div className='flex items-baseline space-x-5'>
         <input
-          id="salary"
-          type="number"
-          name="salary"
-          value={salary}
-          onChange={e => setSalary(e.target.value)}
+          id="video"
+          type="button"
+          name="video"
+          value={"Subir video"}
+          onChange={e => setVideo(e.target.value)}
         />
-        <label htmlFor="date">Date</label>
-        <input
-          id="date"
-          type="date"
-          name="date"
-          value={date}
-          onChange={e => setDate(e.target.value)}
-        />
+        </div>
         <div style={{ marginTop: '30px' }}>
-          <input type="submit" value="Add" />
-          <input
-            style={{ marginLeft: '12px' }}
-            className="muted-button"
-            type="button"
-            value="Cancel"
-            onClick={() => setIsAdding(false)}
-          />
+        <button class="btn btn-success">Añadir</button>
+        <button class="btn btn-error" style={{ marginLeft: '12px'}}onClick={() => setIsAdding(false)}>Cancelar</button>
+
         </div>
       </form>
     </div>

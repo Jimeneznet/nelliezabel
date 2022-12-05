@@ -1,9 +1,11 @@
 import React from 'react';
 
-const Table = ({ employees, handleEdit, handleDelete }) => {
-  employees.forEach((employee, i) => {
-    employee.id = i + 1;
+const Table = ({ words, handleEdit, handleDelete }) => {
+  words.forEach((word, i) => {
+    word.id = i + 1;
+
   });
+  console.log(words);
 
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -16,30 +18,26 @@ const Table = ({ employees, handleEdit, handleDelete }) => {
       <table className="striped-table">
         <thead>
           <tr>
-            <th>No.</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Salary</th>
-            <th>Date</th>
+            <th>ID.</th>
+            <th>Palabra</th>
+            <th>Descripción</th>
+            <th>Categoría</th>
             <th colSpan={2} className="text-center">
               Actions
             </th>
           </tr>
         </thead>
         <tbody>
-          {employees.length > 0 ? (
-            employees.map((employee, i) => (
-              <tr key={employee.id}>
+          {words.length > 0 ? (
+            words.map((Word, i) => (
+              <tr key={Word.id}>
                 <td>{i + 1}</td>
-                <td>{employee.firstName}</td>
-                <td>{employee.lastName}</td>
-                <td>{employee.email}</td>
-                <td>{formatter.format(employee.salary)}</td>
-                <td>{employee.date} </td>
+                <td>{Word.word}</td>
+                <td>{Word.description}</td>
+                <td>{Word.category}</td>
                 <td className="text-right">
                   <button
-                    onClick={() => handleEdit(employee.id)}
+                    onClick={() => handleEdit(Word.id)}
                     className="button muted-button"
                   >
                     Edit
@@ -47,7 +45,7 @@ const Table = ({ employees, handleEdit, handleDelete }) => {
                 </td>
                 <td className="text-left">
                   <button
-                    onClick={() => handleDelete(employee.id)}
+                    onClick={() => handleDelete(Word.id)}
                     className="button muted-button"
                   >
                     Delete
@@ -57,7 +55,7 @@ const Table = ({ employees, handleEdit, handleDelete }) => {
             ))
           ) : (
             <tr>
-              <td colSpan={7}>No Employees</td>
+              <td colSpan={7}>No Existen Palabras</td>
             </tr>
           )}
         </tbody>

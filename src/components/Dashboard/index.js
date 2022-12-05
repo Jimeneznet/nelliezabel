@@ -7,49 +7,50 @@ import Add from './Add';
 import Edit from './Edit';
 import './ui-primitive.css';
 
-import { employeesData } from '../../data';
+import { wordsData } from '../../data';
 
 const Dashboard = ({ setIsAuthenticated }) => {
-  const [employees, setEmployees] = useState(employeesData);
-  const [selectedEmployee, setSelectedEmployee] = useState(null);
+  const [words, setWords] = useState(wordsData);
+  const [selectedWord, setSelectedWord] = useState(null);
   const [isAdding, setIsAdding] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem('employees_data'));
-    if (data !== null && Object.keys(data).length !== 0) setEmployees(data);
+    // aca igual debe haber conexion con firebase
+    const data = JSON.parse(localStorage.getItem('words_data'));
+    if (data !== null && Object.keys(data).length !== 0) setWords(data);
   }, []);
 
   const handleEdit = id => {
-    const [employee] = employees.filter(employee => employee.id === id);
+    const [Word] = words.filter(word => word.id === id);
 
-    setSelectedEmployee(employee);
+    setSelectedWord(Word);
     setIsEditing(true);
   };
 
   const handleDelete = id => {
     Swal.fire({
       icon: 'warning',
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
+      title: 'Estás seguro?',
+      text: "No podras revertir este cambio!",
       showCancelButton: true,
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'No, cancel!',
+      confirmButtonText: 'Eliminar!',
+      cancelButtonText: 'Cancelar!',
     }).then(result => {
       if (result.value) {
-        const [employee] = employees.filter(employee => employee.id === id);
+        const [Word] = words.filter(word => word.id === id);
 
         Swal.fire({
           icon: 'success',
-          title: 'Deleted!',
-          text: `${employee.firstName} ${employee.lastName}'s data has been deleted.`,
+          title: 'Eliminado!',
+          text: `La palabra ${Word.word} ha sido eliminada con éxito  `,
           showConfirmButton: false,
           timer: 1500,
         });
 
-        const employeesCopy = employees.filter(employee => employee.id !== id);
-        localStorage.setItem('employees_data', JSON.stringify(employeesCopy));
-        setEmployees(employeesCopy);
+        const wordsCopy = words.filter(word => word.id !== id);
+        localStorage.setItem('employees_data', JSON.stringify(wordsCopy));
+        setWords(wordsCopy);
       }
     });
   };
@@ -64,7 +65,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
         />
         
           <Table
-            employees={employees}
+            words={words}
             handleEdit={handleEdit}
             handleDelete={handleDelete}
           />
@@ -72,16 +73,16 @@ const Dashboard = ({ setIsAuthenticated }) => {
       )}
       {isAdding && (
         <Add
-          employees={employees}
-          setEmployees={setEmployees}
+          words={words}
+          setWords={setWords}
           setIsAdding={setIsAdding}
         />
       )}
       {isEditing && (
         <Edit
-          employees={employees}
-          selectedEmployee={selectedEmployee}
-          setEmployees={setEmployees}
+          words={words}
+          selectedWord={selectedWord}
+          setWords={setWords}
           setIsEditing={setIsEditing}
         />
       )}

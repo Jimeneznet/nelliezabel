@@ -21,12 +21,12 @@ function App() {
             <Route path='/login' element={ <Login /> }/>
             <Route path='/dictionary' element={ <Dictionary /> }/>
 
-            <Route path='/crud-dictionary' element={ <CrudDictionary /> }/>
+            <Route path='/admin/crud-dictionary' element={ <CrudDictionary /> }/>
 
             
             <Route path='/admin/dictionary' element={
               <ProtectedRoute>
-                <Word />
+                <CrudDictionary />
               </ProtectedRoute>
             }/>
             <Route path='/admin/news' element={
