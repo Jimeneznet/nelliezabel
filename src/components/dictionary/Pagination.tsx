@@ -18,13 +18,14 @@ const Pagination = ({
   return (
     <nav className="my-8 flex justify-center">
       <div className="btn-group">
-        {pageNumbers.map((number) => (
+        {pageNumbers.map((number, index) => (
           <button
-            className={`btn btn-md 
+            className={`btn btn-xs md:btn-md 
             hover:bg-[#D9D7FE] hover:text-black
             ${number === currentPage ? "bg-[#8F19EA] text-white" : null} 
             `}
             onClick={() => paginate(number)}
+            key={index}
           >
             {number}
           </button>

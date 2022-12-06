@@ -38,13 +38,17 @@ const DictionaryRow = ({ word }: { word: Word }) => {
   };
   return (
     <div>
-      <li className="flex justify-evenly py-5 border-t-2 hover:bg-[#D9D7FE] cursor-pointer">
-        <div className="flex justify-start w-1/2">
+      <li className="flex justify-center flex-col md:flex-row md:justify-evenly py-5 border-t-2 hover:bg-[#D9D7FE] cursor-pointer">
+        <div className="flex justify-center md:justify-start md:w-1/2">
           <p className="text-3xl">{word.word}</p>
         </div>
-        <div className="flex justify-around w-1/2">
-          <p className="text-xl"> Categoría: </p>
-          {handleCategories(word.category)}
+        <div className="flex justify-center flex-col md:justify-around md:flex-row md:w-1/2">
+          <div className="flex justify-center m-5 md:m-0">
+            <p className="text-xl"> Categoría: </p>
+          </div>
+          <div className="flex justify-center">
+            {handleCategories(word.category)}
+          </div>
         </div>
       </li>
     </div>
