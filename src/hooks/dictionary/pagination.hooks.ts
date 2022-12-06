@@ -2,8 +2,8 @@ import { Word } from "@lib/types/word.types";
 import { useState } from "react";
 
 export const usePagination = (words: Array<Word>) => {
-  const [currentPage, setCurrentPage] = useState<number>(30);
-  const [wordsPerPage] = useState<number>(1);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [wordsPerPage] = useState<number>(30);
   const indexLastWord = currentPage * wordsPerPage;
   const indexFirstWord = indexLastWord - wordsPerPage;
   const currentWords = words.slice(indexFirstWord, indexLastWord);
