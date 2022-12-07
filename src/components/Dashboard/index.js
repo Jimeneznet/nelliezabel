@@ -10,24 +10,20 @@ import { getWords } from 'hooks/getWords';
 import { wordsData } from '../../data';
 
 const Dashboard = ({ setIsAuthenticated }) => {
-  const [words, setWords] = useState(wordsData);
+  const [words, setWords] = useState(getWords);
   const [selectedWord, setSelectedWord] = useState(null);
   const [isAdding, setIsAdding] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+
   useEffect(() => {
     setWords([]);
     getWords().then((words) => words.forEach((element) => {
-      setWords((old) => [...old, element.data()])
+      setWords((old) => [...old, element])
     }));
   }, [])
 
-  const items = 
-  words.map((word, index) => ({
-    id: word.word,
-    value: word.word,
-  }));
 
-
+  
   const handleEdit = id => {
     const [Word] = words.filter(word => word.id === id);
 

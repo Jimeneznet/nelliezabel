@@ -1,16 +1,11 @@
 import React from 'react';
 
-const Table = ({ words, handleEdit, handleDelete }) => {
-  words.forEach((word, i) => {
-    word.id = i + 1;
-
-  });
-  console.log(words);
-
+const Table = ({ words, setWords, handleEdit, handleDelete }) => {
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
     minimumFractionDigits: null,
+    
   });
 
   return (
@@ -19,6 +14,7 @@ const Table = ({ words, handleEdit, handleDelete }) => {
         <thead>
           <tr>
             <th>ID.</th>
+            <th>Código Serial.</th>
             <th>Palabra</th>
             <th>Descripción</th>
             <th>Categoría</th>
@@ -32,9 +28,10 @@ const Table = ({ words, handleEdit, handleDelete }) => {
             words.map((Word, i) => (
               <tr key={Word.id}>
                 <td>{i + 1}</td>
-                <td>{Word.word}</td>
-                <td>{Word.description}</td>
-                <td>{Word.category}</td>
+                <td>{Word.id}</td>
+                <td>{Word.data().word}</td>
+                <td>{Word.data().description}</td>
+                <td>{Word.data().category}</td>
                 <td className="text-right">
                   <button
                     onClick={() => handleEdit(Word.id)}

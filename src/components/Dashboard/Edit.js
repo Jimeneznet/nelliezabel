@@ -9,7 +9,6 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing }) => {
   const [category, setCategory] = useState(selectedWord.category);
   const [video, setVideo] = useState(selectedWord.video);
 
-  console.log(id)
   const handleUpdate = e => {
     e.preventDefault();
 

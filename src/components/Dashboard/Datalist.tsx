@@ -11,8 +11,7 @@ const Datalist = () => {
     setWords([]);
 
     getWords().then((words: any) => words.forEach((element: any) => {
-      setWords((old: any) => [...old, element.data()])
-
+      setWords((old: any) => [...old, element])
       
     }));
   
@@ -21,8 +20,8 @@ const Datalist = () => {
 
   const items = 
   words.map((word: any, index: number) => ({
-    id: word.word,
-    value: word.word,
+    id: word.data().word,
+    value: word.data().word,
   }));
 
   return (
