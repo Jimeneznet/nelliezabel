@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 
+
 const Edit = ({ words, selectedWord, setWords, setIsEditing }) => {
   const id = selectedWord.id;
 
@@ -41,6 +42,7 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing }) => {
     setEmployees(employees);
     setIsEditing(false);
 */
+
     Swal.fire({
       icon: 'success',
       title: 'Updated!',

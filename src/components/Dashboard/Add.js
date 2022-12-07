@@ -63,7 +63,6 @@ const Add = ({ words, setWords, setIsAdding }) => {
         />
         </div>
         <div className='flex items-baseline space-x-5'>
-        <label htmlFor="description">Descripción</label>
         <input
           className="bg-white"
           id="description"

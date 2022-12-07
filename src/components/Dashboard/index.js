@@ -6,7 +6,7 @@ import Table from './Table';
 import Add from './Add';
 import Edit from './Edit';
 import './ui-primitive.css';
-
+import { getWords } from 'hooks/getWords';
 import { wordsData } from '../../data';
 
 const Dashboard = ({ setIsAuthenticated }) => {
@@ -14,12 +14,24 @@ const Dashboard = ({ setIsAuthenticated }) => {
   const [selectedWord, setSelectedWord] = useState(null);
   const [isAdding, setIsAdding] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-
   useEffect(() => {
-    // aca igual debe haber conexion con firebase
-    const data = JSON.parse(localStorage.getItem('words_data'));
-    if (data !== null && Object.keys(data).length !== 0) setWords(data);
-  }, []);
+    setWords([]);
+
+    getWords().then((words) => words.forEach((element) => {
+      setWords((old) => [...old, element.data()])
+
+      
+    }));
+  
+
+  }, [])
+
+  const items = 
+  words.map((word, index) => ({
+    id: word.word,
+    value: word.word,
+  }));
+
 
   const handleEdit = id => {
     const [Word] = words.filter(word => word.id === id);
