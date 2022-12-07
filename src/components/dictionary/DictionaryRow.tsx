@@ -1,4 +1,4 @@
-import { Word } from "@lib/types/word.types";
+import { Word, WordCategory } from "../../lib/types/word.types";
 import Education from "../../assets/dictionary/education.png";
 import Law from "../../assets/dictionary/law.png";
 import Psychology from "../../assets/dictionary/psychology.png";
@@ -8,34 +8,34 @@ const DictionaryRow = ({ word }: { word: Word }) => {
   const handleCategories = (category: String) => {
     const width = "64px";
     const height = "64px";
-    if (category === "education") {
-      return (
-        <img
-          src={Education}
-          alt="This is an education icon"
-          width={width}
-          height={height}
-        />
-      );
-    } else if (category === "law") {
-      return (
-        <img src={Law} alt="This is a law icon" width={width} height={height} />
-      );
-    } else if (category === "psychology") {
-      return (
-        <img
-          src={Psychology}
-          alt="This is a psychology icon"
-          width={width}
-          height={height}
-        />
-      );
-    } else {
-      return (
-        <img src={NA} alt="This is a NA icon" width={width} height={height} />
-      );
+    let src: string;
+    let alt: string;
+
+    switch (category) {
+      case WordCategory.Education:
+        src = Education;
+        alt = "This is a education icon";
+        break;
+
+      case WordCategory.Law:
+        src = Law;
+        alt = "This is a law icon";
+        break;
+
+      case WordCategory.Psychology:
+        src = Psychology;
+        alt = "This is a psychology icon";
+        break;
+
+      default:
+        src = NA;
+        alt = "This is a Na icon";
+        break;
     }
+
+    return <img src={src} alt={alt} height={height} width={width} />;
   };
+
   return (
     <div>
       <li className="flex justify-center flex-col md:flex-row md:justify-evenly py-5 border-t-2 hover:bg-[#D9D7FE] cursor-pointer">
