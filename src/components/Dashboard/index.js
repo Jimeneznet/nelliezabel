@@ -16,14 +16,9 @@ const Dashboard = ({ setIsAuthenticated }) => {
   const [isEditing, setIsEditing] = useState(false);
   useEffect(() => {
     setWords([]);
-
     getWords().then((words) => words.forEach((element) => {
       setWords((old) => [...old, element.data()])
-
-      
     }));
-  
-
   }, [])
 
   const items = 

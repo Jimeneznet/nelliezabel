@@ -4,12 +4,12 @@ import Swal from 'sweetalert2';
 
 const Edit = ({ words, selectedWord, setWords, setIsEditing }) => {
   const id = selectedWord.id;
-
   const [word, setWord] = useState(selectedWord.word);
   const [description, setDescription] = useState(selectedWord.description);
   const [category, setCategory] = useState(selectedWord.category);
   const [video, setVideo] = useState(selectedWord.video);
 
+  console.log(id)
   const handleUpdate = e => {
     e.preventDefault();
 

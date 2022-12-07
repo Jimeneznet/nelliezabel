@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
-
+import { newWord } from 'hooks/newWord';
 const Add = ({ words, setWords, setIsAdding }) => {
   const [id, setId] = useState('');
   const [word, setWord] = useState('');
@@ -11,7 +11,7 @@ const Add = ({ words, setWords, setIsAdding }) => {
   const handleAdd = e => {
     e.preventDefault();
 
-    if (!id || !word || !description || !category || !video) {
+    if (!id || !word || !description || !category) {
       return Swal.fire({
         icon: 'error',
         title: 'Error!',
@@ -20,18 +20,19 @@ const Add = ({ words, setWords, setIsAdding }) => {
       });
     }
     //aca deberia de haber conexion a firebase para introducir nueva palabra creo qe esta todo 
-    const id = words.length + 1;
-    const newWord = {
-      id,
-      word,
-      description,
-      category,
-      video,
-    };
+    // const id = words.length + 1;
+    // const newWord = {
+    //   id,
+    //   word,
+    //   description,
+    //   category,
+    //   video,
+    // };
 
-    words.push(newWord);
-    localStorage.setItem('employees_data', JSON.stringify(words));//
-    setWords(words);
+    // words.push(newWord);
+    // localStorage.setItem('employees_data', JSON.stringify(words));//
+    // setWords(words);
+    newWord(word,description,category,video)
     setIsAdding(false);
 
     Swal.fire({
@@ -63,6 +64,7 @@ const Add = ({ words, setWords, setIsAdding }) => {
         />
         </div>
         <div className='flex items-baseline space-x-5'>
+        <label className="" htmlFor="word">Descripción</label>
         <input
           className="bg-white"
           id="description"
