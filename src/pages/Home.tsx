@@ -3,29 +3,29 @@ import { logout, auth, db } from "../lib/config/firebase.config";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { getUser } from '../hooks/useGetAuth'
-import UserView from '../components/UserView';
+import AdminView from '../components/AdminView';
+import Header from '../components/Header';
 
 const Home = () => {
   const [user, loading, error] = useAuthState(auth);
   const [rol, setRol] = useState("");
   const navigate = useNavigate();
-  
-  
-
 
   useEffect(() => {
     if (loading) return;
-    if (!user) return navigate("/");
+    if (!user) return navigate("/login");
     
 
-    getUser(user.uid).then((u:any) => setRol(u.data().rol))
+    getUser(user.uid).then((u:any) => setRol(u.data().rol)) //<a href="/register"><button className='btn'>Agregar</button></a>
   }, [user, loading]);
   
   return (
     <div>
-      <UserView></UserView>
-      <button onClick={() => logout()}> Cerrar Sesión</button>
-      <h1>{rol}</h1>
+      <Header>
+        Fundacion Nellie Zabel
+      </Header>
+      <button className='btn' onClick={() => logout()}> Cerrar Sesión</button>
+      <AdminView></AdminView>
     </div>
   )
 }

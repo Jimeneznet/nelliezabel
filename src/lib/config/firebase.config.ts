@@ -16,6 +16,7 @@ import {
   where,
   addDoc,
 } from "firebase/firestore";
+import { Navigate, useNavigate } from "react-router-dom";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -78,6 +79,8 @@ const registerWithEmailAndPassword = async (rol:any, email:any, password:any, ru
 
 const logout = () => {
   signOut(auth);
+  
+
 };
 export {
   auth,

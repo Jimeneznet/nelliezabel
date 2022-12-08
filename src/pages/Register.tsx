@@ -8,7 +8,7 @@ import {
   } from "../lib/config/firebase.config";
 
 import { useNavigate } from 'react-router-dom';
-import LoginHeader from '../components/LoginHeader'
+import Header from '../components/Header'
 
 const Register = () => {
     const [user, loading, error] = useAuthState(auth);
@@ -22,7 +22,7 @@ const Register = () => {
         e.preventDefault();
 
         const email = e.target.elements.email.value;
-        const password = e.target.elements.password.value;
+        const password = '123456'; //Editar proximamente
         const rol = e.target.elements.rol.value;
         const rut = e.target.elements.rut.value;
         const nombre = e.target.elements.nombre.value;
@@ -31,19 +31,20 @@ const Register = () => {
         console.log("submit", email, password, rol);
 
         registrarUsuario(email, password, rol,rut,nombre,status);
-
+        
     }
 
     useEffect(() => {
         if (loading) return;
-        if (user) navigate("/");
+        if (!user) return navigate("/login");
+
       }, [user, loading]);
 
     return (
         <div>
-            <LoginHeader>
-            <h2>Fundacion Nellie Zabel</h2>
-            </LoginHeader>
+            <Header>
+            <h2>Agregar Usuario</h2>
+            </Header>
             <RegisterView submitHandler={(e: any) => submitHandler(e)}></RegisterView>
         </div>
     )

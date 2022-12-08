@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react'
 
 import { getData } from '../hooks/userGetData'
 
-const UserView = () => {
+const AdminView = () => {
+
+  
 
   const [usuarios, setUsuarios]: any = useState([]);
   const [loading, setLoading] = useState(true);
@@ -37,6 +39,7 @@ const UserView = () => {
               <th>Rol</th>
               <th>Status</th>
               <th>Editar</th>
+              <th>Eliminar</th>
             </tr>
           </thead>
           <tbody>
@@ -48,6 +51,7 @@ const UserView = () => {
                     <td>{user.rol}</td>
                     <td>{ user.status ? 'Habilitado': 'Deshabilitado' }</td>
                     <td>Editar</td>
+                    <td>Eliminar</td>
 
                   </tr>))}
           </tbody>
@@ -58,4 +62,4 @@ const UserView = () => {
   )
 }
 
-export default UserView
+export default AdminView
