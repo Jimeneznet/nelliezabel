@@ -25,13 +25,14 @@ const Register = () => {
         const password = '123456'; //Editar proximamente
         const rol = e.target.elements.rol.value;
         const rut = e.target.elements.rut.value;
-        const nombre = e.target.elements.nombre.value;
+        const nombre = e.target.elements.name.value;
         const status = '1';
 
         console.log("submit", email, password, rol);
 
         registrarUsuario(email, password, rol,rut,nombre,status);
         
+        navigate('/');
     }
 
     useEffect(() => {

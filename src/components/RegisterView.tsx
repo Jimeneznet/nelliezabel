@@ -34,7 +34,7 @@ const RegisterView = ({ submitHandler }:any) => {
                                 <br></br>
 
                                 
-                                <select className="select select-bordered w-full max-w-xs">
+                                <select id="rol" className="select select-bordered w-full max-w-xs">
                                     <option disabled selected>Rol del Usuario</option>
                                     <option value="Administrador">Administrador</option>
                                     <option value="Consultor">Consultor</option>
