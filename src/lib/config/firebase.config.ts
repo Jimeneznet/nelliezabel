@@ -8,7 +8,9 @@ import {
   getDocs,
   collection,
   where,
-  addDoc, } from "firebase/firestore";
+  addDoc,
+  doc,
+  getDoc, } from "firebase/firestore";
 
 import {
     getStorage,
@@ -42,3 +44,5 @@ export async function uploadVideo(file:any){
   const url = await getDownloadURL(storageRef)
   return url
 }
+
+export const getTask = (id:any) => getDoc(doc(db,'words',id))

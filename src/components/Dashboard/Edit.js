@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import { editWord } from 'hooks/editWord';
+import {doc,getDoc} from 'firebase/firestore';
+import {db} from 'lib/config/firebase.config';
 
 
 const Edit = ({ words, selectedWord, setWords, setIsEditing }) => {
@@ -8,7 +10,7 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing }) => {
   const [word, setWord] = useState(selectedWord.data().word);
   const [description, setDescription] = useState(selectedWord.data().description);
   const [category, setCategory] = useState(selectedWord.data().category);
-  const [video, setVideo] = useState(selectedWord.video);
+  const [video, setVideo] = useState(selectedWord.data().video);
 
   const handleUpdate = e => {
     e.preventDefault();
@@ -98,6 +100,12 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing }) => {
           value={"Subir video"}
           onChange={e => setVideo(e.target.value)}
         />
+        </div>
+        <div className='flex items-baseline space-x-5'>
+        <label >Video actual</label>
+        </div>
+        <div>
+        <iframe width="560" height="315" src={video} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         <div style={{ marginTop: '30px' }}>
         <button class="btn btn-success">Añadir</button>
