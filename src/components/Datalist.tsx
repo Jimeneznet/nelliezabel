@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useId } from "react";
 import {useState, useEffect} from "react"
 import { getData } from '../hooks/wordGetData'
 import DatalistInput, { useComboboxControls } from 'react-datalist-input';
 import './styles/Datalist.css'
+import Filter from "./Filter";
+
 
 const Datalist = () => {
   const [words, setWords]: any = useState([]);
- 
+
   useEffect(() => {
     setWords([]);
 
+    
     getData().then((words: any) => words.forEach((element: any) => {
       setWords((old: any) => [...old, element.data()])
 
@@ -19,12 +22,14 @@ const Datalist = () => {
 
   }, [])
 
+
   const items = 
   words.map((word: any, index: number) => ({
     id: word.word,
     value: word.word,
   }));
-
+  
+ 
   return (
   <>
      <DatalistInput
