@@ -24,12 +24,9 @@ const Add = ({ words, setWords, setIsAdding }) => {
     try{
 
     //AGREGADO
-    const url = await uploadVideo(video)    //Se almacena el video en Firebase Storage
-    console.log("src\components\Dashboard\Add.js",url)
-    
+    const url = await uploadVideo(video)    //Se almacena el video en Firebase Storage    
     newWord(word,description,category,url)
     setIsAdding(false);
-
     Swal.fire({
       icon: 'success',
       title: 'Agregada!',
@@ -37,6 +34,7 @@ const Add = ({ words, setWords, setIsAdding }) => {
       showConfirmButton: false,
       timer: 1500,
     });
+    
     }catch(err){
       Swal.fire({
         icon: 'error',
@@ -95,6 +93,7 @@ const Add = ({ words, setWords, setIsAdding }) => {
           id="video"
           type="file"
           name="video"
+          accept="video/mp4,video/x-m4v,video/*"
           onChange={e => setVideo(e.target.files[0])}
         />
         </div>

@@ -8,10 +8,10 @@ async function editWord(word:any) {
             word: word.word,
             description: word.description,
             category: word.category,
+            video: word.url
         }
         const words_collection_ref = collection(db,'words')
         const word_to_edit = doc(words_collection_ref,word.id)
-        console.log(word_no_id.word)
         updateDoc(word_to_edit,word_no_id)
     }
     catch(err){

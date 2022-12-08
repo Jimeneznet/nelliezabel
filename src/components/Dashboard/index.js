@@ -7,18 +7,21 @@ import Add from './Add';
 import Edit from './Edit';
 import './ui-primitive.css';
 import { getWords } from 'hooks/getWords';
+import { deleteWord } from 'hooks/deleteWord';
 import { wordsData } from '../../data';
 import {doc,deleteDoc} from 'firebase/firestore';
 import {db} from 'lib/config/firebase.config';
-async function deleteWord(id){
-  await deleteDoc(doc(db,"words",id));
-}
+
 const Dashboard = ({ setIsAuthenticated }) => {
   const [words, setWords] = useState(getWords);
   const [selectedWord, setSelectedWord] = useState(null);
   const [isAdding, setIsAdding] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-
+  
+  function crudRefresh(){
+    window.location.reload(false)
+  }
+  
   useEffect(() => {
     setWords([]);
     getWords().then((words) => words.forEach((element) => {
@@ -27,10 +30,8 @@ const Dashboard = ({ setIsAuthenticated }) => {
   }, [])
 
   
-  
   const handleEdit = id => {
     const [Word] = words.filter(word => word.id === id);
-
     setSelectedWord(Word);
     setIsEditing(true);
   };
@@ -46,8 +47,6 @@ const Dashboard = ({ setIsAuthenticated }) => {
     }).then(result => {
       if (result.value) {
         const [Word] = words.filter(word => word.id === id);
-        
-        
         deleteWord(Word.id)
         Swal.fire({
           icon: 'success',
@@ -58,7 +57,6 @@ const Dashboard = ({ setIsAuthenticated }) => {
         });
 
         const wordsCopy = words.filter(word => word.id !== id);
-        localStorage.setItem('employees_data', JSON.stringify(wordsCopy));
         setWords(wordsCopy);
       }
     });

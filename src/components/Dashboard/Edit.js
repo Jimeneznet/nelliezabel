@@ -3,6 +3,7 @@ import Swal from 'sweetalert2';
 import { editWord } from 'hooks/editWord';
 import {doc,getDoc} from 'firebase/firestore';
 import {db} from 'lib/config/firebase.config';
+import { uploadVideo } from 'lib/config/firebase.config';
 
 
 const Edit = ({ words, selectedWord, setWords, setIsEditing }) => {
@@ -11,10 +12,10 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing }) => {
   const [description, setDescription] = useState(selectedWord.data().description);
   const [category, setCategory] = useState(selectedWord.data().category);
   const [video, setVideo] = useState(selectedWord.data().video);
+  const [newVideo, setNewVideo] = useState("");
 
-  const handleUpdate = e => {
+  const handleUpdate = async(e) => {
     e.preventDefault();
-
     if (!word || !description || !category) {
       return Swal.fire({
         icon: 'error',
@@ -23,14 +24,19 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing }) => {
         showConfirmButton: true,
       });
     }
-
+    let url = ""
+    if(newVideo != "")
+    {
+      url = await uploadVideo(newVideo)
+    }else{
+      url = video
+    }
     const WordAEditar = {
       id,
       word,
       description,
       category,
-      video,
-      
+      url,
     };
     try{
       editWord(WordAEditar)
@@ -42,6 +48,8 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing }) => {
         showConfirmButton: false,
         timer: 1500,
       });
+      // const wordsCopy = words.filter(word => word.id !== id);
+      // setWords(wordsCopy);
     }catch(err){
       Swal.fire({
         icon: 'error',
@@ -51,6 +59,7 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing }) => {
         timer: 1500,
       });
     }
+    
   };
 
   return (
@@ -93,12 +102,13 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing }) => {
         />
         </div>
         <div className='flex items-baseline space-x-5'>
+        <label htmlFor="video">Cambiar video </label>
         <input
           id="video"
-          type="button"
+          type="file"
           name="video"
-          value={"Subir video"}
-          onChange={e => setVideo(e.target.value)}
+          accept="video/mp4,video/x-m4v,video/*"
+          onChange={e => setNewVideo(e.target.files[0])}
         />
         </div>
         <div className='flex items-baseline space-x-5'>
