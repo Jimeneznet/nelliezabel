@@ -43,8 +43,8 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
       setIsEditing(false)
       Swal.fire({
         icon: 'success',
-        title: 'Updated!',
-        text: `La palabra ${WordAEditar.word} a sido editada con éxito`,
+        title: 'Modificado!',
+        text: `La palabra ${WordAEditar.word} ha sido editada con éxito`,
         showConfirmButton: false,
         timer: 1500,
       });
@@ -66,13 +66,12 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
 
   return (
     <div className="container">
-      <div>
-        
-      </div>  
+      
       <form className="w-5/6 m-8" onSubmit={handleUpdate}>
-        
-        <h1 className="bg-[#976DD0]  h-[7rem] shadow-2xl z-1 text-left font-bold indent-12 text-white align-baseline">Nueva palabra</h1>
-        <div className='flex items-baseline space-x-5' > 
+        <div className=''>
+          <h1 className="bg-secondaryHeader  h-[4rem] shadow-2xl z-1  font-bold indent-12 text-white align-baseline text-center mt-3">Modificar palabra</h1>
+        </div>
+        <div className='flex items-baseline space-x-5 text-3xl' > 
         <label className="" htmlFor="word">Palabra</label>
         <input
           id="word"
@@ -82,7 +81,7 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
           onChange={e => setWord(e.target.value)}
         />
         </div>
-        <div className='flex items-baseline space-x-5'>
+        <div className='flex items-baseline space-x-5 text-3xl'>
         <label htmlFor="description">Descripción</label>
         <input
           className="bg-white"
@@ -93,7 +92,7 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
           onChange={e => setDescription(e.target.value)}
         />
         </div>
-        <div className='flex items-baseline space-x-5'>
+        <div className='flex items-baseline space-x-5 text-3xl'>
         <label htmlFor="category">Categoría</label>
         <input
           id="category"
@@ -103,7 +102,7 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
           onChange={e => setCategory(e.target.value)}
         />
         </div>
-        <div className='flex items-baseline space-x-5'>
+        <div className='flex items-baseline space-x-5 text-3xl'>
         <label htmlFor="video">Cambiar video </label>
         <input
           id="video"
@@ -113,7 +112,7 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
           onChange={e => setNewVideo(e.target.files[0])}
         />
         </div>
-        <div className='flex items-baseline space-x-5'>
+        <div className='flex items-baseline space-x-5 text-3xl'>
         <label >Video actual</label>
         </div>
         <div>

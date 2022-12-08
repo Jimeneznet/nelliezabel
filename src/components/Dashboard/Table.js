@@ -1,34 +1,28 @@
 import React from 'react';
 
 const Table = ({ words, setWords, handleEdit, handleDelete }) => {
-  const formatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: null,
-    
-  });
-
+  
   return (
     <div className="contain-table">
-      <table className="striped-table">
-        <thead>
-          <tr>
+      <table className="striped-table mt-2">
+        <thead className='text-3xl'>
+          <tr className="bg-secondaryHeader  h-[7rem] shadow-2xl z-1 text-white mr-3">
             <th>ID.</th>
-            <th>Código Serial.</th>
+            {/* <th>Código Serial.</th> */}
             <th>Palabra</th>
             <th>Descripción</th>
             <th>Categoría</th>
             <th colSpan={2} className="text-center">
-              Actions
+              Acciones
             </th>
           </tr>
         </thead>
         <tbody>
           {words.length > 0 ? (
             words.map((Word, i) => (
-              <tr key={Word.id}>
+              <tr key={Word.id} className='text-2xl'>
                 <td>{i + 1}</td>
-                <td>{Word.id}</td>
+                {/* <td>{Word.id}</td> */}
                 <td>{Word.data().word}</td>
                 <td>{Word.data().description}</td>
                 <td>{Word.data().category}</td>
@@ -37,7 +31,7 @@ const Table = ({ words, setWords, handleEdit, handleDelete }) => {
                     onClick={() => handleEdit(Word.id)}
                     className="button muted-button"
                   >
-                    Edit
+                    Editar
                   </button>
                 </td>
                 <td className="text-left">
@@ -45,7 +39,7 @@ const Table = ({ words, setWords, handleEdit, handleDelete }) => {
                     onClick={() => handleDelete(Word.id)}
                     className="button muted-button"
                   >
-                    Delete
+                    Borrar
                   </button>
                 </td>
               </tr>

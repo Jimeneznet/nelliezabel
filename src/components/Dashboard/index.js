@@ -12,7 +12,7 @@ import { wordsData } from '../../data';
 import {doc,deleteDoc} from 'firebase/firestore';
 import {db} from 'lib/config/firebase.config';
 
-const Dashboard = ({ setIsAuthenticated }) => {
+const Dashboard = () => {
   const [words, setWords] = useState(getWords);
   const [selectedWord, setSelectedWord] = useState(null);
   const [isAdding, setIsAdding] = useState(false);
@@ -66,7 +66,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
         <>
         <Header
           setIsAdding={setIsAdding}
-          setIsAuthenticated={setIsAuthenticated}
+          // setIsAuthenticated={setIsAuthenticated}
         />
         
           <Table

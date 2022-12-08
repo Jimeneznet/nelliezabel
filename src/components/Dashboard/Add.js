@@ -52,8 +52,8 @@ const Add = ({ words, setWords, setIsAdding }) => {
       </div>  
       <form className="w-5/6 m-8" onSubmit={handleAdd}>
         
-        <h1 className="bg-[#976DD0]  h-[7rem] shadow-2xl z-1 text-left font-bold indent-12 text-white align-baseline">Nueva palabra</h1>
-        <div className='flex items-baseline space-x-5' > 
+        <h1 className="bg-secondaryHeader  h-[4rem] shadow-2xl z-1 text-center font-bold indent-12 text-white align-baseline ">Nueva palabra</h1>
+        <div className='flex items-baseline space-x-5 text-3xl' > 
         <label className="" htmlFor="word">Palabra</label>
         <input
           id="word"
@@ -63,7 +63,7 @@ const Add = ({ words, setWords, setIsAdding }) => {
           onChange={e => setWord(e.target.value)}
         />
         </div>
-        <div className='flex items-baseline space-x-5'>
+        <div className='flex items-baseline space-x-5 text-3xl'>
         <label className="" htmlFor="word">Descripción</label>
         <input
           className="bg-white"
@@ -74,7 +74,7 @@ const Add = ({ words, setWords, setIsAdding }) => {
           onChange={e => setDescription(e.target.value)}
         />
         </div>
-        <div className='flex items-baseline space-x-5'>
+        <div className='flex items-baseline space-x-5 text-3xl'>
         <label htmlFor="category">Categoría</label>
         <input
           id="category"
@@ -85,7 +85,7 @@ const Add = ({ words, setWords, setIsAdding }) => {
         />
         </div>
         
-        <div className='flex items-baseline space-x-5'>
+        <div className='flex items-baseline space-x-5 text-3xl'>
         <label htmlFor="video">Subir video </label>
         <input
           id="video"

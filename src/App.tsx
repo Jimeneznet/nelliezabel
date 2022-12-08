@@ -25,9 +25,9 @@ function App() {
 
             
             <Route path='/admin/dictionary' element={
-              <ProtectedRoute>
-                <CrudDictionary />
-              </ProtectedRoute>
+              // <ProtectedRoute>
+                <Word />
+              // </ProtectedRoute>
             }/>
             <Route path='/admin/news' element={
               <ProtectedRoute>

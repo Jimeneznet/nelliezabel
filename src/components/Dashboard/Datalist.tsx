@@ -2,7 +2,7 @@ import React from "react";
 import {useState, useEffect} from "react"
 import { getWords } from "hooks/getWords";
 import DatalistInput, { useComboboxControls } from 'react-datalist-input';
-import './datalist.css'
+// import './datalist.css'
 
 const Datalist = () => {
   const [words, setWords]: any = useState([]);
@@ -26,6 +26,7 @@ const Datalist = () => {
 
   return (
      <DatalistInput
+      className='text-xl position: absolute box-border bg-white border-secondaryHeader'
       placeholder="Ingrese una palabra"
       label=""
       items={items}

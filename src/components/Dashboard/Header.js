@@ -7,11 +7,14 @@ import Datalist from './Datalist';
 const Header = ({ setIsAdding, setIsAuthenticated }) => {
   return (
     <header className="header">
-      <h1>EDITOR DE PALABRAS DEL DICCIONARIO</h1>
-      <div >
-        <button onClick={() => setIsAdding(true)}>Añadir Palabra</button>
+      <div className='flex'>       
+        <div className='flex-1 w-16'>
+          <Datalist/>
+        </div>
 
-        <Datalist/>
+        <div className='text-end flex-1 w-32'>
+          <button className=' mt-5 border-secondaryHeader bg-secondaryHeader hover:bg-primaryHeader hover:border-primaryHeader' onClick={() => setIsAdding(true)}>Agregar palabra</button>
+        </div>
       </div>
     </header>
   );
