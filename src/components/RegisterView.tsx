@@ -7,7 +7,8 @@ const RegisterView = ({ submitHandler }:any) => {
                 <label>
                     Correo electrónico:
                     <input type="email" id="email" />
-                </label>                <label>
+                </label>                
+                <label>
                     Nombre:
                     <input type="text" id="nombre" />
                 </label>

@@ -57,7 +57,7 @@ const logInWithEmailAndPassword = async (email:any, password:any) => {
     alert(err.message);
   }
 };
-const registerWithEmailAndPassword = async (rol:any, email:any, password:any, rut:any,nombre:any) => {
+const registerWithEmailAndPassword = async (rol:any, email:any, password:any, rut:any,nombre:any,status:any) => {
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;
@@ -68,6 +68,7 @@ const registerWithEmailAndPassword = async (rol:any, email:any, password:any, ru
       email,
       rut,
       nombre,
+      status,
     });
   } catch (err:any) {
     console.error(err);

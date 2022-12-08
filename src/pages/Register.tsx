@@ -14,8 +14,8 @@ const Register = () => {
     const [user, loading, error] = useAuthState(auth);
     const navigate = useNavigate();
 
-    async function registrarUsuario(email: string, password: string, rol: string,rut:string,nombre:string) {
-        registerWithEmailAndPassword(rol,email,password,rut,nombre);
+    async function registrarUsuario(email: string, password: string, rol: string,rut:string,nombre:string,status:string) {
+        registerWithEmailAndPassword(rol,email,password,rut,nombre,status);
     }
 
     function submitHandler(e: any) {
@@ -26,10 +26,11 @@ const Register = () => {
         const rol = e.target.elements.rol.value;
         const rut = e.target.elements.rut.value;
         const nombre = e.target.elements.nombre.value;
+        const status = '1';
 
         console.log("submit", email, password, rol);
 
-        registrarUsuario(email, password, rol,rut,nombre);
+        registrarUsuario(email, password, rol,rut,nombre,status);
 
     }
 
