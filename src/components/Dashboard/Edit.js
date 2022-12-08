@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
+import { editWord } from 'hooks/editWord';
 
 
 const Edit = ({ words, selectedWord, setWords, setIsEditing }) => {
   const id = selectedWord.id;
-  const [word, setWord] = useState(selectedWord.word);
-  const [description, setDescription] = useState(selectedWord.description);
-  const [category, setCategory] = useState(selectedWord.category);
+  const [word, setWord] = useState(selectedWord.data().word);
+  const [description, setDescription] = useState(selectedWord.data().description);
+  const [category, setCategory] = useState(selectedWord.data().category);
   const [video, setVideo] = useState(selectedWord.video);
 
   const handleUpdate = e => {
     e.preventDefault();
 
-    if (!word || !description || !category || !video) {
+    if (!word || !description || !category) {
       return Swal.fire({
         icon: 'error',
         title: 'Error!',
@@ -29,26 +30,25 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing }) => {
       video,
       
     };
-    /*/aca deberia haber una conexion a firebase qe busqe el id de la palabra a editar
-    for (let i = 0; i < employees.length; i++) {
-      if (employees[i].id === id) {
-        employees.splice(i, 1, employee);
-        break;
-      }
+    try{
+      editWord(WordAEditar)
+      setIsEditing(false)
+      Swal.fire({
+        icon: 'success',
+        title: 'Updated!',
+        text: `La palabra ${WordAEditar.word} a sido editada con éxito`,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }catch(err){
+      Swal.fire({
+        icon: 'error',
+        title: 'Error!',
+        text: `Ha habido un error durante la edición. Intente nuevamente`,
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
-    
-    localStorage.setItem('employees_data', JSON.stringify(employees));
-    setEmployees(employees);
-    setIsEditing(false);
-*/
-
-    Swal.fire({
-      icon: 'success',
-      title: 'Updated!',
-      text: `La palabra ${WordAEditar.word} a sido editada con éxito`,
-      showConfirmButton: false,
-      timer: 1500,
-    });
   };
 
   return (

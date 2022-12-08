@@ -21,20 +21,6 @@ const Add = ({ words, setWords, setIsAdding }) => {
         showConfirmButton: true,
       });
     }
-    //aca deberia de haber conexion a firebase para introducir nueva palabra creo qe esta todo 
-    // const id = words.length + 1;
-    // const newWord = {
-    //   id,
-    //   word,
-    //   description,
-    //   category,
-    //   video,
-    // };
-
-    // words.push(newWord);
-    // localStorage.setItem('employees_data', JSON.stringify(words));//
-    // setWords(words);
-
     //AGREGADO
     const url = await uploadVideo(video)    //Se almacena el video en Firebase Storage
     console.log("src\components\Dashboard\Add.js",url)
