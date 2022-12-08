@@ -6,7 +6,7 @@ import {db} from 'lib/config/firebase.config';
 import { uploadVideo } from 'lib/config/firebase.config';
 
 
-const Edit = ({ words, selectedWord, setWords, setIsEditing }) => {
+const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
   const id = selectedWord.id;
   const [word, setWord] = useState(selectedWord.data().word);
   const [description, setDescription] = useState(selectedWord.data().description);
@@ -48,17 +48,19 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing }) => {
         showConfirmButton: false,
         timer: 1500,
       });
-      // const wordsCopy = words.filter(word => word.id !== id);
-      // setWords(wordsCopy);
-    }catch(err){
-      Swal.fire({
-        icon: 'error',
-        title: 'Error!',
-        text: `Ha habido un error durante la edición. Intente nuevamente`,
-        showConfirmButton: false,
-        timer: 1500,
-      });
+      setEdited(true)
     }
+    catch(err){
+        Swal.fire({
+            icon: 'error',
+            title: 'Error!',
+            text: `Ha habido un error durante la edición. Intente nuevamente.`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        console.log(err)
+    }
+
     
   };
 

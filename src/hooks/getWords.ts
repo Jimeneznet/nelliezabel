@@ -1,12 +1,10 @@
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs ,onSnapshot,doc} from "firebase/firestore";
 import { db } from '../lib/config/firebase.config';
 
 async function getWords() {
     try{
-        //const q = await getDocs(collection(db,'words'));
         const q = await getDocs(collection(db,'words'));
-        console.log(q.docs)
-        return q.docs;
+        return q;
     }catch(err){
         console.log(err)
     }

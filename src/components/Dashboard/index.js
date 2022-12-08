@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,forceUpdate } from 'react';
 import Swal from 'sweetalert2';
 
 import Header from './Header';
@@ -17,10 +17,8 @@ const Dashboard = ({ setIsAuthenticated }) => {
   const [selectedWord, setSelectedWord] = useState(null);
   const [isAdding, setIsAdding] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  
-  function crudRefresh(){
-    window.location.reload(false)
-  }
+  const [edited, setEdited] = useState(false);
+  const [auxRender, setAuxRender] = useState(false);
   
   useEffect(() => {
     setWords([]);
@@ -91,6 +89,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
           selectedWord={selectedWord}
           setWords={setWords}
           setIsEditing={setIsEditing}
+          setEdited ={setEdited}
         />
       )}
     </div>
