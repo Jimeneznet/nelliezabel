@@ -8,6 +8,7 @@ import {
   } from "../lib/config/firebase.config";
 
 import { useNavigate } from 'react-router-dom';
+import LoginHeader from '../components/LoginHeader'
 
 const Register = () => {
     const [user, loading, error] = useAuthState(auth);
@@ -39,6 +40,9 @@ const Register = () => {
 
     return (
         <div>
+            <LoginHeader>
+            <h2>Fundacion Nellie Zabel</h2>
+            </LoginHeader>
             <RegisterView submitHandler={(e: any) => submitHandler(e)}></RegisterView>
         </div>
     )
