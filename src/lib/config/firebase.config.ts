@@ -26,7 +26,6 @@ const firebaseConfig = {
   messagingSenderId: "191315101630",
   appId: "1:191315101630:web:7782e09545dfb0e3795bef"
 };
-
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
@@ -58,7 +57,7 @@ const logInWithEmailAndPassword = async (email:any, password:any) => {
     alert(err.message);
   }
 };
-const registerWithEmailAndPassword = async (rol:any, email:any, password:any) => {
+const registerWithEmailAndPassword = async (rol:any, email:any, password:any, rut:any,nombre:any) => {
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;
@@ -67,6 +66,8 @@ const registerWithEmailAndPassword = async (rol:any, email:any, password:any) =>
       rol,
       authProvider: "local",
       email,
+      rut,
+      nombre,
     });
   } catch (err:any) {
     console.error(err);

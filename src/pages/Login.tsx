@@ -35,7 +35,7 @@ const Login = () => {
     return (
         <div>
             <LoginView submitHandler={(e: any) => submitHandler(e)}></LoginView>
-            <button onClick={iniciarConGoogle}>Google</button>
+            <button onClick={iniciarConGoogle}>Google -- --</button>
             {error && <h1>Error al conectar</h1>}
         </div>
     )

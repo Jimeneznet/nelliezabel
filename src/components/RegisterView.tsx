@@ -7,18 +7,25 @@ const RegisterView = ({ submitHandler }:any) => {
                 <label>
                     Correo electrónico:
                     <input type="email" id="email" />
+                </label>                <label>
+                    Nombre:
+                    <input type="text" id="nombre" />
                 </label>
 
                 <label>
                     Contraseña:
                     <input type="password" id="password" />
+                </label>                
+                <label>
+                    Rut:
+                    <input type="text" id="rut" />
                 </label>
 
                 <label>
                     Rol:
                     <select id="rol">
-                        <option value="admin">Administrador</option>
-                        <option value="user">Usuario</option>
+                        <option value="Administrador">Administrador</option>
+                        <option value="Consultor">Consultor</option>
                     </select>
                 </label>
 
