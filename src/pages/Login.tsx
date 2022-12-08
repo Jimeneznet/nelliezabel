@@ -31,7 +31,7 @@ const Login = () => {
           // maybe trigger a loading screen
           return;
         }
-        if (user) navigate("/");
+        if (user) navigate("/"); //SOSPECHO ACA ES DONDE REDIRECCIONA A LA PAGINA
       }, [user, loading]);
     return (
         <div>

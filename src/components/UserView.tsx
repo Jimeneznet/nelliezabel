@@ -25,7 +25,41 @@ const UserView = () => {
 
 
   return (
+
+
     <div>
+      <div className="overflow-x-auto">
+  <table className="table w-full">
+    <thead>
+      <tr>
+        <th>Index</th>
+        <th>Nombre</th>
+        <th>Rut</th>
+        <th>Correo</th>
+        <th>Rol</th>
+        <th>Status</th>
+        <th>Editar</th>
+      </tr>
+    </thead>
+    <tbody>
+    {usuarios.map((user: any, index: number) => (
+            <tr key={index}>
+              <td>{index}</td>
+              <td>{user.nombre}</td>
+              <td>{user.rut}</td>
+              <td>{user.email}</td>
+              <td>{user.rol}</td>
+              if (user.status=='1') {
+                <td>Activo</td>
+              }
+              else{
+                <td>Desabilitado</td>
+              }
+              <td>{user.status}</td>
+            </tr>))}
+    </tbody>
+  </table>
+</div>
       <table>
         <thead>
           <tr>
