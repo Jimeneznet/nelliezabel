@@ -9,7 +9,7 @@ const Add = ({ words, setWords, setIsAdding }) => {
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
   const [video, setVideo] = useState('');
-
+  
   const handleAdd = async(e) => {
     e.preventDefault();
 
@@ -35,10 +35,12 @@ const Add = ({ words, setWords, setIsAdding }) => {
     // localStorage.setItem('employees_data', JSON.stringify(words));//
     // setWords(words);
 
+    
+    try{
     //AGREGADO
     const url = await uploadVideo(video)    //Se almacena el video en Firebase Storage
     console.log("src\components\Dashboard\Add.js",url)
-    try{
+    
     newWord(word,description,category,url)
     setIsAdding(false);
 
@@ -100,16 +102,9 @@ const Add = ({ words, setWords, setIsAdding }) => {
           onChange={e => setCategory(e.target.value)}
         />
         </div>
+        
         <div className='flex items-baseline space-x-5'>
-        <input
-          id="video"
-          type="button"
-          name="video"
-          value={"Subir video"}
-          onChange={e => setVideo(e.target.value)}
-        />
-        </div>
-        <div className='flex items-baseline space-x-5'>
+        <label htmlFor="video">Subir video </label>
         <input
           id="video"
           type="file"
@@ -117,6 +112,10 @@ const Add = ({ words, setWords, setIsAdding }) => {
           onChange={e => setVideo(e.target.files[0])}
         />
         </div>
+        
+        
+        
+        
         <div style={{ marginTop: '30px' }}>
         <button class="btn btn-success">Añadir</button>
         <button class="btn btn-error" style={{ marginLeft: '12px'}}onClick={() => setIsAdding(false)}>Cancelar</button>
