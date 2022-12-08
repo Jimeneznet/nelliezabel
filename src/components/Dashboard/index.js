@@ -12,6 +12,9 @@ import { wordsData } from '../../data';
 import {doc,deleteDoc} from 'firebase/firestore';
 import {db} from 'lib/config/firebase.config';
 
+export function refreshPage(){
+  window.location.reload();
+}
 const Dashboard = () => {
   const [words, setWords] = useState(getWords);
   const [selectedWord, setSelectedWord] = useState(null);
@@ -62,12 +65,17 @@ const Dashboard = () => {
 
   return (
     <div className="container">
+      
       {!isAdding && !isEditing && (
         <>
+        
         <Header
+        
           setIsAdding={setIsAdding}
           // setIsAuthenticated={setIsAuthenticated}
         />
+        
+        
         
           <Table
             words={words}

@@ -119,7 +119,7 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
         <iframe width="560" height="315" src={video} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         <div style={{ marginTop: '30px' }}>
-        <button class="btn btn-success">Añadir</button>
+        <button class="btn btn-success">Editar</button>
         <button class="btn btn-error" style={{ marginLeft: '12px'}}onClick={() => setIsEditing(false)}>Cancelar</button>
 
         </div>
