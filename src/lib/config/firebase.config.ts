@@ -20,13 +20,15 @@ import { Navigate, useNavigate } from "react-router-dom";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAjixEsVtWDZE-cGsB_xYdmmSCW4p6AT5s",
-  authDomain: "crudusuarios-59bf0.firebaseapp.com",
-  projectId: "crudusuarios-59bf0",
-  storageBucket: "crudusuarios-59bf0.appspot.com",
-  messagingSenderId: "191315101630",
-  appId: "1:191315101630:web:7782e09545dfb0e3795bef"
+  apiKey: "AIzaSyAe69243D4_2zTupe-91DKsw4_m-CukmXE",
+  authDomain: "pr-topicos-avanzados.firebaseapp.com",
+  projectId: "pr-topicos-avanzados",
+  storageBucket: "pr-topicos-avanzados.appspot.com",
+  messagingSenderId: "258464120558",
+  appId: "1:258464120558:web:bca8504cbaed6d8358fdff",
+  measurementId: "G-L81KF505QW"
 };
+
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
