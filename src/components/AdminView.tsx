@@ -47,7 +47,7 @@ const AdminView = () => {
                     <td>{user.email}</td>
                     <td>{user.rol}</td>
                     <td>{user.status}</td>
-                    <td>Editar</td>
+                    <td><a className='btn'href={`/admin/users/edit/${user.uid}`}> editar</a></td>
                     <td><button className='btn' onClick={() => updateUserStatus(user.uid,user.status)}> cambiar status</button></td>
 
                   </tr>))}

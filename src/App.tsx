@@ -9,6 +9,8 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Dictionary from 'pages/Dictionary';
 import Register from 'pages/Register';
+import UserEdit from 'pages/admin/UserEdit';
+
 
 function App() {
   return (
@@ -30,10 +32,11 @@ function App() {
               </ProtectedRoute>
             }/>
             <Route path='/admin/users' element={
-              <ProtectedRoute>
+              //<ProtectedRoute>
                 <Users />
-              </ProtectedRoute>
+              //</ProtectedRoute>
             }/>
+            <Route path='/admin/users/edit/:uid' element={ <UserEdit /> }/>
             <Route path='/admin/game' element={
               <ProtectedRoute>
                 <Game />
