@@ -1,6 +1,7 @@
 export type newsCard = {
-    title: String,
-    date: String,
-    author: String,
-    imgUrl: String,
+    id: string,
+    title: string,
+    date: string,
+    author: string,
+    url: string,
 }

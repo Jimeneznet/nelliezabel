@@ -16,9 +16,10 @@ const Home = () => {
     const fetchNews = async () => {
       const newsQuery = query(collection(db, "news"));
       const querySnapshot = await getDocs(newsQuery);
-      const newsArray = querySnapshot.docs.map(news => news.data() as newsCard);
-      setLoading(false);
+      const newsArray = querySnapshot.docs.map(news => {console.log(news.data()); return {id: news.id, ...news.data()} as newsCard });
+      console.log(newsArray);
       newsArray.length !== 0 ? setNews(newsArray) : setNoData(true);
+      setLoading(false);
     }
 
     fetchNews();
@@ -51,6 +52,7 @@ const Home = () => {
     return (
       <div>
         <Header>Portal de noticias</Header>
+        <h2>Noticias</h2>
         <FirstCard news={news[0]} />
       </div>
     )
@@ -58,8 +60,10 @@ const Home = () => {
     return (
       <div>
         <Header>Portal de noticias</Header>
+        <h2>Ultima noticia</h2>
         <FirstCard news={news[0]}></FirstCard>
-        {news.splice(0, 1).map(news => <Card news={news}></Card>)}
+        <h2>Noticias</h2>
+        {news.map((news, index) => index !== 0 ? <Card key={news.id} news={news}></Card> : null)}
       </div>
     )
   }
