@@ -1,46 +1,48 @@
-import React from "react";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-// import { useAuth } from '../context/authContext'
+import React, { useEffect, useState } from 'react'
+import LoginView from '../components/LoginView';
+import { auth, logInWithEmailAndPassword, signInWithGoogle } from "../lib/config/firebase.config";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from 'react-router-dom';
+import LoginHeader from '../components/LoginHeader'
 
 
-export const Login = () => {
-  //const { user, signIn } = useAuth()
+const Login = () => {
+    const [user, loading, error] = useAuthState(auth);
+    const navigate = useNavigate();
+    function submitHandler(e: any) {
+        e.preventDefault();
 
-/*   const navigate = useNavigate();
+        const email = e.target.elements.email.value;
+        const password = e.target.elements.password.value;
 
-  const [user, setUser] = useState({
-    email: "",
-    password: "",
-  });
+        console.log("submit", email, password);
 
-  const handleChange = ({ target: { name, value } }) => {
-    setUser({ ...user, [name]: value });
-  };
+        logInWithEmailAndPassword(email,password);
+        
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    //login(user.email, user.password).then(() => navigate('/home'))
-    navigate("/admin/dictionary");
-  } */
+    }
 
-  return (
-    <div>
-      {/*
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <label className=" text-black">email:</label>
-        <input is="email" name="email" type="email" onInput={handleChange} />
-        <label className=" text-black">password:</label>
-        <input
-          id="password"
-          name="password"
-          type="password"
-          onInput={handleChange}
-        />
-        <input className=" text-black" type="submit" value="Iniciar sesion" />
-      </form>
-       */}
-    </div>
-  );
-};
+    function iniciarConGoogle(e: any) {
+        signInWithGoogle();
+    }
+
+    useEffect(() => {
+        if (loading) {
+          // maybe trigger a loading screen
+          return;
+        }
+        if (user) navigate("/admin/users"); //SOSPECHO ACA ES DONDE REDIRECCIONA A LA PAGINA
+      }, [user, loading]);
+    return (
+        <div>
+            <LoginHeader>
+            <h2>Fundacion Nellie Zabel</h2>
+            </LoginHeader>
+            <LoginView submitHandler={(e: any) => submitHandler(e)}></LoginView>
+            <button onClick={iniciarConGoogle}>Google -- --</button>
+            {error && <h1>Error al conectar</h1>}
+        </div>
+    )
+}
+
+export default Login
