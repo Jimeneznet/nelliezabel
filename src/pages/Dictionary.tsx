@@ -30,7 +30,7 @@ const Dictionary = () => {
     <div>
       <div className="">
         <Header>Diccionario</Header>
-        <div className="block m-auto w-3/4">
+        <div className="block m-auto w-3/4 py-8">
           <DictionarySearchInput
             handleSearch={handleSearch}
             handleInputChange={handleInputChange}
