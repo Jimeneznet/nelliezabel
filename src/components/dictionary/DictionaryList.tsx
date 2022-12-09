@@ -16,13 +16,11 @@ const DictionaryList = ({ words }: { words: Word[] }) => {
   }
   return (
     <div>
-      <div className="flex justify-center">
-        <ul className=" w-1/2 mt-10">
-          {currentWords.map((word, index) => (
-            <DictionaryRow key={index} word={word} />
-          ))}
-        </ul>
-      </div>
+      <ul className="">
+        {currentWords.map((word, index) => (
+          <DictionaryRow key={index} word={word} />
+        ))}
+      </ul>
       <Pagination
         totalWords={words.length}
         wordsPerPage={wordsPerPage}
