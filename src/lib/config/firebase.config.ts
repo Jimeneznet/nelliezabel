@@ -79,9 +79,10 @@ const registerWithEmailAndPassword = async (rol:any, email:any, password:any, ru
 
 const logout = () => {
   signOut(auth);
-  
-
 };
+
+
+
 export {
   auth,
   db,

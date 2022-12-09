@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react'
 
 import { getData } from '../hooks/userGetData'
+import {updateUserStatus} from '../hooks/userUpdateStatus'
+
 
 const AdminView = () => {
 
-  
-
   const [usuarios, setUsuarios]: any = useState([]);
   const [loading, setLoading] = useState(true);
-
 
   useEffect(() => {
 
@@ -23,8 +22,6 @@ const AdminView = () => {
     
 
   }, [])
-  
-
 
   return (
     <div>
@@ -49,9 +46,9 @@ const AdminView = () => {
                     <td>{user.rut}</td>
                     <td>{user.email}</td>
                     <td>{user.rol}</td>
-                    <td>{ user.status ? 'Habilitado': 'Deshabilitado' }</td>
+                    <td>{user.status}</td>
                     <td>Editar</td>
-                    <td>Eliminar</td>
+                    <td><button className='btn' onClick={() => updateUserStatus(user.uid,user.status)}> cambiar status</button></td>
 
                   </tr>))}
           </tbody>
