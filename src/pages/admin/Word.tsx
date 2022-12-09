@@ -1,13 +1,23 @@
 import React from "react";
 import Layout from "../../components/Layout";
 import Header from "../../components/Header";
+import Dashboard  from "../../components/Dashboard/index";
+
 
 const Word = () => {
   return (
     <div>
-      <div className="">
+      <div className="">      
+
         <Header>Centro de Administracion</Header>
-        <Layout>CRUD de Palabras</Layout>
+        <Layout>
+
+       
+          <Dashboard/>
+          
+                    
+        </Layout>
+
       </div>
     </div>
   );

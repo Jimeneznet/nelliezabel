@@ -1,7 +1,23 @@
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import {
+  getAuth,
+} from "firebase/auth";
+import { 
+  getFirestore,
+  query,
+  getDocs,
+  collection,
+  where,
+  addDoc,
+  doc,
+  getDoc, } from "firebase/firestore";
 
+import {
+    getStorage,
+    ref,
+    uploadBytes,
+    getDownloadURL,
+} from "firebase/storage";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -19,3 +35,14 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 export default app;
+export const storage = getStorage(app);
+
+//Se agregó esta funcion
+export async function uploadVideo(file:any){
+  const storageRef = ref(storage,file.name)
+  await uploadBytes(storageRef,file)
+  const url = await getDownloadURL(storageRef)
+  return url
+}
+
+export const getTask = (id:any) => getDoc(doc(db,'words',id))
