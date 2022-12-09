@@ -22,7 +22,8 @@ const AdminView = () => {
         id: doc.id,
         email: doc.data().email,
         rol: doc.data().rol,
-        status: doc.data().status
+        status: doc.data().status,
+        uid: doc.data().uid
       }))
 
       setUsuarios(sanatizedUsers);
