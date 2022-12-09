@@ -1,4 +1,5 @@
 import { newsCard } from "@lib/types/newsCard.types";
+import { useNavigate } from "react-router-dom";
 
 type cardProps = {
     news: newsCard,
@@ -7,6 +8,7 @@ type cardProps = {
 const Card = (props: cardProps) => {
 
     const { news } = props;
+    const navigate = useNavigate();
 
     return (
         <div className="card w-96 bg-base-100 shadow-xl image-full">
@@ -15,7 +17,7 @@ const Card = (props: cardProps) => {
                 <h2 className="card-title">{news.title}</h2>
                 <p>{`Autor: ${news.author}`}</p>
                 <div className="card-actions justify-end">
-                    <button className="btn btn-primary">Ir a la noticia</button>
+                    <button onClick={() => navigate(`/news/${news.id}`)} className="btn btn-primary">Ir a la noticia</button>
                 </div>
             </div>
         </div>

@@ -16,7 +16,7 @@ const Home = () => {
     const fetchNews = async () => {
       const newsQuery = query(collection(db, "news"));
       const querySnapshot = await getDocs(newsQuery);
-      const newsArray = querySnapshot.docs.map(news => {console.log(news.data()); return {id: news.id, ...news.data()} as newsCard });
+      const newsArray = querySnapshot.docs.map(news => { return { id: news.id, ...news.data() } as newsCard });
       newsArray.length !== 0 ? setNews(newsArray) : setNoData(true);
       setLoading(false);
     }
