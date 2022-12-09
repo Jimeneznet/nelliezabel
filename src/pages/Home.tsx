@@ -28,17 +28,21 @@ const Home = () => {
 
   if (loading) {
     return (
-      <h2>
-        Loading....
-      </h2>
+      <div>
+        <Header>Portal de noticias</Header>
+        <h2>
+          Loading....
+        </h2>
+      </div>
     )
   }
 
   if (noData) {
     return (
-      <h2>
+      <div>
+        <Header>Portal de noticias</Header>
         {`No hay noticias disponibles :(`}
-      </h2>
+      </div>
     )
   }
 
@@ -46,12 +50,14 @@ const Home = () => {
   if (news.length === 1) {
     return (
       <div>
+        <Header>Portal de noticias</Header>
         <FirstCard news={news[0]} />
       </div>
     )
   } else {
     return (
       <div>
+        <Header>Portal de noticias</Header>
         <FirstCard news={news[0]}></FirstCard>
         {news.splice(0, 1).map(news => <Card news={news}></Card>)}
       </div>
