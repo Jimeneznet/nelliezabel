@@ -1,10 +1,14 @@
 import DictionaryList from "../components/dictionary/DictionaryList";
 import { useWord } from "api/dictionary/dictionary.api";
 import Header from "../components/Header";
+<<<<<<< HEAD
 import { useEffect, useState } from "react";
 import { filterWords } from "../components/utils/Filter";
 import { Word } from "@lib/types/word.types";
 import DictionarySearchInput from "../components/dictionary/DictionarySearchInput";
+=======
+import Datalist from "../components/Datalist"
+>>>>>>> 8970a9f392fa696032b948f34cc36e50fb6171bf
 
 const Dictionary = () => {
   const { words } = useWord();
@@ -29,6 +33,7 @@ const Dictionary = () => {
   return (
     <div>
       <div className="">
+<<<<<<< HEAD
         <Header>Diccionario</Header>
         <div className="block m-auto w-3/4 py-8">
           <DictionarySearchInput
@@ -37,6 +42,11 @@ const Dictionary = () => {
           />
           <DictionaryList words={filteredWords} />
         </div>
+=======
+        <Header>Centro de Administracion</Header>
+        <Datalist></Datalist>
+        <Layout>Diccionario</Layout>
+>>>>>>> 8970a9f392fa696032b948f34cc36e50fb6171bf
       </div>
     </div>
   );
