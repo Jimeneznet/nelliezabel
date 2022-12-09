@@ -12,14 +12,24 @@ const AdminView = () => {
   useEffect(() => {
 
     setLoading(true)
-    setUsuarios([]);
 
-    getData().then((users: any) => users.forEach((element: any) => {
-      setUsuarios((old: any) => [...old, element.data()])
+    const handleGetUser = async () => {
+      const userDocs = await getData();
+      console.log(userDocs)
+      const sanatizedUsers = userDocs.map((doc) => ({
+        nombre: doc.data().nombre,
+        rut: doc.data().rut,
+        id: doc.id,
+        email: doc.data().email,
+        rol: doc.data().rol,
+        status: doc.data().status
+      }))
 
-      
-    })).finally(()=>setLoading(false));
-    
+      setUsuarios(sanatizedUsers);
+      setLoading(false);
+    }
+
+    handleGetUser();
 
   }, [])
 
