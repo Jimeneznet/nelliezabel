@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { getNews } from "api/dictionary/news/getNews.api";
+import { getNews } from "api/news/getNews.api";
 import { useEffect, useState } from "react";
 import Header from "components/Header";
 import { newsCard } from "lib/types/newsCard.types";
