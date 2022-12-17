@@ -30,9 +30,7 @@ const Home = () => {
     return (
       <div>
         <Header>Portal de noticias</Header>
-        <h2>
-          Loading....
-        </h2>
+        <div className="radial-progress animate-spin"></div>
       </div>
     )
   }
