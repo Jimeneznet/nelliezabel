@@ -9,6 +9,7 @@ import Dictionary from 'pages/Dictionary';
 import Register from 'pages/Register';
 import UserEdit from 'pages/admin/UserEdit';
 import NewsDetail from 'pages/news/NewsDetail';
+import CreateNews from 'pages/news/CreateNews';
 //import {CrudDictionary} from './pages/admin/CrudDictionary';
 import CrudDictionary from "./pages/admin/CrudDictionary";
 
@@ -34,6 +35,11 @@ function App() {
             <Route path='/admin/news' element={
               //<ProtectedRoute>
                 <News />
+              //</ProtectedRoute>
+            }/>
+            <Route path='/admin/news/create' element={
+              //<ProtectedRoute>
+                <CreateNews />
               //</ProtectedRoute>
             }/>
             <Route path='/admin/users' element={
