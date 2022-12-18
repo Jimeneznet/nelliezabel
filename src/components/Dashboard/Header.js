@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-import Datalist from './Datalist';
+// import Datalist from './Datalist';
 import { refreshPage } from '.';
 
 const Header = ({ setIsAdding, setIsAuthenticated }) => {
@@ -9,7 +9,7 @@ const Header = ({ setIsAdding, setIsAuthenticated }) => {
     <header className="header">
       <div className='flex'>       
         <div className='flex-1 w-16'>
-          <Datalist/>
+          {/* <Datalist/> */}
         </div>
 
         <div className='text-end flex-1 w-32'>
