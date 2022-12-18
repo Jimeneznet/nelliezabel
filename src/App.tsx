@@ -10,8 +10,6 @@ import Register from 'pages/Register';
 import UserEdit from 'pages/admin/UserEdit';
 
 
-//import {CrudDictionary} from './pages/admin/CrudDictionary';
-import CrudDictionary from "./pages/admin/CrudDictionary";
 
 function App() {
   return (
@@ -21,7 +19,6 @@ function App() {
             <Route path='/login' element={ <Login /> }/>
             <Route path='/dictionary' element={ <Dictionary /> }/>
 
-            <Route path='/admin/crud-dictionary' element={ <CrudDictionary /> }/>
 
             
             <Route path='/admin/dictionary' element={
