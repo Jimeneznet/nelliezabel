@@ -19,7 +19,14 @@ module.exports = {
         lighter: "F3F4F6",
       },
     },
+    scale:{
+      '105': '1.01',
+    },
+
     extend: {},
   },
   plugins: [require("daisyui")],
+  daisyui:{
+    themes: false,
+  },
 }

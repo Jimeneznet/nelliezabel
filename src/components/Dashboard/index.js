@@ -5,7 +5,6 @@ import Header from './Header';
 import Table from './Table';
 import Add from './Add';
 import Edit from './Edit';
-import './ui-primitive.css';
 import { getWords } from 'hooks/getWords';
 import { deleteWord } from 'hooks/deleteWord';
 import { wordsData } from '../../data';
