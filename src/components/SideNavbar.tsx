@@ -10,10 +10,9 @@ import HomeIcon from "./icons/HomeIcon";
 
 
 const menuItems = [
-  { id: 1, label: "Noticias", icon: ArticleIcon, link: "/admin/news" },
-  { id: 2, label: "Personal", icon: UserIcon, link: "/admin/users" },
-  { id: 3, label: "Diccionario", icon: HomeIcon, link: "/admin/dictionary" },
-  { id: 4, label: "Juego", icon: VideosIcon, link: "/admin/game" },
+  { id: 1, label: "Administración de Noticias", icon: ArticleIcon, link: "/admin/news" },
+  { id: 2, label: "Administración de Usuarios", icon: UserIcon, link: "/admin/users" },
+  { id: 3, label: "Administración de Palabras", icon: HomeIcon, link: "/admin/crud-dictionary" },
 ];
 
 const SideNavbar = () => {
