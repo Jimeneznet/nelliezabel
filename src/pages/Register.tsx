@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import RegisterView from '../components/RegisterView';
+import RegisterView from '../components/admin/RegisterView';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import {
     auth,
@@ -22,12 +22,14 @@ const Register = () => {
         e.preventDefault();
 
         const email = e.target.elements.email.value;
-        const password = '123456'; //Editar proximamente
+        
         const rol = e.target.elements.rol.value;
         const rut = e.target.elements.rut.value;
         const nombre = e.target.elements.name.value;
         const status = '1';
+        const password = rut.slice(0, 6); //Editar proximamente
 
+        
         console.log("submit", email, password, rol);
 
         registrarUsuario(email, password, rol,rut,nombre,status);

@@ -3,7 +3,7 @@ import { logout, auth, db } from "../../lib/config/firebase.config";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { getUser } from "../../hooks/useGetAuth";
-import AdminView from "../../components/AdminView";
+import AdminView from "../../components/admin/AdminView";
 import Header from "../../components/Header";
 import Layout from "../../components/Layout";
 

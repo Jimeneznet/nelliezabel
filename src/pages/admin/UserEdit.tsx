@@ -5,7 +5,7 @@ import { auth } from "../../lib/config/firebase.config";
 import { getUser } from '../../hooks/useGetAuth'
 import { userUpdate } from "hooks/userUpdate";
 import Header from "components/Header";
-import EditUserView from "components/EditUserView";
+import EditUserView from "components/admin/EditUserView";
 
 const UserEdit = () => {
     const {uid}=useParams();

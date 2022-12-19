@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
-import { getData } from '../hooks/userGetData'
-import {updateUserStatus} from '../hooks/userUpdateStatus'
+import { getData } from '../../hooks/userGetData'
+import {updateUserStatus} from '../../hooks/userUpdateStatus'
 
 
 const AdminView = () => {
