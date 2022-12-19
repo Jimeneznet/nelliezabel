@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -8,6 +8,8 @@ import {
 } from "firebase/auth";
 import { auth } from "../config/firebase.config";
 import { AuthContextType, AuthProviderProps } from "../types/auth.types";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext<AuthContextType>(
   {} as AuthContextType
@@ -49,4 +51,14 @@ function useAuth() {
   return context;
 }
 
-export { AuthProvider, useAuth };
+const ProtectedRoute = ({ children }: any) => {
+  const [user] = useAuthState(auth);
+  const navigate = useNavigate();
+  if (!user) {
+    navigate("/");
+    return;
+  }
+  return children;
+};
+
+export { AuthProvider, useAuth, ProtectedRoute };

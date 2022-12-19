@@ -12,6 +12,7 @@ import UserEdit from 'pages/admin/UserEdit';
 
 //import {CrudDictionary} from './pages/admin/CrudDictionary';
 import CrudDictionary from "./pages/admin/CrudDictionary";
+import { ProtectedRoute } from './lib/context/auth.context';
 
 function App() {
   return (
@@ -25,20 +26,20 @@ function App() {
 
             
             <Route path='/admin/dictionary' element={
-              // <ProtectedRoute>
+              <ProtectedRoute>
                 <Word />
-              // </ProtectedRoute>
+              </ProtectedRoute>
             } />
             <Route path='/register' element={ <Register /> }/>
             <Route path='/admin/news' element={
-              //<ProtectedRoute>
+              <ProtectedRoute>
                 <News />
-              //</ProtectedRoute>
+              </ProtectedRoute>
             }/>
             <Route path='/admin/users' element={
-              //<ProtectedRoute>
+              <ProtectedRoute>
                 <Users />
-              //</ProtectedRoute>
+              </ProtectedRoute>
             }/>
             <Route path='/admin/users/edit/:uid' element={ <UserEdit /> }/>
             <Route path='/admin/game' element={
