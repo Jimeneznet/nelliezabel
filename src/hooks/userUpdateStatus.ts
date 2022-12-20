@@ -21,8 +21,8 @@ const updateUserStatus = async (
       const user = docs.docs.shift();
       if (user) {
         const userRef = user.ref;
-        updateDoc(userRef, {
-          status: status == "1" ? "0" : "1",
+        await updateDoc(userRef, {
+          status: status === "1" ? "0" : "1",
         });
         const newUsersState = users.map((user) => {
           if (uid !== user.uid) {
