@@ -57,7 +57,7 @@ const AdminView = () => {
                     <td>{user.rut}</td>
                     <td>{user.email}</td>
                     <td>{user.rol}</td>
-                    <td>{user.status}</td>
+                    <td>{user.status === "1" ? "Habilitado" : "Deshabilitado"}</td>
                     <td>
                       <Link
                         className="btn"
