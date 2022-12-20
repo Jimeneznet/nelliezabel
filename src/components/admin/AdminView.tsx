@@ -3,8 +3,9 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getData } from "../../hooks/userGetData";
 import { updateUserStatus } from "../../hooks/userUpdateStatus";
+import { sendPasswordResetEmail } from "firebase/auth";
 
-const AdminView = () => {
+const AdminView = ({ userDoc }: any) => {
   const [usuarios, setUsuarios] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -24,16 +25,18 @@ const AdminView = () => {
       setUsuarios(sanatizedUsers);
       setIsLoading(false);
     };
-
     handleGetUser();
   }, []);
 
   return (
     <div>
-      {isLoading ? (
+      {isLoading || !userDoc ? (
         <LoadingBar />
       ) : (
         <div>
+          <div className="flex justify-center">
+            <h1>Bienvenido {userDoc.data().nombre} !</h1>
+          </div>
           <Link to="/register">
             <button className="btn">Agregar</button>
           </Link>

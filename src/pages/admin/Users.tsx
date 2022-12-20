@@ -9,6 +9,7 @@ import Layout from "../../components/Layout";
 
 const Users = () => {
   const [user, loading, error] = useAuthState(auth);
+  const [userDoc, setUserDoc] = useState<any>();
   const [rol, setRol] = useState("");
   const navigate = useNavigate();
 
@@ -16,14 +17,18 @@ const Users = () => {
     if (loading) return;
     if (!user) return navigate("/login");
 
-    getUser(user.uid).then((u: any) => setRol(u.data().rol));
+    const handleGetUserDoc = async () => {
+      const userDoc = await getUser(user.uid);
+      setUserDoc(userDoc);
+    };
+    handleGetUserDoc();
   }, [user, loading]);
 
   return (
     <div>
       <Header>Administración de usuarios</Header>
       <Layout>
-        <AdminView />
+        <AdminView userDoc={userDoc} />
       </Layout>
     </div>
   );
