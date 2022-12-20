@@ -29,6 +29,20 @@ const Register = () => {
         const status = '1';
         const password = rut.slice(0, 6); //Editar proximamente
 
+        if(!RegExp("^(\\d{1,3}(?:\\d{1,3}){2}[\\dk])$").test(rut)){
+          alert("El rut debe tener un formato válido, sin puntos ni guión");
+          return;
+        }
+
+        if(!RegExp("^[a-zA-Z\\s]*$").test(nombre)){
+          alert("El nombre debe tener sólo letras");
+          return;
+        }
+
+        if(!rol){
+          alert("Seleccione un rol");
+          return;
+        }
         
         console.log("submit", email, password, rol);
 

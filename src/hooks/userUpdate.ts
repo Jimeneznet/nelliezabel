@@ -8,7 +8,7 @@ import {
   import { db } from "../lib/config/firebase.config";
   
   
-  const userUpdate = async (uid: any, nombre :any, rut : any) => { 
+  const userUpdate = async (uid: any, nombre :any, rol: any) => { 
     try {
       const q = query(collection(db, "usuarios"), where("uid", "==", uid));
       const docs = await getDocs(q);
@@ -18,7 +18,7 @@ import {
           const userRef = user.ref;
           updateDoc(userRef, {
             nombre: nombre,
-            rut: rut,
+            rol: rol,
           });
         }
       }

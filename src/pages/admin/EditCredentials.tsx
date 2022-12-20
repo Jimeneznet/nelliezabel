@@ -3,61 +3,63 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate, useParams } from "react-router-dom";
 import { auth } from "../../lib/config/firebase.config";
 import { getUser } from '../../hooks/useGetAuth'
-import { userUpdate } from "hooks/userUpdate";
+import { userEditCredentials } from "hooks/userEditCredentials";
 import Header from "components/Header";
 import EditUserView from "components/admin/EditUserView";
 import Layout from "../../components/Layout";
 import LoadingBar from "../../components/LoadingBar";
+import EditCredentialsView from "@components/admin/EditCredentialsView";
 
-const UserEdit = () => {
+const UserEditCredentials = () => {
     const {uid}=useParams();
-    const [user, loading, error] = useAuthState(auth);
-    const [rol, setRol] = useState("");
-    const [nombre, setNombre] = useState("");
+    const [user, loading] = useAuthState(auth);
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [verification, setVerification] = useState("");
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const navigate = useNavigate();
-
+    
     function submitHandler(e: any) {
-        e.preventDefault();
 
-        if(!RegExp("^[a-zA-Z\\s]*$").test(nombre)){
-          alert("El nombre debe tener sólo letras");
+        if(password !== verification){
+          alert("Las contraseñas no coinciden");
           return;
         }
 
-        userUpdate(uid,nombre,rol);
+        userEditCredentials(email, password);
         
         navigate('/admin/users');
     }
 
-    useEffect(() => {
+      useEffect(() => {
         if (loading) return;
         if (!user) return navigate("/login");
         
-        getUser(uid).then((u:any) => {
-          setRol(u.data().rol);
-          setNombre(u.data().nombre);
+        getUserByEmail(email).then((u:any) => {
+          setEmail(u.data().rol);
           setIsLoading(false);
         })
       }, [user, loading]);
 
       return (
         <div>
-          <Header>Editar Usuario</Header>
+          <Header>Editar Credenciales</Header>
           <Layout>
             { isLoading ? (
               <LoadingBar/>
             ) :( 
-              <EditUserView 
+              <EditCredentialsView 
                 submitHandler={(e: any) => submitHandler(e)}
-                nombre={nombre}
-                rol={rol}
-                setNombre={setNombre}
-                setRol={setRol}
+                email={email}
+                password={password}
+                verification={verification}
+                setEmail={setEmail}
+                setPassword={setPassword}
+                setVerification={setVerification}
               />)
             }
           </Layout>
         </div>
     )
 }
-export default UserEdit
+export default UserEditCredentials

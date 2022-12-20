@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { getData } from "../../hooks/userGetData";
 import { updateUserStatus } from "../../hooks/userUpdateStatus";
 import { sendPasswordResetEmail } from "firebase/auth";
+import { auth } from "../../lib/config/firebase.config";
 
 const AdminView = ({ userDoc }: any) => {
   const [usuarios, setUsuarios] = useState<any[]>([]);
@@ -37,8 +38,12 @@ const AdminView = ({ userDoc }: any) => {
           <div className="flex justify-center">
             <h1>Bienvenido {userDoc.data().nombre} !</h1>
           </div>
-          <Link to="/register">
+          <Link className="mx-2" to="/register">
             <button className="btn">Agregar</button>
+          </Link>
+
+          <Link className="mx-2"to="/register">
+            <button className="btn">Cambiar Credenciales</button>
           </Link>
           <div className="overflow-x-auto">
             <table className="table w-full">
@@ -51,6 +56,7 @@ const AdminView = ({ userDoc }: any) => {
                   <th>Status</th>
                   <th>Editar</th>
                   <th>Eliminar</th>
+                  <th>Restablecer</th>
                 </tr>
               </thead>
               <tbody>
@@ -82,6 +88,21 @@ const AdminView = ({ userDoc }: any) => {
                         }
                       >
                         cambiar status
+                      </button>
+                    </td>
+                    <td>
+                      <button
+                        className="btn"
+                        onClick={() => {
+                          sendPasswordResetEmail(
+                            auth,
+                            user.email,
+                          );
+                          alert("Se ha enviado un correo al usuario para restablecer contraseña")
+                        }
+                        }
+                      >
+                        Reestablecer contraseña
                       </button>
                     </td>
                   </tr>

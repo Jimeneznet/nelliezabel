@@ -1,6 +1,6 @@
 import React from 'react'
 
-const EditUserView = ({ submitHandler,rut,nombre,setNombre,setRut }:any) => {
+const EditUserView = ({ submitHandler,nombre,rol,setNombre,setRol }:any) => {
     return (
         <div>
             <div className=" flex flex-col justify-center min-h-screen overflow-hidden">
@@ -22,8 +22,12 @@ const EditUserView = ({ submitHandler,rut,nombre,setNombre,setRut }:any) => {
                                 <br></br>
 
                                 <label>
-                                    Rut:
-                                <input value={rut} onChange={(e)=>setRut(e.target.value)} type="text" id="rut" required autoComplete="Rut" className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"/>
+                                    Rol:
+                                    <select id="rol" onChange={(e)=>setRol(e.target.value)} className="select select-bordered w-full max-w-xs">
+                                    <option disabled selected value={rol}>{rol} - Actual</option>
+                                    <option value="Administrador">Administrador</option>
+                                    <option value="Consultor">Consultor</option>
+                                </select>
                                 </label>
                                 <br></br>
 
