@@ -54,8 +54,9 @@ const Table = ({ words, setWords, handleEdit, handleDelete }) => {
             onChange={Filtrar}    
           >
             <option value="">Selecciona una categoria</option>
-            <option value="Acciones">Acciones</option>
-            <option value="Saludos">Saludos</option>
+            <option value="Educación">Educación</option>
+            <option value="Psicología">Psicología</option>
+            <option value="Jurídico">Jurídico</option>
           </select>
         </div>
       </div>
