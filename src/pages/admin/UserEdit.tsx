@@ -36,7 +36,7 @@ const UserEdit = () => {
           setRol(u.data().rol);
           setNombre(u.data().nombre);
           setRut(u.data().rut);
-          setIsLoading(false)
+          setIsLoading(false);
         })
       }, [user, loading]);
 

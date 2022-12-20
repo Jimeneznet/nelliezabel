@@ -6,8 +6,7 @@ import {updateUserStatus} from '../../hooks/userUpdateStatus'
 
 
 const AdminView = () => {
-
-  const [usuarios, setUsuarios]: any = useState([]);
+  const [usuarios, setUsuarios] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -59,14 +58,18 @@ const AdminView = () => {
                     <td>{user.email}</td>
                     <td>{user.rol}</td>
                     <td>{user.status}</td>
-                    <td><Link className='btn' to={`/admin/users/edit/${user.uid}`}> editar</Link></td>
-                    <td><button className='btn' onClick={() => updateUserStatus(user.uid,user.status)}> cambiar status</button></td>
-
+                    <td><Link className='btn' to={`/admin/users/edit/${user.uid}`}>editar</Link></td>
+                    <td>
+                      <button 
+                        className='btn' 
+                        onClick={() => updateUserStatus(user.uid,user.status, usuarios, setUsuarios)}> 
+                        cambiar status
+                      </button>
+                    </td>
                   </tr>))}
           </tbody>
         </table>
     </div>
-      
   </div>
   )
 }
