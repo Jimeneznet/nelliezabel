@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 
 import { getData } from '../../hooks/userGetData'
 import {updateUserStatus} from '../../hooks/userUpdateStatus'
@@ -36,7 +37,7 @@ const AdminView = () => {
 
   return (
     <div>
-      <a href="/register"><button className='btn'>Agregar</button></a>
+      <Link to="/register"><button className='btn'>Agregar</button></Link>
       <div className="overflow-x-auto">
         <table className="table w-full">
           <thead>
@@ -58,7 +59,7 @@ const AdminView = () => {
                     <td>{user.email}</td>
                     <td>{user.rol}</td>
                     <td>{user.status}</td>
-                    <td><a className='btn'href={`/admin/users/edit/${user.uid}`}> editar</a></td>
+                    <td><Link className='btn' to={`/admin/users/edit/${user.uid}`}> editar</Link></td>
                     <td><button className='btn' onClick={() => updateUserStatus(user.uid,user.status)}> cambiar status</button></td>
 
                   </tr>))}
