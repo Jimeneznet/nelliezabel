@@ -74,15 +74,20 @@ const Add = ({ words, setWords, setIsAdding }) => {
           onChange={e => setDescription(e.target.value)}
         />
         </div>
+        
         <div className='flex items-baseline space-x-5 text-3xl'>
         <label htmlFor="category">Categoría</label>
-        <input
-          id="category"
-          type="text"
-          name="category"
-          value={category}
-          onChange={e => setCategory(e.target.value)}
-        />
+          <select 
+            className='form-select'
+            name="category" 
+            id="category"
+            onChange={e => setCategory(e.target.value)}   
+          >
+            <option value="">Selecciona una categoria</option>
+            <option value="Educación">Educación</option>
+            <option value="Psicología">Psicología</option>
+            <option value="Jurídico">Jurídico</option>
+          </select>
         </div>
         
         <div className='flex items-baseline space-x-5 text-3xl'>
