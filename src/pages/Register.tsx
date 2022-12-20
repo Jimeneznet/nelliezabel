@@ -9,6 +9,7 @@ import {
 
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header'
+import Layout from '../components/Layout';
 
 const Register = () => {
     const [user, loading, error] = useAuthState(auth);
@@ -44,10 +45,10 @@ const Register = () => {
 
     return (
         <div>
-            <Header>
-            <h2>Agregar Usuario</h2>
-            </Header>
-            <RegisterView submitHandler={(e: any) => submitHandler(e)}></RegisterView>
+            <Header>Agregar Usuario</Header>
+            <Layout>
+              <RegisterView submitHandler={(e: any) => submitHandler(e)}></RegisterView>
+            </Layout>
         </div>
     )
 }
