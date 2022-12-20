@@ -1,8 +1,11 @@
+import { RefObject } from "react";
+
 export interface IDictionarySearchInput {
   handleSearch: () => void;
   handleInputChange: (value: string) => void;
   history: string[];
   searchQuery: string;
+  searchButtonRef: RefObject<HTMLButtonElement>;
 }
 
 const DictionarySearchInput: React.FC<IDictionarySearchInput> = (props) => {
@@ -23,7 +26,17 @@ const DictionarySearchInput: React.FC<IDictionarySearchInput> = (props) => {
           >
             {props.history.map((word, index) => (
               <li key={index}>
-                <p onClick={() => props.handleInputChange(word)}>{word}</p>
+                <p
+                  onClick={() => {
+                    props.handleInputChange(word);
+                    if (!props.searchButtonRef.current) {
+                      return;
+                    }
+                    props.searchButtonRef.current.focus();
+                  }}
+                >
+                  {word}
+                </p>
               </li>
             ))}
           </ul>
@@ -33,6 +46,7 @@ const DictionarySearchInput: React.FC<IDictionarySearchInput> = (props) => {
         <button
           className="btn w-full md:w-56"
           onClick={() => props.handleSearch()}
+          ref={props.searchButtonRef}
         >
           Buscar
         </button>
