@@ -22,7 +22,6 @@ const Register = () => {
         e.preventDefault();
 
         const email = e.target.elements.email.value;
-        
         const rol = e.target.elements.rol.value;
         const rut = e.target.elements.rut.value;
         const nombre = e.target.elements.name.value;
@@ -34,7 +33,7 @@ const Register = () => {
 
         registrarUsuario(email, password, rol,rut,nombre,status);
         
-        navigate('/');
+        navigate('/admin/users');
     }
 
     useEffect(() => {

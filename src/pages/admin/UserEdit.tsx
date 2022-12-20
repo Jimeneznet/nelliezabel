@@ -22,7 +22,7 @@ const UserEdit = () => {
         console.log(rut);
         console.log(nombre);
         
-        navigate('/');
+        navigate('/admin/users');
     }
 
     useEffect(() => {
