@@ -12,3 +12,10 @@ export enum UserRole {
   Aministrador = "Administrador",
   Consultor = "Consultor",
 }
+
+export type Action = { type: "login" | "singout"; user: User | {} };
+
+export type userContextType = {
+  user: User | {};
+  dispatch: React.Dispatch<Action>;
+}
