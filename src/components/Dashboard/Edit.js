@@ -4,6 +4,7 @@ import { editWord } from 'hooks/editWord';
 import {doc,getDoc} from 'firebase/firestore';
 import {db} from 'lib/config/firebase.config';
 import { uploadVideo } from 'lib/config/firebase.config';
+import { getWords } from 'hooks/getWords';
 
 
 const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
@@ -61,7 +62,6 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
         console.log(err)
     }
 
-    
   };
 
   return (

@@ -3,7 +3,7 @@ import Swal from 'sweetalert2';
 import { newWord } from 'hooks/newWord';
 import { getWords } from 'hooks/getWords';
 import { uploadVideo } from 'lib/config/firebase.config';
-const Add = ({ words, setWords, setIsAdding }) => {
+const Add = ({ words, setWords, setIsAdding, setAdded }) => {
   const [isWaiting, setIsWaiting] = useState(false);
   const [id, setId] = useState('');
   const [word, setWord] = useState('');
@@ -36,6 +36,7 @@ const Add = ({ words, setWords, setIsAdding }) => {
       showConfirmButton: false,
       timer: 1500,
     });
+    setAdded(true)
     setIsWaiting(false)
     setIsAdding(false)
     }catch(err){
