@@ -4,9 +4,8 @@ import { useEffect, useState } from "react";
 import { db } from "lib/config/firebase.config";
 import { newsCard } from "lib/types/newsCard.types";
 import Card from "components/news/Card";
-import { collection, query, getDocs } from "firebase/firestore";
+import { collection, query, getDocs, orderBy, limit } from "firebase/firestore";
 import FirstCard from "components/news/FirstCard";
-import { idText } from "typescript";
 
 const Home = () => {
 
@@ -16,7 +15,7 @@ const Home = () => {
 
   useEffect(() => {
     const fetchNews = async () => {
-      const newsQuery = query(collection(db, "news"));
+      const newsQuery = query(collection(db, "news"), orderBy("uploadDate", "desc"), limit(13));
       const querySnapshot = await getDocs(newsQuery);
       const newsArray = querySnapshot.docs.map(news => { return {id: news.id, ...news.data() } as newsCard });
       newsArray.length !== 0 ? setNews(newsArray) : setNoData(true);
@@ -72,7 +71,6 @@ const Home = () => {
             <FirstCard news={news[0]}></FirstCard>
             <h2 className="text-black text-5xl my-3">Noticias</h2>
             <div className="m-auto grid  gap-10 2xl:grid-cols-4 xl:grid-cols-3 sm:grid-cols-1 md:grid-cols-2">
-              {news.map((news, index) => index !== 0 ? <Card key={news.id} news={news}></Card> : null)}
               {news.map((news, index) => index !== 0 ? <Card key={news.id} news={news}></Card> : null)}
             </div>
             </div>

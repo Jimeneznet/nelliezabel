@@ -2,7 +2,7 @@ import { newsCard } from "lib/types/newsCard.types";
 import { useEffect, useState } from "react"
 import { db } from "lib/config/firebase.config";
 import { useNavigate } from "react-router-dom";
-import { collection, query, getDocs, onSnapshot, doc } from "firebase/firestore";
+import { collection, query, onSnapshot, orderBy } from "firebase/firestore";
 import { deleteNews } from "api/news/firestore.api";
 
 export const formatDate = (date: string) => {
@@ -17,7 +17,7 @@ const NewsCrud = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const q = query(collection(db, "news"));
+        const q = query(collection(db, "news"), orderBy("uploadDate", "asc"));
         const unsub = onSnapshot(q, querySnapshot => {
             const newsArray = querySnapshot.docs.map(news => { return { id: news.id, ...news.data() } as newsCard });
             newsArray.length !== 0 ? setNews(newsArray) : setNews([]);

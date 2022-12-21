@@ -64,7 +64,7 @@ export const uploadNews = async (e: React.MouseEvent<HTMLInputElement>, id: stri
             setLoading(true)
             const imgUrl = await uploadNewsFile(img, id, "img")
             const videoUrl = await uploadNewsFile(video, id, "mp4")
-            const news = { ...data, imgUrl: imgUrl, videoUrl: videoUrl }
+            const news = { ...data, uploadDate: new Date(), imgUrl: imgUrl, videoUrl: videoUrl }
             await setDoc(doc(db, 'news', id), news)
             setLoading(false)
             Swal.fire({

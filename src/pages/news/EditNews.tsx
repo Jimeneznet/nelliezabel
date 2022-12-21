@@ -23,12 +23,12 @@ const EditNews = () => {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault()
-        setNews( previous => {
-            if(e.target !== null){ 
-                return {...previous, [e.target.name]: e.target.value}
+        setNews(previous => {
+            if (e.target !== null) {
+                return { ...previous, [e.target.name]: e.target.value }
             }
-            else{
-                return {...previous}
+            else {
+                return { ...previous }
             }
         })
     }
@@ -56,7 +56,11 @@ const EditNews = () => {
             <div>
                 <Header>Editor de Noticias</Header>
                 <Layout>
-                    <h2>Editando noticia....</h2>
+                    <div className="bg-white h-full w-full">
+                        <div className=" bg-white m-auto h-full flex flex-row justify-center w-11/12">
+                            <div className="radial-progress animate-spin text-primary my-10"></div>
+                        </div>
+                    </div>
                 </Layout>
             </div>
         )
@@ -90,21 +94,21 @@ const EditNews = () => {
                                     <label className="label">
                                         <span className="label-text">Imagen</span>
                                     </label>
-                                    <input onChange={e => setImg(e.target.files !== null ? e.target.files[0] : null)} type="file" className="file-input file-input-bordered w-full max-w-xs" />
+                                    <input onChange={e => setImg(e.target.files !== null ? e.target.files[0] : null)} type="file" accept="image/*" className="file-input file-input-bordered w-full max-w-xs" />
                                 </div>
 
                                 <div className="form-control w-full max-w-xs">
                                     <label className="label">
                                         <span className="label-text">Video</span>
                                     </label>
-                                    <input onChange={e => setVideo(e.target.files !== null ? e.target.files[0] : null)} type="file" className="file-input file-input-bordered w-full max-w-xs" />
+                                    <input onChange={e => setVideo(e.target.files !== null ? e.target.files[0] : null)} type="file" accept="video/*" className="file-input file-input-bordered w-full max-w-xs" />
                                 </div>
 
                                 <div className="form-control w-full max-w-xs">
                                     <label className="label">
                                         <span className="label-text">Fecha de la Noticia</span>
                                     </label>
-                                    <input name="date" type="date" onChange={event => handleChange(event)} defaultValue={date ? date : news.date} placeholder="Escriba aca" className="input input-bordered w-full max-w-xs" />
+                                    <input name="date" type="date" max={new Date().toISOString().split('T')[0]} onChange={event => handleChange(event)} defaultValue={date ? date : news.date} placeholder="Escriba aca" className="input input-bordered w-full max-w-xs" />
                                 </div>
 
                                 <div className="card-actions justify-center mt-7">

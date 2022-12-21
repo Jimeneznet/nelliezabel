@@ -20,29 +20,33 @@ const CreateNews = () => {
         date: new Date().toDateString(),
     })
     const [img, setImg] = useState<unknown>(null)
-    const [video, videoImg] = useState<unknown>(null)
+    const [video, setVideo] = useState<unknown>(null)
     const [loading, setLoading] = useState(false)
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault()
-        setNews( previous => {
-            if(e.target !== null){ 
-                return {...previous, [e.target.name]: e.target.value}
+        setNews(previous => {
+            if (e.target !== null) {
+                return { ...previous, [e.target.name]: e.target.value }
             }
-            else{
-                return {...previous}
+            else {
+                return { ...previous }
             }
         })
     }
-    
+
     const navigate = useNavigate()
 
-    if(loading){
-        return(
+    if (loading) {
+        return (
             <div>
-                <Header></Header>
+                <Header>Agregar noticia</Header>
                 <Layout>
-                    <h2>Subiendo noticias....</h2>
+                    <div className="bg-white h-full w-full">
+                        <div className=" bg-white m-auto h-full flex flex-row justify-center w-11/12">
+                            <div className="radial-progress animate-spin text-primary my-10"></div>
+                        </div>
+                    </div>
                 </Layout>
             </div>
         )
@@ -51,7 +55,7 @@ const CreateNews = () => {
     return (
         <div>
             <div className="">
-                <Header>Centro de Administracion</Header>
+                <Header>Agregar noticia</Header>
                 <Layout>
                     <div className="flex flex-row justify-center">
                         <div className="card w-96 bg-base-100 shadow-xl">
@@ -76,26 +80,26 @@ const CreateNews = () => {
                                     <label className="label">
                                         <span className="label-text">Imagen</span>
                                     </label>
-                                    <input type="file" onChange={ e => setImg(e.target.files !== null ? e.target.files[0] : null)} className="file-input file-input-bordered w-full max-w-xs" />
+                                    <input type="file" onChange={e => setImg(e.target.files !== null ? e.target.files[0] : null)} accept="image/*" className="file-input file-input-bordered w-full max-w-xs" />
                                 </div>
 
                                 <div className="form-control w-full max-w-xs">
                                     <label className="label">
                                         <span className="label-text">Video</span>
                                     </label>
-                                    <input type="file" onChange={ e => videoImg(e.target.files !== null ? e.target.files[0] : null)} className="file-input file-input-bordered w-full max-w-xs" />
+                                    <input type="file" onChange={e => setVideo(e.target.files !== null ? e.target.files[0] : null)} accept="video/*" className="file-input file-input-bordered w-full max-w-xs" />
                                 </div>
 
                                 <div className="form-control w-full max-w-xs">
                                     <label className="label">
                                         <span className="label-text">Fecha de la Noticia</span>
                                     </label>
-                                    <input type="date" name="date" defaultValue={new Date().toISOString().split('T')[0]} onChange={event => handleChange(event)} placeholder="Escriba aca" className="input input-bordered w-full max-w-xs" />
+                                    <input type="date" name="date" max={new Date().toISOString().split('T')[0]} defaultValue={new Date().toISOString().split('T')[0]} onChange={event => handleChange(event)} placeholder="Escriba aca" className="input input-bordered w-full max-w-xs" />
                                 </div>
 
                                 <div className="card-actions justify-center mt-7">
-                                    <input onClick={ (e) => uploadNews(e, uuid, news, img, video, setLoading).then( (response) => {if(response)navigate("/admin/news")})} type="input" name="agregar" className="btn btn-primary" value={"agregar"}/>
-                                    <input onClick={ (e) => navigate("/admin/news")} type="input" name="cancelar" className="btn btn-primary" value={"cancelar"}/>
+                                    <input onClick={(e) => uploadNews(e, uuid, news, img, video, setLoading).then((response) => { if (response) navigate("/admin/news") })} type="input" name="agregar" className="btn btn-primary" value={"agregar"} />
+                                    <input onClick={(e) => navigate("/admin/news")} type="input" name="cancelar" className="btn btn-primary" value={"cancelar"} />
                                 </div>
                             </form>
                         </div>
