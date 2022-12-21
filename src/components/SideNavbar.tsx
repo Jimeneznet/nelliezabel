@@ -22,6 +22,8 @@ const handleMenuItems = (user: User) => {
     case UserRole.Aministrador:
       return  [
         { id: 1, label: "Administración de Usuarios", icon: UserIcon, link: "/admin/users" },
+        { id: 2, label: "Administración de Noticias", icon: ArticleIcon, link: "/admin/news" },
+        { id: 3, label: "Administración de Palabras", icon: HomeIcon, link: "/admin/crud-dictionary" },
       ];
     
     case UserRole.Consultor:
