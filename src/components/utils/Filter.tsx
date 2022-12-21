@@ -54,13 +54,27 @@ export const filterWords = (words: Word[], searchQuery: string, isCheckedA: bool
     return parsedWords;
   }
 
-  if (categories.length === 2 ) {
+
+
+  if (categories.length === 3 ) {
+    for (let i = 0; i < words.length; i++) {
+      const element = filterQuery(words[i].word);
+      for (let j = 0; j < element.length; j++) {
+        const query = element[j];
+        if (parsedFilter.includes(query)) {
+          parsedWords.push(words[i]);
+          break;
+        }
+      }
+    }
+    return parsedWords;
+  } else if (categories.length === 2 ) {
     for (let i = 0; i < words.length; i++) {
       const element = filterQuery(words[i].word);
       const category= filterQuery(words[i].category);
       for (let j = 0; j < element.length; j++) {
         const query = element[j];
-        if (parsedFilter.includes(query) && categoryOne.toLocaleLowerCase() === category[j] || categoryTwo.toLocaleLowerCase() === category[j]) {
+        if (parsedFilter.includes(query) && (categoryOne.toLocaleLowerCase() === category[j] || categoryTwo.toLocaleLowerCase() === category[j])) {
           parsedWords.push(words[i]);
           break;
         }
