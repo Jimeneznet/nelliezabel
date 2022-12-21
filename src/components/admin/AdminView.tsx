@@ -28,15 +28,8 @@ const AdminView = ({ userDoc, users }: any) => {
         <LoadingBar />
       ) : (
         <div>
-          <div className="flex justify-center">
-            <h1>Bienvenido {userDoc.data().nombre} !</h1>
-          </div>
           <Link className="mx-2" to="/register">
             <button className="btn">Agregar</button>
-          </Link>
-
-          <Link className="mx-2" to="/user/credentials">
-            <button className="btn">Cambiar Credenciales</button>
           </Link>
           <div className="overflow-x-auto">
             <table className="table w-full">
@@ -54,7 +47,7 @@ const AdminView = ({ userDoc, users }: any) => {
               </thead>
               <tbody>
                 {users.map((user: User, index: number) => {
-                  if (userDoc.data().email === user.email) {
+                  if (userDoc.data().uid === user.uid) {
                     return null;
                   }
                   return (
