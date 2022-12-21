@@ -9,6 +9,7 @@ import { auth } from "../lib/config/firebase.config";
 export const userEditCredentials = async (
   email: string,
   password: string,
+  nombre: string,
   currentUserDoc: QueryDocumentSnapshot<DocumentData>
 ) => {
   if (!auth.currentUser) {
@@ -18,5 +19,6 @@ export const userEditCredentials = async (
   await updateEmail(auth.currentUser, email);
   await updateDoc(currentUserDoc.ref, {
     email,
+    nombre,
   });
 };

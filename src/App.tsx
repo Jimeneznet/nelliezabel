@@ -14,6 +14,7 @@ import UserEdit from 'pages/admin/UserEdit';
 import CrudDictionary from "./pages/admin/CrudDictionary";
 import { ProtectedRoute } from './lib/context/auth.context';
 import EditCredentialsView from './pages/admin/EditCredentials';
+import ForgotPassword from 'pages/ForgotPassword';
 
 function App() {
   return (
@@ -25,7 +26,8 @@ function App() {
 
             <Route path='/admin/crud-dictionary' element={ <CrudDictionary /> }/>
 
-            
+            <Route path='/forgot-password' element={ <ForgotPassword /> }/>
+
             <Route path='/admin/dictionary' element={
               <ProtectedRoute>
                 <Word />

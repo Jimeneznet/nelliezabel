@@ -1,6 +1,6 @@
 import React from 'react'
 
-const EditCredentialsView = ({ submitHandler,email,password,verification,setEmail,setPassword, setVerification }:any) => {
+const EditCredentialsView = ({ submitHandler,nombre,email,password,verification,setEmail,setNombre,setPassword, setVerification }:any) => {
     return (
         <div>
             <div className=" flex flex-col justify-center min-h-screen overflow-hidden">
@@ -15,6 +15,12 @@ const EditCredentialsView = ({ submitHandler,email,password,verification,setEmai
                     <div className='card-body'> 
                         <form onSubmit={submitHandler}>
                             <div className="-space-y-px rounded-md shadow-sm">
+                                <label>
+                                    Nombre:
+                                <input value={nombre} onChange={(e)=>setNombre(e.target.value)} type="text" id="nombre" required className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"/>
+                                </label>
+                                <br></br>
+                                
                                 <label>
                                     Correo:
                                 <input value={email} onChange={(e)=>setEmail(e.target.value)} type="email" id="email" required className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"/>

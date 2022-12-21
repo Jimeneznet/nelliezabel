@@ -13,6 +13,7 @@ import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
 const UserEditCredentials = () => {
   const getUserByEmail = useGetUserByEmail();
   const [user, loading] = useAuthState(auth);
+  const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [verification, setVerification] = useState("");
@@ -52,7 +53,8 @@ const UserEditCredentials = () => {
     if (!currentUserDoc) {
       return;
     }
-    userEditCredentials(email, password, currentUserDoc);
+
+    userEditCredentials(email, password, nombre, currentUserDoc);
 
     navigate("/admin/users");
   };
@@ -66,12 +68,14 @@ const UserEditCredentials = () => {
         ) : (
           <EditCredentialsView
             submitHandler={(e: any) => submitHandler(e)}
+            nombre={nombre}
             email={email}
             password={password}
             verification={verification}
             setEmail={setEmail}
             setPassword={setPassword}
             setVerification={setVerification}
+            setNombre={setNombre}
           />
         )}
       </Layout>

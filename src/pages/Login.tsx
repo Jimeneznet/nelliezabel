@@ -37,8 +37,6 @@ const Login = () => {
         <div>
             <Header>Fundacion Nellie Zabel</Header>
             <LoginView submitHandler={(e: any) => submitHandler(e)}></LoginView>
-            <button onClick={iniciarConGoogle}>Google -- --</button>
-            {error && <h1>Error al conectar</h1>}
         </div>
     )
 }

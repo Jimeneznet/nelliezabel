@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const LoginView = ({ submitHandler }: any) => {
     return (
@@ -30,9 +31,13 @@ const LoginView = ({ submitHandler }: any) => {
                                 <div className='flex flex-col items-center'>
                                     <button type="submit" className="btn btn-wide">Ingresar</button>
 
-                                </div>  
+                                </div>
+
                             </div>
                         </form>
+                        
+                        <Link to="/forgot-password"> ¿Has olvidado la contraseña? </Link>
+                        
                     </div>
                 </div>
             </div>
