@@ -7,18 +7,39 @@ import ArticleIcon from "./icons/ArticleIcon";
 import UserIcon from "./icons/UserIcon";
 import VideosIcon from "./icons/VideosIcon";
 import HomeIcon from "./icons/HomeIcon";
+import { User, UserRole } from "../lib/types/user.types";
+import { useUser } from "../lib/context/user.context";
 
+type MenuItem = {
+  id: number;
+  label: string;
+  icon: Function
+  link: string;
+};
 
-const menuItems = [
-  { id: 1, label: "Administración de Noticias", icon: ArticleIcon, link: "/admin/news" },
-  { id: 2, label: "Administración de Usuarios", icon: UserIcon, link: "/admin/users" },
-  { id: 3, label: "Administración de Palabras", icon: HomeIcon, link: "/admin/crud-dictionary" },
-];
+const handleMenuItems = (user: User) => {
+  switch (user.rol) {
+    case UserRole.Aministrador:
+      return  [
+        { id: 1, label: "Administración de Usuarios", icon: UserIcon, link: "/admin/users" },
+      ];
+    
+    case UserRole.Consultor:
+      return  [
+        { id: 1, label: "Administración de Noticias", icon: ArticleIcon, link: "/admin/news" },
+        { id: 2, label: "Administración de Palabras", icon: HomeIcon, link: "/admin/crud-dictionary" },
+      ];
+
+    default:
+      return [];
+  }
+};
 
 const SideNavbar = () => {
   const [toggleCollapse, setToggleCollapse] = useState(true);
   const [isCollapsible, setIsCollapsible] = useState(false);
-
+  const user = useUser().user as User;
+  const menuItems:MenuItem[] = handleMenuItems(user);
   const { pathname } = useLocation();
 
   const activeMenu = useMemo(
@@ -98,7 +119,7 @@ const SideNavbar = () => {
           {menuItems.map(({ icon: Icon, ...menu }) => {
             const classes = getNavItemClasses(menu);
             return (
-              <div className={classes}>
+              <div key={menu.id} className={classes}>
                 <Link
                   className="flex py-4 px-3  items-center w-full h-full"
                   to={menu.link}
