@@ -48,46 +48,53 @@ const AdminView = ({ userDoc, users }: any) => {
                 </tr>
               </thead>
               <tbody>
-                {users.map((user: User, index: number) => (
-                  <tr key={index}>
-                    <td>{user.nombre}</td>
-                    <td>{user.rut}</td>
-                    <td>{user.email}</td>
-                    <td>{user.rol}</td>
-                    <td>
-                      {user.status === "1" ? "Habilitado" : "Deshabilitado"}
-                    </td>
-                    <td>
-                      <Link
-                        className="btn"
-                        to={`/admin/users/edit/${user.uid}`}
-                      >
-                        editar
-                      </Link>
-                    </td>
-                    <td>
-                      <button
-                        className="btn"
-                        onClick={() => updateUserStatus(user.uid, user.status)}
-                      >
-                        cambiar status
-                      </button>
-                    </td>
-                    <td>
-                      <button
-                        className="btn"
-                        onClick={() => {
-                          sendPasswordResetEmail(auth, user.email);
-                          alert(
-                            "Se ha enviado un correo al usuario para restablecer contraseña"
-                          );
-                        }}
-                      >
-                        Reestablecer contraseña
-                      </button>
-                    </td>
-                  </tr>
-                ))}
+                {users.map((user: User, index: number) => {
+                  if (userDoc.data().email === user.email){
+                    return null;
+                  }
+                  return (
+                    <tr key={index}>
+                      <td>{user.nombre}</td>
+                      <td>{user.rut}</td>
+                      <td>{user.email}</td>
+                      <td>{user.rol}</td>
+                      <td>
+                        {user.status === "1" ? "Habilitado" : "Deshabilitado"}
+                      </td>
+                      <td>
+                        <Link
+                          className="btn"
+                          to={`/admin/users/edit/${user.uid}`}
+                        >
+                          editar
+                        </Link>
+                      </td>
+                      <td>
+                        <button
+                          className="btn"
+                          onClick={() =>
+                            updateUserStatus(user.uid, user.status)
+                          }
+                        >
+                          cambiar status
+                        </button>
+                      </td>
+                      <td>
+                        <button
+                          className="btn"
+                          onClick={() => {
+                            sendPasswordResetEmail(auth, user.email);
+                            alert(
+                              "Se ha enviado un correo al usuario para restablecer contraseña"
+                            );
+                          }}
+                        >
+                          Reestablecer contraseña
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
