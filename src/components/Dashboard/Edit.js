@@ -14,6 +14,18 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
   const [video, setVideo] = useState(selectedWord.data().video);
   const [newVideo, setNewVideo] = useState("");
 
+  function containsNumbers(x){
+    return /\d/.test(x);
+  }
+  function containsSpecialChars(x){
+    const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+    return specialChars.test(x);
+  }
+  function hasOnlySpecialChars(x){
+    const pattern = /^[^a-zA-Z0-9]+$/;
+    return pattern.test(x);
+  }
+
   const handleUpdate = async(e) => {
     e.preventDefault();
     if (!word || !description || !category) {
@@ -23,6 +35,23 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
         text: 'Todos los campos son requeridos.',
         showConfirmButton: true,
       });
+    }else{
+      if (containsNumbers(word) || containsSpecialChars(word)){
+        return Swal.fire({
+          icon:'error',
+          title:'Error!',
+          text:'La palabra contiene números o caracteres especiales',
+          showConfirmButton: true,
+        });
+      }
+      if (!isNaN(description) || hasOnlySpecialChars(description)){
+        return Swal.fire({
+          icon:'error',
+          title:'Error!',
+          text:' La descripción contiene sólo números o sólo caracteres especiales',
+          showConfirmButton: true,
+        });
+      }
     }
     let url = ""
     if(newVideo != "")
@@ -100,6 +129,7 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
             className='form-select'
             name="category" 
             id="category"
+            value={category}
             onChange={e => setCategory(e.target.value)}   
           >
             <option value="">Selecciona una categoria</option>
