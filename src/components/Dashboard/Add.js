@@ -60,11 +60,9 @@ const Add = ({ words, setWords, setIsAdding, setAdded }) => {
       <form className="w-5/6 m-8" onSubmit={handleAdd}>
         
         <h1 className="bg-secondaryHeader  h-[4rem] shadow-2xl z-1 text-center font-bold indent-12 text-white align-baseline ">Nueva palabra</h1>
+
         <div className='flex items-baseline space-x-5 text-3xl' > 
-        
-          <label className="" htmlFor="word">Palabra</label>
-        </div>
-        <div className='flex items-baseline space-x-5 text-3xl' > 
+          <label className="" htmlFor="word" style={{width:'20%'}} >Palabra</label>
           <input
             id="word"
             type="text"
@@ -74,24 +72,21 @@ const Add = ({ words, setWords, setIsAdding, setAdded }) => {
             placeholder="Escriba la palabra.."
           />
         </div>
-        <div className='flex items-baseline space-x-5 text-3xl'>
-          <label className="" htmlFor="word">Descripción</label>
-        </div>
+
         <div className='flex items-baseline space-x-5 text-3xl' > 
-        <input
-            id="description"
-            type="text"
-            name="description"
-            value={description}
-            onChange={e => setDescription(e.target.value)}
-            placeholder="Escriba la descripción.."
-          />        
-          </div>
+          <label className="" htmlFor="word"style={{width:'20%'}}>Descripción</label>
+          <input
+              id="description"
+              type="text"
+              name="description"
+              value={description}
+              onChange={e => setDescription(e.target.value)}
+              placeholder="Escriba la descripción.."
+            />        
+        </div>
         
-        <div className='flex items-baseline space-x-5 text-3xl'>
-        <label htmlFor="category">Categoría</label>
-        </div>
         <div className='flex items-baseline space-x-5 text-3xl' > 
+        <label htmlFor="category" style={{width:'20%'}}>Categoría</label>
           <select 
             className='form-select'
             name="category" 

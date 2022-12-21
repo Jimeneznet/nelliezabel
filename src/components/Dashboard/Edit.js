@@ -74,10 +74,9 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
         <div className=''>
           <h1 className="bg-secondaryHeader  h-[4rem] shadow-2xl z-1  font-bold indent-12 text-white align-baseline text-center mt-3">Modificar palabra</h1>
         </div>
+        
         <div className='flex items-baseline space-x-5 text-3xl' > 
-          <label className="" htmlFor="word">Palabra</label>
-        </div>
-        <div className='flex items-baseline space-x-5 text-3xl' > 
+          <label className="" htmlFor="word"style={{width:'20%'}}>Palabra</label>
           <input
             id="word"
             type="text"
@@ -87,10 +86,9 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
             placeholder="Escriba la palabra.."
           />
         </div>
-        <div className='flex items-baseline space-x-5 text-3xl'>
-          <label className="" htmlFor="word">Descripción</label>
-        </div>
+
         <div className='flex items-baseline space-x-5 text-3xl' > 
+          <label className="" htmlFor="word" style={{width:'20%'}}>Descripción</label>
         <input
             id="description"
             type="text"
@@ -101,11 +99,8 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
           />        
           </div>
         
-
-        <div className='flex items-baseline space-x-5 text-3xl'>
-          <label htmlFor="category">Categoría</label>
-        </div>
         <div className='flex items-baseline space-x-5 text-3xl' > 
+          <label htmlFor="category" style={{width:'20%'}}>Categoría</label>
           <select 
             className='form-select'
             name="category" 
@@ -120,43 +115,55 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
           </select>
         </div>
 
-
-        <div className='flex items-baseline space-x-5 text-3xl'>
-          <label htmlFor="video">Subir video </label>
-        </div>
-
-        <div className='flex items-baseline space-x-5 text-3xl' > 
-        <input
-          id="video"
-          type="file"
-          name="video"
-          accept="video/mp4,video/x-m4v,video/*"
-          onChange={e => setVideo(e.target.files[0])}
-        />
-        </div>
-
-        <br/>
-        <div className='flex space-x-5 text-3xl'>
-          <div class='flex justify-start'>
-              <label >Video actual</label>
-          </div>
-          <div class=' justify-end'>
-              {!isWaiting &&(
-                <button class="btn btn-success disabled:opacity-50">Editar</button>
-              )}
-            
-              {isWaiting &&(
-                <div className="flex items-center justify-center ">
-                  <div className="w-16 h-16 border-b-2 border-purple-700 rounded-full animate-spin"></div>
-                </div>
-              )}
-              <button hidden={isWaiting == true ? true : false } class="btn btn-error" style={{ marginLeft: '12px'}} onClick={() => setIsEditing(false)}>Cancelar</button>
-          </div>
-        </div>
+       
         <div>
-        <iframe width="560" height="315" src={video} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
 
+          <div className='grid grid-flow-col auto-cols-max gap-x-16'>        
+            
+            <div className='col-span-1'>
+
+              <div className='grid grid-rows-4 grid-flow-col gap-5'>
+
+                <div className=' mt-20'>
+                  <label htmlFor="video" className='text-3xl'>Subir video </label>  
+                </div>
+                
+                <div className=' mt-2' >
+                  <input
+                    id="video"
+                    type="file"
+                    name="video"
+                    accept="video/mp4,video/x-m4v,video/*"
+                    onChange={e => setVideo(e.target.files[0])}
+                  />
+                </div>
+
+                <div className= ''>
+                    {!isWaiting &&(
+                      <button class="btn btn-success disabled:opacity-50">Editar</button>
+                    )}
+                  
+                    {isWaiting &&(
+                      <div className="flex items-center justify-center ">
+                        <div className="w-16 h-16 border-b-2 border-purple-700 rounded-full animate-spin"></div>
+                      </div>
+                    )}
+                    <button hidden={isWaiting == true ? true : false } class="btn btn-error" style={{ marginLeft: '12px'}} onClick={() => setIsEditing(false)}>Cancelar</button>
+                </div>
+
+              </div>
+      
+            </div>
+
+            <div className='col-span-1'>
+              <label className='text-3xl' >Video actual</label>
+              <iframe width="560" height="315" src={video} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>  
+
+          </div>
+
+        </div>
+        
       </form>
     </div>
   );
