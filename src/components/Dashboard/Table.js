@@ -17,12 +17,8 @@ const Table = ({ words, setWords, handleEdit, handleDelete }) => {
       results = words
   }else{
     results = words.filter((dato) => dato.data().word.toLowerCase().includes(search.toLowerCase()) || dato.data().category.toLowerCase().includes(search.toLowerCase()))
-    // results = words.filter((dato) => dato.data().category.toLowerCase().includes(search.toLowerCase()))
     words= results
   }
-  // console.log(words)
-  // console.log(results)
-  // const results = !search ? words : words.filter((dato)=> dato.description.toLowerCase().includes(search.toLocaleLowerCase()))
 
   //metodo para filtrar por categoria
   if (!filtro) {
@@ -33,7 +29,7 @@ const Table = ({ words, setWords, handleEdit, handleDelete }) => {
   }
   const Filtrar = (e) => {
     setFiltro(e.target.value)
-    // console.log(e.target.value)
+
   }
 
   
@@ -42,11 +38,11 @@ const Table = ({ words, setWords, handleEdit, handleDelete }) => {
 
       <div className='flex justify-content-center gap-5'>        
 
-        <div className='flex-auto w-16 mr-1'>           
-          <input value={search} onChange={Searcher} type="text" placeholder='Buscar palabra' className='form-control'/>      
+        <div className='grow w-16 mr-1'>           
+          <input value={search} onChange={Searcher} type="text" placeholder='Buscar palabra' className='form-control' />      
         </div>
 
-        <div className='text-end '>
+        <div className='text-end'>
           <select 
             className='form-select'
             name="filtrar" 
@@ -87,7 +83,7 @@ const Table = ({ words, setWords, handleEdit, handleDelete }) => {
                 <td className="text-right">
                   <button
                     onClick={() => handleEdit(Word.id)}
-                    className="button muted-button"
+                    className="btn btn-outline btn-info"
                   >
                     Editar
                   </button>
@@ -95,7 +91,7 @@ const Table = ({ words, setWords, handleEdit, handleDelete }) => {
                 <td className="text-left">
                   <button
                     onClick={() => handleDelete(Word.id)}
-                    className="button muted-button"
+                    className="btn btn-outline btn-error"
                   >
                     Borrar
                   </button>

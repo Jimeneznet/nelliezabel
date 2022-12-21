@@ -54,6 +54,7 @@ const Add = ({ words, setWords, setIsAdding }) => {
         
         <h1 className="bg-secondaryHeader  h-[4rem] shadow-2xl z-1 text-center font-bold indent-12 text-white align-baseline ">Nueva palabra</h1>
         <div className='flex items-baseline space-x-5 text-3xl' > 
+        
         <label className="" htmlFor="word">Palabra</label>
         <input
           id="word"
