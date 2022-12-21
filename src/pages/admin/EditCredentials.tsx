@@ -2,64 +2,72 @@ import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate, useParams } from "react-router-dom";
 import { auth } from "../../lib/config/firebase.config";
-import { getUser } from '../../hooks/useGetAuth'
 import { userEditCredentials } from "hooks/userEditCredentials";
 import Header from "components/Header";
-import EditUserView from "components/admin/EditUserView";
 import Layout from "../../components/Layout";
 import LoadingBar from "../../components/LoadingBar";
-import EditCredentialsView from "@components/admin/EditCredentialsView";
+import EditCredentialsView from "../../components/admin/EditCredentialsView";
+import { useGetUserByEmail } from "../../hooks/getUserByEmail";
+import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
 
 const UserEditCredentials = () => {
-    const {uid}=useParams();
-    const [user, loading] = useAuthState(auth);
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [verification, setVerification] = useState("");
-    const [isLoading, setIsLoading] = useState<boolean>(true);
-    const navigate = useNavigate();
-    
-    function submitHandler(e: any) {
+  const getUserByEmail = useGetUserByEmail();
+  const [user, loading] = useAuthState(auth);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [verification, setVerification] = useState("");
+  const [currentUserDoc, setCurrentUserDoc] =
+    useState<QueryDocumentSnapshot<DocumentData>>();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const navigate = useNavigate();
 
-        if(password !== verification){
-          alert("Las contraseñas no coinciden");
-          return;
-        }
+  useEffect(() => {
+    if (loading) return;
+    if (!user) return navigate("/login");
 
-        userEditCredentials(email, password);
-        
-        navigate('/admin/users');
+    const handleGetUser = async () => {
+      const userDoc = await getUserByEmail(auth.currentUser?.email as string);
+      if (!userDoc) {
+        return;
+      }
+      setCurrentUserDoc(userDoc);
+      setIsLoading(false);
+    };
+    handleGetUser();
+  }, [user, loading]);
+
+  const submitHandler = (e: any) => {
+    if (password !== verification) {
+      alert("Las contraseñas no coinciden");
+      return;
     }
+    if (!currentUserDoc) {
+      return;
+    }
+    userEditCredentials(email, password, currentUserDoc);
 
-      useEffect(() => {
-        if (loading) return;
-        if (!user) return navigate("/login");
-        
-        getUserByEmail(email).then((u:any) => {
-          setEmail(u.data().rol);
-          setIsLoading(false);
-        })
-      }, [user, loading]);
+    navigate("/admin/users");
+  };
 
-      return (
-        <div>
-          <Header>Editar Credenciales</Header>
-          <Layout>
-            { isLoading ? (
-              <LoadingBar/>
-            ) :( 
-              <EditCredentialsView 
-                submitHandler={(e: any) => submitHandler(e)}
-                email={email}
-                password={password}
-                verification={verification}
-                setEmail={setEmail}
-                setPassword={setPassword}
-                setVerification={setVerification}
-              />)
-            }
-          </Layout>
-        </div>
-    )
-}
-export default UserEditCredentials
+  return (
+    <div>
+      <Header>Editar Credenciales</Header>
+      <Layout>
+        {isLoading ? (
+          <LoadingBar />
+        ) : (
+          <EditCredentialsView
+            submitHandler={(e: any) => submitHandler(e)}
+            email={email}
+            password={password}
+            verification={verification}
+            setEmail={setEmail}
+            setPassword={setPassword}
+            setVerification={setVerification}
+          />
+        )}
+      </Layout>
+    </div>
+  );
+};
+export default UserEditCredentials;
