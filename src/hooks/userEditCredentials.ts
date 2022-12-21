@@ -14,9 +14,9 @@ export const userEditCredentials = async (
   if (!auth.currentUser) {
     return;
   }
+  await updatePassword(auth.currentUser, password);
+  await updateEmail(auth.currentUser, email);
   await updateDoc(currentUserDoc.ref, {
     email,
   });
-  await updatePassword(auth.currentUser, password);
-  await updateEmail(auth.currentUser, email);
 };
