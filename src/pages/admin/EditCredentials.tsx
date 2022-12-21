@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { auth } from "../../lib/config/firebase.config";
 import { userEditCredentials } from "hooks/userEditCredentials";
 import Header from "components/Header";
@@ -9,14 +9,20 @@ import LoadingBar from "../../components/LoadingBar";
 import EditCredentialsView from "../../components/admin/EditCredentialsView";
 import { useGetUserByEmail } from "../../hooks/getUserByEmail";
 import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
+import { EditCredentialsInputs } from "../../lib/types/adminForm.types";
+
+const defaultInputsValue = {
+  nombre: "",
+  email: "",
+  password: "",
+  verification: "",
+};
 
 const UserEditCredentials = () => {
   const getUserByEmail = useGetUserByEmail();
   const [user, loading] = useAuthState(auth);
-  const [nombre, setNombre] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [verification, setVerification] = useState("");
+  const [editCredentialInputs, setEditCredentialInputs] =
+    useState<EditCredentialsInputs>(defaultInputsValue);
   const [currentUserDoc, setCurrentUserDoc] =
     useState<QueryDocumentSnapshot<DocumentData>>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -35,26 +41,35 @@ const UserEditCredentials = () => {
       setIsLoading(false);
     };
     handleGetUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, loading]);
 
-  const submitHandler = (e: any) => {
+  const submitHandler = (e: FormEvent) => {
     e.preventDefault();
-    if (password !== verification) {
+    if (editCredentialInputs.password !== editCredentialInputs.verification) {
       alert("Las contraseñas no coinciden");
       return;
     }
 
-    if(!RegExp("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$").test(email)){
+    if (
+      !RegExp("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$").test(
+        editCredentialInputs.email
+      )
+    ) {
       alert("El email tiene un formato incorrecto");
       return;
     }
-
 
     if (!currentUserDoc) {
       return;
     }
 
-    userEditCredentials(email, password, nombre, currentUserDoc);
+    userEditCredentials(
+      editCredentialInputs.email,
+      editCredentialInputs.password,
+      editCredentialInputs.nombre,
+      currentUserDoc
+    );
 
     navigate("/admin/users");
   };
@@ -67,15 +82,9 @@ const UserEditCredentials = () => {
           <LoadingBar />
         ) : (
           <EditCredentialsView
-            submitHandler={(e: any) => submitHandler(e)}
-            nombre={nombre}
-            email={email}
-            password={password}
-            verification={verification}
-            setEmail={setEmail}
-            setPassword={setPassword}
-            setVerification={setVerification}
-            setNombre={setNombre}
+            submitHandler={(e: FormEvent) => submitHandler(e)}
+            editCredentialInputs={editCredentialInputs}
+            setEditCredentialInputs={setEditCredentialInputs}
           />
         )}
       </Layout>
