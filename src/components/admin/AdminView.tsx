@@ -6,6 +6,8 @@ import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../../lib/config/firebase.config";
 import { User, UserRole } from "../../lib/types/user.types";
 import { useUser } from "../../lib/context/user.context";
+import Logo from "../../assets/logo.png";
+
 
 const AdminView = ({ userDoc, users }: any) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -22,81 +24,92 @@ const AdminView = ({ userDoc, users }: any) => {
   }, []);
 
   return (
-    <div>
-      {isLoading || !userDoc ? (
-        <LoadingBar />
-      ) : (
-        <div>
-          <Link className="mx-2" to="/register">
-            <button className="btn">Agregar</button>
-          </Link>
-          <div className="overflow-x-auto">
-            <table className="table w-full">
-              <thead>
-                <tr>
-                  <th>Nombre</th>
-                  <th>Rut</th>
-                  <th>Correo</th>
-                  <th>Rol</th>
-                  <th>Status</th>
-                  <th>Editar</th>
-                  <th>Eliminar</th>
-                  <th>Restablecer</th>
-                </tr>
-              </thead>
-              <tbody>
-                {users.map((user: User, index: number) => {
-                  if (userDoc.data().uid === user.uid) {
-                    return null;
-                  }
-                  return (
-                    <tr key={index}>
-                      <td>{user.nombre}</td>
-                      <td>{user.rut}</td>
-                      <td>{user.email}</td>
-                      <td>{user.rol}</td>
-                      <td>
-                        {user.status === "1" ? "Habilitado" : "Deshabilitado"}
-                      </td>
-                      <td>
-                        <Link
-                          className="btn"
-                          to={`/admin/users/edit/${user.uid}`}
-                        >
-                          editar
-                        </Link>
-                      </td>
-                      <td>
-                        <button
-                          className="btn"
-                          onClick={() =>
-                            updateUserStatus(user.uid, user.status)
-                          }
-                        >
-                          cambiar status
-                        </button>
-                      </td>
-                      <td>
-                        <button
-                          className="btn"
-                          onClick={() => {
-                            sendPasswordResetEmail(auth, user.email);
-                            alert(
-                              "Se ha enviado un correo al usuario para restablecer contraseña"
-                            );
-                          }}
-                        >
-                          Reestablecer contraseña
-                        </button>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+    <div
+    className="hero min-h-screen"
+    style={{
+      backgroundImage: `url(${Logo})`,
+      backgroundSize: "55%",
+      backgroundRepeat: "no-repeat",
+    }}
+    >
+    <div className="hero-overlay bg-opacity-90 bg-[#f4eefc]"></div>
+    <div className="hero-content text-center text-[#47525e]"></div>
+      <div>
+        {isLoading || !userDoc ? (
+          <LoadingBar />
+        ) : (
+          <div>
+            <Link className="mx-2" to="/register">
+              <button className="btn">Agregar</button>
+            </Link>
+            <div className="overflow-x-auto">
+              <table className="table w-full">
+                <thead>
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Rut</th>
+                    <th>Correo</th>
+                    <th>Rol</th>
+                    <th>Status</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                    <th>Restablecer</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {users.map((user: User, index: number) => {
+                    if (userDoc.data().uid === user.uid) {
+                      return null;
+                    }
+                    return (
+                      <tr key={index}>
+                        <td>{user.nombre}</td>
+                        <td>{user.rut}</td>
+                        <td>{user.email}</td>
+                        <td>{user.rol}</td>
+                        <td>
+                          {user.status === "1" ? "Habilitado" : "Deshabilitado"}
+                        </td>
+                        <td>
+                          <Link
+                            className="btn"
+                            to={`/admin/users/edit/${user.uid}`}
+                          >
+                            editar
+                          </Link>
+                        </td>
+                        <td>
+                          <button
+                            className="btn"
+                            onClick={() =>
+                              updateUserStatus(user.uid, user.status)
+                            }
+                          >
+                            cambiar status
+                          </button>
+                        </td>
+                        <td>
+                          <button
+                            className="btn"
+                            onClick={() => {
+                              sendPasswordResetEmail(auth, user.email);
+                              alert(
+                                "Se ha enviado un correo al usuario para restablecer contraseña"
+                              );
+                            }}
+                          >
+                            Reestablecer contraseña
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };
