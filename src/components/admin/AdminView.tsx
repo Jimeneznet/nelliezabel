@@ -7,9 +7,9 @@ import { auth } from "../../lib/config/firebase.config";
 import { User, UserRole } from "../../lib/types/user.types";
 import { useUser } from "../../lib/context/user.context";
 import Logo from "../../assets/logo.png";
+import UserSearch from "./UserSearch";
 
-
-const AdminView = ({ userDoc, users }: any) => {
+const AdminView = ({ userDoc, users, handleSearch }: any) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const userContext = useUser();
   const redirect = useNavigate();
@@ -20,96 +20,88 @@ const AdminView = ({ userDoc, users }: any) => {
       setIsLoading(false);
     };
     handleGetUser();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div
-    className="hero min-h-screen"
-    style={{
-      backgroundImage: `url(${Logo})`,
-      backgroundSize: "55%",
-      backgroundRepeat: "no-repeat",
-    }}
-    >
-    <div className="hero-overlay bg-opacity-90 bg-[#f4eefc]"></div>
-    <div className="hero-content text-center text-[#47525e]"></div>
-      <div>
-        {isLoading || !userDoc ? (
-          <LoadingBar />
-        ) : (
-          <div>
+    <div>
+      {isLoading || !userDoc ? (
+        <LoadingBar />
+      ) : (
+        <div>
+          <div className="flex flex-row">
             <Link className="mx-2" to="/register">
               <button className="btn">Agregar</button>
             </Link>
-            <div className="overflow-x-auto">
-              <table className="table w-full">
-                <thead>
-                  <tr>
-                    <th>Nombre</th>
-                    <th>Rut</th>
-                    <th>Correo</th>
-                    <th>Rol</th>
-                    <th>Status</th>
-                    <th>Editar</th>
-                    <th>Eliminar</th>
-                    <th>Restablecer</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {users.map((user: User, index: number) => {
-                    if (userDoc.data().uid === user.uid) {
-                      return null;
-                    }
-                    return (
-                      <tr key={index}>
-                        <td>{user.nombre}</td>
-                        <td>{user.rut}</td>
-                        <td>{user.email}</td>
-                        <td>{user.rol}</td>
-                        <td>
-                          {user.status === "1" ? "Habilitado" : "Deshabilitado"}
-                        </td>
-                        <td>
-                          <Link
-                            className="btn"
-                            to={`/admin/users/edit/${user.uid}`}
-                          >
-                            editar
-                          </Link>
-                        </td>
-                        <td>
-                          <button
-                            className="btn"
-                            onClick={() =>
-                              updateUserStatus(user.uid, user.status)
-                            }
-                          >
-                            cambiar status
-                          </button>
-                        </td>
-                        <td>
-                          <button
-                            className="btn"
-                            onClick={() => {
-                              sendPasswordResetEmail(auth, user.email);
-                              alert(
-                                "Se ha enviado un correo al usuario para restablecer contraseña"
-                              );
-                            }}
-                          >
-                            Reestablecer contraseña
-                          </button>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
+            <UserSearch handleSearch={handleSearch} />
           </div>
-        )}
-      </div>
+          <div className="overflow-x-auto">
+            <table className="table w-full">
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Rut</th>
+                  <th>Correo</th>
+                  <th>Rol</th>
+                  <th>Status</th>
+                  <th>Editar</th>
+                  <th>Eliminar</th>
+                  <th>Restablecer</th>
+                </tr>
+              </thead>
+              <tbody>
+                {users.map((user: User, index: number) => {
+                  if (userDoc.data().uid === user.uid) {
+                    return null;
+                  }
+                  return (
+                    <tr key={index}>
+                      <td>{user.nombre}</td>
+                      <td>{user.rut}</td>
+                      <td>{user.email}</td>
+                      <td>{user.rol}</td>
+                      <td>
+                        {user.status === "1" ? "Habilitado" : "Deshabilitado"}
+                      </td>
+                      <td>
+                        <Link
+                          className="btn"
+                          to={`/admin/users/edit/${user.uid}`}
+                        >
+                          editar
+                        </Link>
+                      </td>
+                      <td>
+                        <button
+                          className="btn"
+                          onClick={() =>
+                            updateUserStatus(user.uid, user.status)
+                          }
+                        >
+                          cambiar status
+                        </button>
+                      </td>
+                      <td>
+                        <button
+                          className="btn"
+                          onClick={() => {
+                            sendPasswordResetEmail(auth, user.email);
+                            alert(
+                              "Se ha enviado un correo al usuario para restablecer contraseña"
+                            );
+                          }}
+                        >
+                          Reestablecer contraseña
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

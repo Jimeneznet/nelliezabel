@@ -7,13 +7,16 @@ import AdminView from "../../components/admin/AdminView";
 import Header from "../../components/Header";
 import Layout from "../../components/Layout";
 import { collection, query, onSnapshot } from "firebase/firestore";
+import { User } from "../../lib/types/user.types";
+import { useSearchUserByRut } from "hooks/searchUserByRut";
 
 const Users = () => {
   const [user, loading] = useAuthState(auth);
   const [userDoc, setUserDoc] = useState<any>();
-  const [users, setUsers] = useState<any>();
+  const [users, setUsers] = useState<User[]>();
+  const [filteredUsers, setFilteredUsers] = useState<User[]>();
   const navigate = useNavigate();
-
+  const handleSearchUser = useSearchUserByRut();
   const firebaseListener = () => {
     const q = query(collection(db, "usuarios"));
     onSnapshot(q, (querySnapshot) => {
@@ -30,28 +33,38 @@ const Users = () => {
         });
       });
       setUsers(users);
+      setFilteredUsers(users);
     });
   };
 
   useEffect(() => {
     if (loading) return;
     if (!user) return navigate("/login");
-    
+
     const handleGetUserDoc = async () => {
       const userDoc = await getUser(user.uid);
       setUserDoc(userDoc);
     };
-    
+
     firebaseListener();
     handleGetUserDoc();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, loading]);
+
+  const handleSearch = (rut: string) => {
+    handleSearchUser(users, rut, setFilteredUsers);
+  };
 
   return (
     <div>
       <Header>Administración de usuarios</Header>
       <Layout>
-          <AdminView userDoc={userDoc} users={users} />
+        <AdminView
+          userDoc={userDoc}
+          users={filteredUsers}
+          setUsers={setFilteredUsers}
+          handleSearch={handleSearch}
+        />
       </Layout>
     </div>
   );
