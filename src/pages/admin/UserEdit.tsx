@@ -20,7 +20,7 @@ const UserEdit = () => {
     function submitHandler(e: any) {
         e.preventDefault();
 
-        if(!RegExp("^[a-zA-Z\\s]*$").test(nombre)){
+        if(!RegExp("^[a-zA-ZÀ-ÿ\\u00f1\\u00d1]+(\\s*[a-zA-ZÀ-ÿ\\u00f1\\u00d1]*)*[a-zA-ZÀ-ÿ\\u00f1\\u00d1]+$").test(nombre)){
           alert("El nombre debe tener sólo letras");
           return;
         }
