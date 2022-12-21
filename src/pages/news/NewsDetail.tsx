@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Header from "components/Header";
 import { newsCard } from "lib/types/newsCard.types";
 import ReactPlayer from "react-player";
+import { formatDate } from "components/news/NewsCrud";
 
 const NewsDetail = () => {
 
@@ -35,13 +36,14 @@ const NewsDetail = () => {
                 <div className="bg-white h-full w-full pb-10">
                     <div className="bg-white h-full flex m-auto w-11/12 flex-col justify-center">
                         <ReactPlayer 
-                        url="https://www.youtube.com/watch?v=MefbMlcGStY" 
+                        url={data.videoUrl} 
                         controls 
                         className="m-auto mt-10"
                         width='70%'
                         />
                         <h2 className="text-black text-3xl mt-5">{data.title}</h2>
                         <h2 className="text-black text-1xl"> {data.author}</h2>
+                        <h2 className="text-black text-1xl"> {formatDate(data.date)}</h2>
                     </div>
                 </div>
                 <Footer/>
@@ -57,6 +59,7 @@ const NewsDetail = () => {
 
                 <h2 className="text-black text-5xl my-3">La noticia que esta buscando no existe</h2>
                 </div>
+                <Footer/>
             </div>
         )
     }

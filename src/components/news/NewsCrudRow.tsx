@@ -1,4 +1,6 @@
 import { newsCard } from "lib/types/newsCard.types";
+import { deleteNews } from "api/news/firestore.api";
+import { useNavigate } from "react-router-dom";
 
 type newsCrudRowProps = {
     newsData: newsCard
@@ -7,6 +9,7 @@ type newsCrudRowProps = {
 const NewsCrudRow = (props: newsCrudRowProps) => {
     
     const { newsData } = props;
+    const navigate = useNavigate()
 
     return (
         <tr>

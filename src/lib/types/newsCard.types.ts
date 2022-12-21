@@ -3,5 +3,6 @@ export type newsCard = {
     title: string,
     date: string,
     author: string,
-    url: string,
+    imgUrl: string,
+    videoUrl: string,
 }

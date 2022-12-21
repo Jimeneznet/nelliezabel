@@ -2,29 +2,30 @@ import { newsCard } from "lib/types/newsCard.types";
 import { useEffect, useState } from "react"
 import { db } from "lib/config/firebase.config";
 import { useNavigate } from "react-router-dom";
-import { collection, query, getDocs } from "firebase/firestore";
+import { collection, query, getDocs, onSnapshot, doc } from "firebase/firestore";
+import { deleteNews } from "api/news/firestore.api";
+
+export const formatDate = (date: string) => {
+    const aux = new Date(new Date(date).toUTCString())
+    return `${aux.getUTCDate()}/${aux.getUTCMonth() + 1}/${aux.getUTCFullYear()}`
+}
 
 const NewsCrud = () => {
 
     const [news, setNews] = useState<newsCard[]>([]);
-    const [noData, setNoData] = useState(false);
-    const [loading, setLoading] = useState(true);
 
     const navigate = useNavigate();
 
     useEffect(() => {
-        const fetchNews = async () => {
-            const newsQuery = query(collection(db, "news"));
-            const querySnapshot = await getDocs(newsQuery);
+        const q = query(collection(db, "news"));
+        const unsub = onSnapshot(q, querySnapshot => {
             const newsArray = querySnapshot.docs.map(news => { return { id: news.id, ...news.data() } as newsCard });
-            newsArray.length !== 0 ? setNews(newsArray) : setNoData(true);
-            setLoading(false);
-        }
-    
-        fetchNews();
-    
-        return () => { }
-        }, [])
+            newsArray.length !== 0 ? setNews(newsArray) : setNews([]);
+        })
+
+        return () => { unsub() }
+    }, [])
+
     return (
         <div className="overflow-x-auto mt-10">
             <div className="flex flex-row justify-end">
@@ -41,18 +42,17 @@ const NewsCrud = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {news.map((news, index)=>
-                    <tr className="hover">
-                        <th className="bg-white p-0 m-auto">{index+1}</th>
-                        <th className="bg-white">{news.title}</th>
-                        <th className="bg-white">{news.author}</th>
-                        <th className="bg-white">{news.date}</th>
-                        <th className="bg-white m-auto">
-                        <button className="m-auto btn bg-primaryHeader text-white">Editar</button>
-                        <button className="m-auto btn bg-secondaryHeader text-white mx-5">Eliminar</button>
-                        
-                        </th>     
-                    </tr>
+                    {news.map((news, index) =>
+                        <tr key={news.id} className="hover">
+                            <th className="bg-white p-0 m-auto">{index + 1}</th>
+                            <th className="bg-white">{news.title}</th>
+                            <th className="bg-white">{news.author}</th>
+                            <th className="bg-white">{formatDate(news.date)}</th>
+                            <th className="bg-white m-auto">
+                                <button onClick={() => navigate(`/admin/news/edit/${news.id}`)} className="m-auto btn bg-primaryHeader text-white">Editar</button>
+                                <button onClick={() => deleteNews(news.id)} className="m-auto btn bg-secondaryHeader text-white mx-5">Eliminar</button>
+                            </th>
+                        </tr>
                     )}
                 </tbody>
             </table>
