@@ -13,6 +13,7 @@ import UserEdit from 'pages/admin/UserEdit';
 //import {CrudDictionary} from './pages/admin/CrudDictionary';
 import CrudDictionary from "./pages/admin/CrudDictionary";
 import { ProtectedRoute } from './lib/context/auth.context';
+import EditCredentialsView from './pages/admin/EditCredentials';
 
 function App() {
   return (
@@ -42,6 +43,10 @@ function App() {
               </ProtectedRoute>
             }/>
             <Route path='/admin/users/edit/:uid' element={ <UserEdit /> }/>
+            <Route path='/user/credentials' element={
+                <EditCredentialsView /> 
+            }
+            />
             <Route path='/admin/game' element={
               //<ProtectedRoute>
                 <Game />

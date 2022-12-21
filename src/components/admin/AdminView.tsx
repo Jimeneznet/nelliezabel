@@ -5,25 +5,13 @@ import { getData } from "../../hooks/userGetData";
 import { updateUserStatus } from "../../hooks/userUpdateStatus";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../../lib/config/firebase.config";
+import { User } from "../../lib/types/user.types";
 
-const AdminView = ({ userDoc }: any) => {
-  const [usuarios, setUsuarios] = useState<any[]>([]);
+const AdminView = ({ userDoc, users }: any) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const handleGetUser = async () => {
-      const userDocs = await getData();
-      const sanatizedUsers = userDocs.map((doc) => ({
-        nombre: doc.data().nombre,
-        rut: doc.data().rut,
-        id: doc.id,
-        email: doc.data().email,
-        rol: doc.data().rol,
-        status: doc.data().status,
-        uid: doc.data().uid,
-      }));
-
-      setUsuarios(sanatizedUsers);
       setIsLoading(false);
     };
     handleGetUser();
@@ -42,7 +30,7 @@ const AdminView = ({ userDoc }: any) => {
             <button className="btn">Agregar</button>
           </Link>
 
-          <Link className="mx-2"to="/register">
+          <Link className="mx-2" to="/user/credentials">
             <button className="btn">Cambiar Credenciales</button>
           </Link>
           <div className="overflow-x-auto">
@@ -60,13 +48,15 @@ const AdminView = ({ userDoc }: any) => {
                 </tr>
               </thead>
               <tbody>
-                {usuarios.map((user: any, index: number) => (
+                {users.map((user: User, index: number) => (
                   <tr key={index}>
                     <td>{user.nombre}</td>
                     <td>{user.rut}</td>
                     <td>{user.email}</td>
                     <td>{user.rol}</td>
-                    <td>{user.status === "1" ? "Habilitado" : "Deshabilitado"}</td>
+                    <td>
+                      {user.status === "1" ? "Habilitado" : "Deshabilitado"}
+                    </td>
                     <td>
                       <Link
                         className="btn"
@@ -78,14 +68,7 @@ const AdminView = ({ userDoc }: any) => {
                     <td>
                       <button
                         className="btn"
-                        onClick={() =>
-                          updateUserStatus(
-                            user.uid,
-                            user.status,
-                            usuarios,
-                            setUsuarios
-                          )
-                        }
+                        onClick={() => updateUserStatus(user.uid, user.status)}
                       >
                         cambiar status
                       </button>
@@ -94,13 +77,11 @@ const AdminView = ({ userDoc }: any) => {
                       <button
                         className="btn"
                         onClick={() => {
-                          sendPasswordResetEmail(
-                            auth,
-                            user.email,
+                          sendPasswordResetEmail(auth, user.email);
+                          alert(
+                            "Se ha enviado un correo al usuario para restablecer contraseña"
                           );
-                          alert("Se ha enviado un correo al usuario para restablecer contraseña")
-                        }
-                        }
+                        }}
                       >
                         Reestablecer contraseña
                       </button>
