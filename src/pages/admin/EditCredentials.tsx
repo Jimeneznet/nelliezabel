@@ -10,6 +10,7 @@ import EditCredentialsView from "../../components/admin/EditCredentialsView";
 import { useGetUserByEmail } from "../../hooks/getUserByEmail";
 import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
 import { EditCredentialsInputs } from "../../lib/types/adminForm.types";
+import { useUser } from "../../lib/context/user.context";
 
 const defaultInputsValue = {
   nombre: "",
@@ -27,6 +28,7 @@ const UserEditCredentials = () => {
     useState<QueryDocumentSnapshot<DocumentData>>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const navigate = useNavigate();
+  const userContext = useUser();
 
   useEffect(() => {
     if (loading) return;
@@ -63,12 +65,12 @@ const UserEditCredentials = () => {
     if (!currentUserDoc) {
       return;
     }
-
     userEditCredentials(
       editCredentialInputs.email,
       editCredentialInputs.password,
       editCredentialInputs.nombre,
-      currentUserDoc
+      currentUserDoc,
+      userContext
     );
 
     navigate("/admin/users");

@@ -8,9 +8,7 @@ import {
 import { auth } from "../config/firebase.config";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
-import { User } from "../types/user.types";
-
-type Action = { type: "login" | "singout"; user: User | {} };
+import { Action, User } from "../types/user.types";
 
 const userReducer = (user: User | {}, action: Action) => {
   switch (action.type) {
