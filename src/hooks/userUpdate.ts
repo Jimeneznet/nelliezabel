@@ -16,7 +16,7 @@ import {
         const user = docs.docs.shift();
         if (user) {
           const userRef = user.ref;
-          updateDoc(userRef, {
+          await updateDoc(userRef, {
             nombre: nombre,
             rol: rol,
           });
