@@ -88,6 +88,7 @@ const registerWithEmailAndPassword = async (rol:any, email:any, password:any, ru
     const res = await createUserWithEmailAndPassword(auth, email, password);
     await auth.updateCurrentUser(currentUser);
     const user = res.user;
+
     await addDoc(collection(db, "usuarios"), {
       uid: user.uid,
       rol,

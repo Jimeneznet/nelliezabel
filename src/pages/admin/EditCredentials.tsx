@@ -1,14 +1,21 @@
 import { FormEvent, useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../../lib/config/firebase.config";
+import { auth, db } from "../../lib/config/firebase.config";
 import { userEditCredentials } from "hooks/userEditCredentials";
 import Header from "components/Header";
 import Layout from "../../components/Layout";
 import LoadingBar from "../../components/LoadingBar";
 import EditCredentialsView from "../../components/admin/EditCredentialsView";
 import { useGetUserByEmail } from "../../hooks/getUserByEmail";
-import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
+import {
+  DocumentData,
+  QueryDocumentSnapshot,
+  collection,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
 import { EditCredentialsInputs } from "../../lib/types/adminForm.types";
 import { useUser } from "../../lib/context/user.context";
 
@@ -46,7 +53,7 @@ const UserEditCredentials = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, loading]);
 
-  const submitHandler = (e: FormEvent) => {
+  const submitHandler = async (e: FormEvent) => {
     e.preventDefault();
     if (editCredentialInputs.password !== editCredentialInputs.verification) {
       alert("Las contraseñas no coinciden");
@@ -64,6 +71,21 @@ const UserEditCredentials = () => {
 
     if (!currentUserDoc) {
       return;
+    }
+    if (currentUserDoc.data().email !== editCredentialInputs.email) {
+      const documento = collection(db, "usuarios");
+      const esEmail = query(
+        documento,
+        where("email", "==", editCredentialInputs.email)
+      );
+
+      const querySnapshotEmail = await getDocs(esEmail);
+      const userByEmailDoc = querySnapshotEmail.docs.shift();
+
+      if (userByEmailDoc) {
+        alert("El email ingresado ya se encuentra en uso");
+        return;
+      }
     }
     userEditCredentials(
       editCredentialInputs.email,
