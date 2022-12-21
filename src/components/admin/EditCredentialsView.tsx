@@ -17,7 +17,7 @@ const EditCredentialsView = ({ submitHandler,email,password,verification,setEmai
                             <div className="-space-y-px rounded-md shadow-sm">
                                 <label>
                                     Correo:
-                                <input value={email} onChange={(e)=>setEmail(e.target.value)} type="text" id="email" required className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"/>
+                                <input value={email} onChange={(e)=>setEmail(e.target.value)} type="email" id="email" required className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"/>
                                 </label>
                                 <br></br>
 

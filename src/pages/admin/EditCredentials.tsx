@@ -37,10 +37,18 @@ const UserEditCredentials = () => {
   }, [user, loading]);
 
   const submitHandler = (e: any) => {
+    e.preventDefault();
     if (password !== verification) {
       alert("Las contraseñas no coinciden");
       return;
     }
+
+    if(!RegExp("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$").test(email)){
+      alert("El email tiene un formato incorrecto");
+      return;
+    }
+
+
     if (!currentUserDoc) {
       return;
     }
