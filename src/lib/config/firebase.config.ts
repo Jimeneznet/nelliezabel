@@ -84,7 +84,9 @@ const logInWithEmailAndPassword = async (email:any, password:any) => {
 };
 const registerWithEmailAndPassword = async (rol:any, email:any, password:any, rut:any,nombre:any,status:any) => {
   try {
+    const currentUser = auth.currentUser;
     const res = await createUserWithEmailAndPassword(auth, email, password);
+    await auth.updateCurrentUser(currentUser);
     const user = res.user;
     await addDoc(collection(db, "usuarios"), {
       uid: user.uid,
