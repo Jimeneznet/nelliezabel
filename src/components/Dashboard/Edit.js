@@ -13,7 +13,11 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
   const [category, setCategory] = useState(selectedWord.data().category);
   const [video, setVideo] = useState(selectedWord.data().video);
   const [newVideo, setNewVideo] = useState("");
+  const [isChecked, setIsChecked] = useState(selectedWord.data().forAppMobile);
 
+  const handleOnChange = () => {
+    setIsChecked(!isChecked);
+  };
   const handleUpdate = async(e) => {
     e.preventDefault();
     if (!word || !description || !category) {
@@ -37,6 +41,7 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
       description,
       category,
       url,
+      isChecked,
     };
     try{
       editWord(WordAEditar)
@@ -101,6 +106,17 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
           value={category}
           onChange={e => setCategory(e.target.value)}
         />
+        </div>
+        <div className='flex items-baseline space-x-5 text-3xl'>
+        <label htmlFor="isForMobile">Para App Mobile</label>
+        <input
+           type="checkbox"
+           id="isForMobile"
+           name="isForMobile"
+           value=""
+           checked={isChecked}
+           onChange={handleOnChange}
+         />
         </div>
         <div className='flex items-baseline space-x-5 text-3xl'>
         <label htmlFor="video">Cambiar video </label>

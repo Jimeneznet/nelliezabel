@@ -9,7 +9,11 @@ const Add = ({ words, setWords, setIsAdding }) => {
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
   const [video, setVideo] = useState('');
-  
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleOnChange = () => {
+    setIsChecked(!isChecked);
+  };
   const handleAdd = async(e) => {
     e.preventDefault();
 
@@ -24,7 +28,7 @@ const Add = ({ words, setWords, setIsAdding }) => {
     try{
     //AGREGADO
     const url = await uploadVideo(video)    //Se almacena el video en Firebase Storage    
-    newWord(word,description,category,url)
+    newWord(word,description,category,url,isChecked)
     Swal.fire({
       icon: 'success',
       title: 'Agregada!',
@@ -84,7 +88,17 @@ const Add = ({ words, setWords, setIsAdding }) => {
           onChange={e => setCategory(e.target.value)}
         />
         </div>
-        
+        <div className='flex items-baseline space-x-5 text-3xl'>
+        <label htmlFor="isForMobile">Para App Mobile</label>
+        <input
+           type="checkbox"
+           id="isForMobile"
+           name="isForMobile"
+           value=""
+           checked={isChecked}
+           onChange={handleOnChange}
+         />
+        </div>
         <div className='flex items-baseline space-x-5 text-3xl'>
         <label htmlFor="video">Subir video </label>
         <input
