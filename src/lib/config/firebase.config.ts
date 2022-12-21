@@ -79,7 +79,7 @@ const logInWithEmailAndPassword = async (email:any, password:any) => {
     await signInWithEmailAndPassword(auth, email, password);
   } catch (err:any) {
     console.error(err);
-    alert(err.message);
+    alert("Ha ocurrido un error al iniciar sesión, compruebe que haya ingresado bien sus credenciales");
   }
 };
 const registerWithEmailAndPassword = async (rol:any, email:any, password:any, rut:any,nombre:any,status:any) => {
