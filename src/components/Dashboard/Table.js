@@ -29,7 +29,7 @@ const Table = ({ words, setWords, handleEdit, handleDelete }) => {
   }
   const Filtrar = (e) => {
     setFiltro(e.target.value)
-
+    // console.log(e.target.value)
   }
 
   
@@ -42,14 +42,14 @@ const Table = ({ words, setWords, handleEdit, handleDelete }) => {
           <input value={search} onChange={Searcher} type="text" placeholder='Buscar palabra' className='form-control' />      
         </div>
 
-        <div className='text-end'>
+        <div className='text-end '>
           <select 
             className='form-select'
             name="filtrar" 
             id="filtrar"
             onChange={Filtrar}    
           >
-            <option value="">Selecciona una categoria</option>
+            <option value="">Selecciona una categoría</option>
             <option value="Educación">Educación</option>
             <option value="Psicología">Psicología</option>
             <option value="Jurídico">Jurídico</option>

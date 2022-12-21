@@ -3,7 +3,8 @@ import Swal from 'sweetalert2';
 import { newWord } from 'hooks/newWord';
 import { getWords } from 'hooks/getWords';
 import { uploadVideo } from 'lib/config/firebase.config';
-const Add = ({ words, setWords, setIsAdding }) => {
+const Add = ({ words, setWords, setIsAdding, setAdded }) => {
+  const [isWaiting, setIsWaiting] = useState(false);
   const [id, setId] = useState('');
   const [word, setWord] = useState('');
   const [description, setDescription] = useState('');
@@ -11,8 +12,10 @@ const Add = ({ words, setWords, setIsAdding }) => {
   const [video, setVideo] = useState('');
   
   const handleAdd = async(e) => {
-    e.preventDefault();
+    e.preventDefault()
 
+    //Se inhabilita el botón mientras que se sube el video
+    setIsWaiting(true)
     if (!word || !description || !category || !video) {
       return Swal.fire({
         icon: 'error',
@@ -20,6 +23,7 @@ const Add = ({ words, setWords, setIsAdding }) => {
         text: 'Todos los campos son requeridos',
         showConfirmButton: true,
       });
+      setIsWaiting(false)
     }
     try{
     //AGREGADO
@@ -32,7 +36,9 @@ const Add = ({ words, setWords, setIsAdding }) => {
       showConfirmButton: false,
       timer: 1500,
     });
-    setIsAdding(false);
+    setAdded(true)
+    setIsWaiting(false)
+    setIsAdding(false)
     }catch(err){
       Swal.fire({
         icon: 'error',
@@ -41,11 +47,12 @@ const Add = ({ words, setWords, setIsAdding }) => {
         showConfirmButton: false,
         timer: 1500,
       });
+      setIsWaiting(false)
     }
   };
 
   return (
-    
+
     <div className="container">
       <div>
         
@@ -55,36 +62,43 @@ const Add = ({ words, setWords, setIsAdding }) => {
         <h1 className="bg-secondaryHeader  h-[4rem] shadow-2xl z-1 text-center font-bold indent-12 text-white align-baseline ">Nueva palabra</h1>
         <div className='flex items-baseline space-x-5 text-3xl' > 
         
-        <label className="" htmlFor="word">Palabra</label>
-        <input
-          id="word"
-          type="text"
-          name="word"
-          value={word}
-          onChange={e => setWord(e.target.value)}
-        />
+          <label className="" htmlFor="word">Palabra</label>
+        </div>
+        <div className='flex items-baseline space-x-5 text-3xl' > 
+          <input
+            id="word"
+            type="text"
+            name="word"
+            value={word}
+            onChange={e => setWord(e.target.value)}
+            placeholder="Escriba la palabra.."
+          />
         </div>
         <div className='flex items-baseline space-x-5 text-3xl'>
-        <label className="" htmlFor="word">Descripción</label>
-        <input
-          className="bg-white"
-          id="description"
-          type="text"
-          name="description"
-          value={description}
-          onChange={e => setDescription(e.target.value)}
-        />
+          <label className="" htmlFor="word">Descripción</label>
         </div>
+        <div className='flex items-baseline space-x-5 text-3xl' > 
+        <input
+            id="description"
+            type="text"
+            name="description"
+            value={description}
+            onChange={e => setDescription(e.target.value)}
+            placeholder="Escriba la descripción.."
+          />        
+          </div>
         
         <div className='flex items-baseline space-x-5 text-3xl'>
         <label htmlFor="category">Categoría</label>
+        </div>
+        <div className='flex items-baseline space-x-5 text-3xl' > 
           <select 
             className='form-select'
             name="category" 
             id="category"
             onChange={e => setCategory(e.target.value)}   
           >
-            <option value="">Selecciona una categoria</option>
+            <option value="">Selecciona una categoría</option>
             <option value="Educación">Educación</option>
             <option value="Psicología">Psicología</option>
             <option value="Jurídico">Jurídico</option>
@@ -92,7 +106,10 @@ const Add = ({ words, setWords, setIsAdding }) => {
         </div>
         
         <div className='flex items-baseline space-x-5 text-3xl'>
-        <label htmlFor="video">Subir video </label>
+          <label htmlFor="video">Subir video </label>
+        </div>
+
+        <div className='flex items-baseline space-x-5 text-3xl' > 
         <input
           id="video"
           type="file"
@@ -104,12 +121,17 @@ const Add = ({ words, setWords, setIsAdding }) => {
         
         
         
-        
         <div style={{ marginTop: '30px' }}>
-        <button class="btn btn-success">Añadir</button>
-        <button class="btn btn-error" style={{ marginLeft: '12px'}}onClick={() => setIsAdding(false)}>Cancelar</button>
-
-
+          {!isWaiting &&(
+            <button class="btn btn-success disabled:opacity-50">Añadir</button>
+          )}
+        
+          {isWaiting &&(
+            <div className="flex items-center justify-center ">
+              <div className="w-16 h-16 border-b-2 border-purple-700 rounded-full animate-spin"></div>
+            </div>
+          )}
+        <button hidden={isWaiting == true ? true : false }class="btn btn-error" style={{ marginLeft: '12px'}}onClick={() => setIsAdding(false)}>Cancelar</button>
         </div>
       </form>
     </div>

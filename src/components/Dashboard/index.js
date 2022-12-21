@@ -21,6 +21,7 @@ const Dashboard = () => {
   const [isAdding, setIsAdding] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [edited, setEdited] = useState(false);
+  const [added, setAdded] = useState(false);
   const [auxRender, setAuxRender] = useState(false);
   
   useEffect(() => {
@@ -36,6 +37,22 @@ const Dashboard = () => {
     setSelectedWord(Word);
     setIsEditing(true);
   };
+
+  if(edited){
+    setWords([]);
+    getWords().then((words) => words.forEach((element) => {
+      setWords((old) => [...old, element])
+    }))
+    setEdited(false)
+  }
+
+  if(added){
+    setWords([]);
+    getWords().then((words) => words.forEach((element) => {
+      setWords((old) => [...old, element])
+    }))
+    setAdded(false)
+  }
 
   const handleDelete = id => {
     Swal.fire({
@@ -74,10 +91,7 @@ const Dashboard = () => {
           setIsAdding={setIsAdding}
           // setIsAuthenticated={setIsAuthenticated}
         />
-        
-        
-        
-          <Table
+        <Table
             words={words}
             handleEdit={handleEdit}
             handleDelete={handleDelete}
@@ -89,6 +103,7 @@ const Dashboard = () => {
           words={words}
           setWords={setWords}
           setIsAdding={setIsAdding}
+          setAdded={setAdded}
         />
       )}
       {isEditing && (
