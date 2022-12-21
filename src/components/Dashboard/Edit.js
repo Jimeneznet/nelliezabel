@@ -135,7 +135,8 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
         />
         </div>
 
-        <div className='flex justify-end space-x-5 text-3xl'>
+        <br/>
+        <div className='flex space-x-5 text-3xl'>
           <div class='flex justify-start'>
               <label >Video actual</label>
           </div>
