@@ -17,12 +17,8 @@ const Table = ({ words, setWords, handleEdit, handleDelete }) => {
       results = words
   }else{
     results = words.filter((dato) => dato.data().word.toLowerCase().includes(search.toLowerCase()) || dato.data().category.toLowerCase().includes(search.toLowerCase()))
-    // results = words.filter((dato) => dato.data().category.toLowerCase().includes(search.toLowerCase()))
     words= results
   }
-  // console.log(words)
-  // console.log(results)
-  // const results = !search ? words : words.filter((dato)=> dato.description.toLowerCase().includes(search.toLocaleLowerCase()))
 
   //metodo para filtrar por categoria
   if (!filtro) {
@@ -33,7 +29,6 @@ const Table = ({ words, setWords, handleEdit, handleDelete }) => {
   }
   const Filtrar = (e) => {
     setFiltro(e.target.value)
-    // console.log(e.target.value)
   }
 
   
@@ -46,14 +41,14 @@ const Table = ({ words, setWords, handleEdit, handleDelete }) => {
           <input value={search} onChange={Searcher} type="text" placeholder='Buscar palabra' className='form-control'/>      
         </div>
 
-        <div className='text-end '>
+        <div className='text-end w-64'>
           <select 
             className='form-select'
             name="filtrar" 
             id="filtrar"
             onChange={Filtrar}    
           >
-            <option value="">Selecciona una categoria</option>
+            <option value="">Selecciona una categoría</option>
             <option value="Educación">Educación</option>
             <option value="Psicología">Psicología</option>
             <option value="Jurídico">Jurídico</option>
