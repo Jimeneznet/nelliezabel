@@ -27,7 +27,7 @@ const Login = () => {
     if (loading) {
       return;
     }
-    if (user) navigate("/admin/users");
+    if (user) navigate("/admin");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, loading]);
   return (

@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Word from './pages/admin/Word';
-import Game from './pages/admin/Game';
+import Auth from './pages/admin/Auth';
 import News from './pages/admin/News';
 import Users from './pages/admin/Users';
 import Home from './pages/Home';
@@ -51,10 +51,10 @@ function App() {
                 <EditCredentialsView /> 
             }
             />
-            <Route path='/admin/game' element={
-              //<ProtectedRoute>
-                <Game />
-              //</ProtectedRoute>
+            <Route path='/admin' element={
+              <ProtectedRoute>
+                <Auth />
+              </ProtectedRoute>
             }/>
             <Route path='*' element={<h1>404 Page Not Found</h1>}/>
           </Routes>

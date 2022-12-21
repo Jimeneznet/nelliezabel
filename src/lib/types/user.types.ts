@@ -7,3 +7,8 @@ export type User = {
   status: string;
   uid: string;
 };
+
+export enum UserRole {
+  Aministrador = "Administrador",
+  Consultor = "Consultor",
+}
