@@ -5,17 +5,49 @@ import Swal from "sweetalert2";
 import { newsState } from "pages/news/CreateNews";
 import { deleteObject, ref } from "firebase/storage";
 
-export const editNews = async (e: React.MouseEvent<HTMLInputElement>, id: string, data: newsState, img: unknown, video: unknown, setLoading: React.Dispatch<React.SetStateAction<boolean>>) => {
+const validateNewsData = (data: newsState, img: File | null, video: File | null) => {
+    if (!data.title || !data.author || !data.date || !img || !video) {
+        return false
+    }
+    return true
+}
+
+const validateFilesType = (img: File | null, video: File | null) => {
+    if(!img?.name.match(/\.(jpf|jpeg|png|gif)$/) || !video?.name.match(/\.(mp4|mkv)$/)){
+        return false
+    }
+    return true
+}
+
+const printError = (message: string) => {
+    Swal.fire({
+        icon: 'error',
+        title: 'Error!',
+        text: `${message}`,
+        showConfirmButton: false,
+        timer: 1500,
+    });
+}
+
+const printSucces = (message: string) => {
+    Swal.fire({
+        icon: 'success',
+        title: 'Editado!',
+        text: `${message}`,
+        showConfirmButton: false,
+        timer: 1500,
+    });
+}
+
+export const editNews = async (e: React.MouseEvent<HTMLInputElement>, id: string, data: newsState, img: File | null, video: File | null, setLoading: React.Dispatch<React.SetStateAction<boolean>>) => {
     try {
         e.preventDefault()
-        if (!data.title || !data.author || !data.date || !img || !video) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error!',
-                text: `Debe de rellenar todos los datos`,
-                showConfirmButton: false,
-                timer: 1500,
-            });
+        if (!validateNewsData(data, img, video)) {
+            printError("Debe de llenar todos los campos")
+            return false
+        }
+        else if(!validateFilesType(img, video)){
+            printError("Verifique los tipos de archivos subidos")
             return false
         }
         else {
@@ -26,38 +58,24 @@ export const editNews = async (e: React.MouseEvent<HTMLInputElement>, id: string
             const newsRef = doc(db, "news", id)
             await updateDoc(newsRef, news)
             setLoading(false)
-            Swal.fire({
-                icon: 'success',
-                title: 'Editado!',
-                text: `Noticia editada correctamente`,
-                showConfirmButton: false,
-                timer: 1500,
-            });
+            printSucces("Noticia editada correctamente")
             return true
         }
     } catch (error) {
         setLoading(false)
-        Swal.fire({
-            icon: 'error',
-            title: 'Error!',
-            text: `Ha ocurrido un error durante la transacción!`,
-            showConfirmButton: false,
-            timer: 1500,
-        });
+        printError("Ha ocurrido un error durante la transacción!")
     }
 }
 
-export const uploadNews = async (e: React.MouseEvent<HTMLInputElement>, id: string, data: newsState, img: unknown, video: unknown, setLoading: React.Dispatch<React.SetStateAction<boolean>>) => {
+export const uploadNews = async (e: React.MouseEvent<HTMLInputElement>, id: string, data: newsState, img: File | null, video: File | null, setLoading: React.Dispatch<React.SetStateAction<boolean>>) => {
     try {
         e.preventDefault()
-        if (!data.title || !data.author || !data.date || !img || !video) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error!',
-                text: `Debe de rellenar todos los datos`,
-                showConfirmButton: false,
-                timer: 1500,
-            });
+        if (!validateNewsData(data, img, video)) {
+            printError("Debe de llenar todos los campos")
+            return false
+        }
+        else if(!validateFilesType(img, video)){
+            printError("Verifique los tipos de archivos subidos")
             return false
         }
         else {
@@ -67,24 +85,12 @@ export const uploadNews = async (e: React.MouseEvent<HTMLInputElement>, id: stri
             const news = { ...data, uploadDate: new Date(), imgUrl: imgUrl, videoUrl: videoUrl }
             await setDoc(doc(db, 'news', id), news)
             setLoading(false)
-            Swal.fire({
-                icon: 'success',
-                title: 'Agregada!',
-                text: `Noticia añadida correctamente`,
-                showConfirmButton: false,
-                timer: 1500,
-            });
+            printSucces("Noticia añadida correctamente")
             return true
         }
     } catch (error) {
         setLoading(false)
-        Swal.fire({
-            icon: 'error',
-            title: 'Error!',
-            text: `Ha ocurrido un error durante la transacción!`,
-            showConfirmButton: false,
-            timer: 1500,
-        });
+        printError("Ha ocurrido un error durante la transacción!")
     }
 }
 
@@ -94,21 +100,9 @@ export const deleteNews = async (id: string) => {
     deleteObject(imgRef).then( () => {
         deleteObject(videoRef).then(() => {
             deleteDoc(doc(db, "news", id))
-            Swal.fire({
-                icon: 'success',
-                title: 'Eliminada',
-                text: `Noticia eliminada correctamente`,
-                showConfirmButton: false,
-                timer: 1500,
-            });
+            printSucces("Noticia eliminada correctamente")
         })
     }).catch(() => {
-        Swal.fire({
-            icon: 'error',
-            title: 'Error!',
-            text: `Ha ocurrido un error durante la transacción!`,
-            showConfirmButton: false,
-            timer: 1500,
-        });
+        printError("Ha ocurrido un error durante la transacción!")
     })
 }

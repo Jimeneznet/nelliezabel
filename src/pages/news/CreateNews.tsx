@@ -19,8 +19,8 @@ const CreateNews = () => {
         author: "",
         date: new Date().toDateString(),
     })
-    const [img, setImg] = useState<unknown>(null)
-    const [video, setVideo] = useState<unknown>(null)
+    const [img, setImg] = useState<File | null>(null)
+    const [video, setVideo] = useState<File | null>(null)
     const [loading, setLoading] = useState(false)
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,7 +40,7 @@ const CreateNews = () => {
     if (loading) {
         return (
             <div>
-                <Header>Agregar noticia</Header>
+                <Header>Agregando noticia</Header>
                 <Layout>
                     <div className="bg-white h-full w-full">
                         <div className=" bg-white m-auto h-full flex flex-row justify-center w-11/12">
@@ -80,14 +80,14 @@ const CreateNews = () => {
                                     <label className="label">
                                         <span className="label-text">Imagen</span>
                                     </label>
-                                    <input type="file" onChange={e => setImg(e.target.files !== null ? e.target.files[0] : null)} accept="image/*" className="file-input file-input-bordered w-full max-w-xs" />
+                                    <input onChange={e => setImg( e.target.files !== null ? e.target.files[0] : null )} type="file" accept="image/*" className="file-input file-input-bordered w-full max-w-xs" />
                                 </div>
 
                                 <div className="form-control w-full max-w-xs">
                                     <label className="label">
                                         <span className="label-text">Video</span>
                                     </label>
-                                    <input type="file" onChange={e => setVideo(e.target.files !== null ? e.target.files[0] : null)} accept="video/*" className="file-input file-input-bordered w-full max-w-xs" />
+                                    <input onChange={e => setVideo( e.target.files !== null ? e.target.files[0] : null )} type="file" accept="video/*" className="file-input file-input-bordered w-full max-w-xs" />
                                 </div>
 
                                 <div className="form-control w-full max-w-xs">
