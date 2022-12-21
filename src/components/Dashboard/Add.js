@@ -4,6 +4,7 @@ import { newWord } from 'hooks/newWord';
 import { getWords } from 'hooks/getWords';
 import { uploadVideo } from 'lib/config/firebase.config';
 const Add = ({ words, setWords, setIsAdding }) => {
+  const [isWaiting, setIsWaiting] = useState(false);
   const [id, setId] = useState('');
   const [word, setWord] = useState('');
   const [description, setDescription] = useState('');
@@ -11,8 +12,10 @@ const Add = ({ words, setWords, setIsAdding }) => {
   const [video, setVideo] = useState('');
   
   const handleAdd = async(e) => {
-    e.preventDefault();
+    e.preventDefault()
 
+    //Se inhabilita el botón mientras que se sube el video
+    setIsWaiting(true)
     if (!word || !description || !category || !video) {
       return Swal.fire({
         icon: 'error',
@@ -20,6 +23,7 @@ const Add = ({ words, setWords, setIsAdding }) => {
         text: 'Todos los campos son requeridos',
         showConfirmButton: true,
       });
+      setIsWaiting(false)
     }
     try{
     //AGREGADO
@@ -32,7 +36,8 @@ const Add = ({ words, setWords, setIsAdding }) => {
       showConfirmButton: false,
       timer: 1500,
     });
-    setIsAdding(false);
+    setIsWaiting(false)
+    setIsAdding(false)
     }catch(err){
       Swal.fire({
         icon: 'error',
@@ -41,6 +46,7 @@ const Add = ({ words, setWords, setIsAdding }) => {
         showConfirmButton: false,
         timer: 1500,
       });
+      setIsWaiting(false)
     }
   };
 
@@ -103,12 +109,17 @@ const Add = ({ words, setWords, setIsAdding }) => {
         
         
         
-        
         <div style={{ marginTop: '30px' }}>
-        <button class="btn btn-success">Añadir</button>
-        <button class="btn btn-error" style={{ marginLeft: '12px'}}onClick={() => setIsAdding(false)}>Cancelar</button>
-
-
+          {!isWaiting &&(
+            <button class="btn btn-success disabled:opacity-50">Añadir</button>
+          )}
+        
+          {isWaiting &&(
+            <div className="flex items-center justify-center ">
+              <div className="w-16 h-16 border-b-2 border-purple-700 rounded-full animate-spin"></div>
+            </div>
+          )}
+        <button hidden={isWaiting == true ? true : false }class="btn btn-error" style={{ marginLeft: '12px'}}onClick={() => setIsAdding(false)}>Cancelar</button>
         </div>
       </form>
     </div>
