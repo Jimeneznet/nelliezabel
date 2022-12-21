@@ -1,20 +1,25 @@
 import LoadingBar from "../LoadingBar";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { getData } from "../../hooks/userGetData";
+import { Link, useNavigate } from "react-router-dom";
 import { updateUserStatus } from "../../hooks/userUpdateStatus";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../../lib/config/firebase.config";
-import { User } from "../../lib/types/user.types";
+import { User, UserRole } from "../../lib/types/user.types";
+import { useUser } from "../../lib/context/user.context";
 
 const AdminView = ({ userDoc, users }: any) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-
+  const userContext = useUser();
+  const redirect = useNavigate();
   useEffect(() => {
     const handleGetUser = async () => {
+      const userData = userContext.user as User;
+      console.log(userData);
+      if (userData.rol !== UserRole.Aministrador) redirect("/admin");
       setIsLoading(false);
     };
     handleGetUser();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -49,7 +54,7 @@ const AdminView = ({ userDoc, users }: any) => {
               </thead>
               <tbody>
                 {users.map((user: User, index: number) => {
-                  if (userDoc.data().email === user.email){
+                  if (userDoc.data().email === user.email) {
                     return null;
                   }
                   return (
