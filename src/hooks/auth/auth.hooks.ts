@@ -21,7 +21,6 @@ export const useAuthStateChange = () => {
             status: userDoc.data().status,
             uid: userDoc.data().uid,
           };
-          console.log(user);
           userContext.dispatch({ type: "login", user: user });
         } catch (error) {
           console.error(error);

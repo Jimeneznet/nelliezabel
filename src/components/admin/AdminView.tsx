@@ -14,7 +14,6 @@ const AdminView = ({ userDoc, users }: any) => {
   useEffect(() => {
     const handleGetUser = async () => {
       const userData = userContext.user as User;
-      console.log(userData);
       if (userData.rol !== UserRole.Aministrador) redirect("/admin");
       setIsLoading(false);
     };
