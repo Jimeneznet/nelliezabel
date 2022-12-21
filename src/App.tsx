@@ -12,11 +12,13 @@ import UserEdit from 'pages/admin/UserEdit';
 
 //import {CrudDictionary} from './pages/admin/CrudDictionary';
 import CrudDictionary from "./pages/admin/CrudDictionary";
-import { ProtectedRoute } from './lib/context/auth.context';
+import { ProtectedRoute } from './lib/context/user.context';
 import EditCredentialsView from './pages/admin/EditCredentials';
 import ForgotPassword from 'pages/ForgotPassword';
+import { useAuthStateChange } from './hooks/auth/auth.hooks';
 
 function App() {
+  useAuthStateChange();
   return (
       <Router>
       <Routes>
