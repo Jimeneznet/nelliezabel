@@ -42,7 +42,7 @@ const Add = ({ words, setWords, setIsAdding, setAdded }) => {
         showConfirmButton: true,
       });
     }else{
-      if (containsNumbers(word) || containsSpecialChars(word)){
+      if (containsNumbers(word) || containsSpecialChars(word) || hasOnlySpecialChars(word)){
         setIsWaiting(false)
         return Swal.fire({
           icon:'error',
@@ -143,7 +143,7 @@ const Add = ({ words, setWords, setIsAdding, setAdded }) => {
           </select>
         </div>
         <div className='flex items-baseline space-x-5 text-3xl'>
-        <label htmlFor="isForMobile">Para App Mobile</label>
+        <label htmlFor="isForMobile">Para niños</label>
         <input
            type="checkbox"
            id="isForMobile"
