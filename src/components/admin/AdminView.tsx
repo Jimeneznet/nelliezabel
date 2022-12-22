@@ -7,6 +7,14 @@ import { auth } from "../../lib/config/firebase.config";
 import { User, UserRole } from "../../lib/types/user.types";
 import { useUser } from "../../lib/context/user.context";
 import UserSearch from "./UserSearch";
+import Disable from "../../assets/admin/disable.png";
+import Enable from "../../assets/admin/enable.png";
+import Erase from "../../assets/admin/erase.png";
+import Restore from "../../assets/admin/restore.png";
+import Edit from "../../assets/admin/edit.png";
+import RestorePassword from "../../assets/admin/restorePassword.png";
+import AddUser from "../../assets/admin/addUser.png";
+import Search from "../../assets/admin/search.png";
 
 const AdminView = ({ userDoc, users, handleSearch }: any) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -23,16 +31,19 @@ const AdminView = ({ userDoc, users, handleSearch }: any) => {
   }, []);
 
   return (
-    <div>
+    <div className="mt-10">
       {isLoading || !userDoc ? (
         <LoadingBar />
       ) : (
         <div>
-          <div className="flex flex-row">
+          <div className="flex flex-row items-center mb-8">
             <Link className="mx-2" to="/register">
-              <button className="btn">Agregar</button>
+              <button className="">
+                <img src={AddUser} alt="disable user icon" width="70px" />
+              </button>
             </Link>
             <UserSearch handleSearch={handleSearch} />
+            <img src={Search} alt="search icon" width="50px" className="mr-16" />
           </div>
           <div className="overflow-x-auto">
             <table className="table w-full">
@@ -60,29 +71,39 @@ const AdminView = ({ userDoc, users, handleSearch }: any) => {
                       <td>{user.email}</td>
                       <td>{user.rol}</td>
                       <td>
-                        {user.status === "1" ? "Habilitado" : "Deshabilitado"}
+                        <img
+                          src={user.status === "1" ? Enable : Disable}
+                          alt="disable user icon"
+                          width="70px"
+                        />
                       </td>
                       <td>
-                        <Link
-                          className="btn"
-                          to={`/admin/users/edit/${user.uid}`}
-                        >
-                          editar
+                        <Link to={`/admin/users/edit/${user.uid}`}>
+                          <img
+                            className="hover:bg-[#e0e0e0f5] rounded-3xl"
+                            src={Edit}
+                            alt="disable user icon"
+                            width="70px"
+                          />
                         </Link>
                       </td>
                       <td>
                         <button
-                          className="btn"
+                          className="hover:bg-[#e0e0e0f5] rounded-3xl"
                           onClick={() =>
                             updateUserStatus(user.uid, user.status)
                           }
                         >
-                          cambiar status
+                          <img
+                            src={user.status === "1" ? Erase : Restore}
+                            alt="disable user icon"
+                            width="70px"
+                          />
                         </button>
                       </td>
                       <td>
                         <button
-                          className="btn"
+                          className="hover:bg-[#e0e0e0f5] rounded-3xl"
                           onClick={() => {
                             sendPasswordResetEmail(auth, user.email);
                             alert(
@@ -90,7 +111,11 @@ const AdminView = ({ userDoc, users, handleSearch }: any) => {
                             );
                           }}
                         >
-                          Reestablecer contraseña
+                          <img
+                            src={RestorePassword}
+                            alt="disable user icon"
+                            width="70px"
+                          />
                         </button>
                       </td>
                     </tr>
