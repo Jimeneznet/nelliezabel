@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import RegisterView from "../components/admin/RegisterView";
 import { useAuthState } from "react-firebase-hooks/auth";
 import {
   auth,
   db,
   registerWithEmailAndPassword,
-  signInWithGoogle,
 } from "../lib/config/firebase.config";
 
 import { useNavigate } from "react-router-dom";
@@ -14,7 +13,7 @@ import Layout from "../components/Layout";
 import { collection, getDocs, query, where } from "firebase/firestore";
 
 const Register = () => {
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   const navigate = useNavigate();
 
   async function registrarUsuario(
@@ -82,11 +81,12 @@ const Register = () => {
     registrarUsuario(email, password, rol, rut, nombre, status);
 
     navigate("/admin/users");
-  }
+  };
 
   useEffect(() => {
     if (loading) return;
     if (!user) return navigate("/login");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, loading]);
 
   return (

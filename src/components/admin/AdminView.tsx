@@ -6,7 +6,6 @@ import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../../lib/config/firebase.config";
 import { User, UserRole } from "../../lib/types/user.types";
 import { useUser } from "../../lib/context/user.context";
-import Logo from "../../assets/logo.png";
 import UserSearch from "./UserSearch";
 
 const AdminView = ({ userDoc, users, handleSearch }: any) => {
