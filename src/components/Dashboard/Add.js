@@ -30,31 +30,31 @@ const Add = ({ words, setWords, setIsAdding, setAdded }) => {
     //Se inhabilita el botón mientras que se sube el video
     setIsWaiting(true)
     if (!word || !description || !category || !video) {
+      setIsWaiting(false)
       return Swal.fire({
         icon: 'error',
         title: 'Error!',
         text: 'Todos los campos son requeridos',
         showConfirmButton: true,
       });
-      setIsWaiting(false)
     }else{
       if (containsNumbers(word) || containsSpecialChars(word)){
+        setIsWaiting(false)
         return Swal.fire({
           icon:'error',
           title:'Error!',
           text:'La palabra contiene números o caracteres especiales',
           showConfirmButton: true,
         });
-        setIsWaiting(false)
       }
       if (!isNaN(description) || hasOnlySpecialChars(description)){
+        setIsWaiting(false)
         return Swal.fire({
           icon:'error',
           title:'Error!',
           text:' La descripción contiene sólo números o sólo caracteres especiales',
           showConfirmButton: true,
         });
-        setIsWaiting(false)
       }
     }
     try{

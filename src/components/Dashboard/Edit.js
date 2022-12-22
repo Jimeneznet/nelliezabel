@@ -32,6 +32,7 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
     e.preventDefault();
     setIsWaiting(true)
     if (!word || !description || !category) {
+      setIsWaiting(false)
       return Swal.fire({
         icon: 'error',
         title: 'Error!',
@@ -40,6 +41,7 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
       });
     }else{
       if (containsNumbers(word) || containsSpecialChars(word)){
+        setIsWaiting(false)
         return Swal.fire({
           icon:'error',
           title:'Error!',
@@ -48,6 +50,7 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
         });
       }
       if (!isNaN(description) || hasOnlySpecialChars(description)){
+        setIsWaiting(false)
         return Swal.fire({
           icon:'error',
           title:'Error!',
@@ -92,6 +95,7 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
             timer: 1500,
           });
         console.log(err)
+        setIsWaiting(false)
     }
 
   };
