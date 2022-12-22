@@ -10,7 +10,20 @@ const Add = ({ words, setWords, setIsAdding, setAdded }) => {
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
   const [video, setVideo] = useState('');
+
+  function containsNumbers(x){
+    return /\d/.test(x);
+  }
+  function containsSpecialChars(x){
+    const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+    return specialChars.test(x);
+  }
+  function hasOnlySpecialChars(x){
+    const pattern = /^[^a-zA-Z0-9]+$/;
+    return pattern.test(x);
+  }
   
+
   const handleAdd = async(e) => {
     e.preventDefault()
 
@@ -24,6 +37,25 @@ const Add = ({ words, setWords, setIsAdding, setAdded }) => {
         showConfirmButton: true,
       });
       setIsWaiting(false)
+    }else{
+      if (containsNumbers(word) || containsSpecialChars(word)){
+        return Swal.fire({
+          icon:'error',
+          title:'Error!',
+          text:'La palabra contiene números o caracteres especiales',
+          showConfirmButton: true,
+        });
+        setIsWaiting(false)
+      }
+      if (!isNaN(description) || hasOnlySpecialChars(description)){
+        return Swal.fire({
+          icon:'error',
+          title:'Error!',
+          text:' La descripción contiene sólo números o sólo caracteres especiales',
+          showConfirmButton: true,
+        });
+        setIsWaiting(false)
+      }
     }
     try{
     //AGREGADO
