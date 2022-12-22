@@ -3,7 +3,7 @@ import LoginView from '../components/LoginView';
 import { auth, logInWithEmailAndPassword, signInWithGoogle } from "../lib/config/firebase.config";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from 'react-router-dom';
-import LoginHeader from '../components/LoginHeader'
+import Header from '../components/Header'
 
 
 const Login = () => {
@@ -35,9 +35,7 @@ const Login = () => {
       }, [user, loading]);
     return (
         <div>
-            <LoginHeader>
-            <h2>Fundacion Nellie Zabel</h2>
-            </LoginHeader>
+            <Header>Fundacion Nellie Zabel</Header>
             <LoginView submitHandler={(e: any) => submitHandler(e)}></LoginView>
             <button onClick={iniciarConGoogle}>Google -- --</button>
             {error && <h1>Error al conectar</h1>}
