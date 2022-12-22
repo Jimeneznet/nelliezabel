@@ -120,7 +120,7 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
       
       <form className="w-5/6 m-8" onSubmit={handleUpdate}>
         <div className=''>
-          <h1 className="bg-secondaryHeader  h-[4rem] shadow-2xl z-1  font-bold indent-12 text-white align-baseline text-center mt-3">Modificar palabra</h1>
+          <h1 className="bg-secondaryHeader  h-[3rem] shadow-2xl z-1  font-bold indent-12 text-white align-baseline text-center mt-3">Modificar palabra</h1>
         </div>
         
         <div className='flex items-baseline space-x-5 text-3xl' > 
@@ -209,7 +209,11 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
 
             <div className='col-span-1'>
               <label className='text-3xl' >Video actual</label>
-              <iframe width="560" height="315" src={video} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+              <video width="560" height="315" controls autoPlay muted>
+                  <source src={video} type="video/mp4"/>
+              </video>
+
             </div>  
 
           </div>
