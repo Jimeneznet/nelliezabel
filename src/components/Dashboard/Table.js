@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 const Table = ({ words, setWords, handleEdit, handleDelete }) => {
 
   
@@ -65,8 +64,8 @@ const Table = ({ words, setWords, handleEdit, handleDelete }) => {
             {/* <th>Código Serial.</th> */}
             <th>Palabra</th>
             <th>Descripción</th>
-            <th>Categoría</th>
-            <th className="text-center">Para niños</th>
+            <th className="text-center">Categoría</th>
+            <th className="text-center">Infantil</th>
             <th colSpan={2} className="text-center">
               Acciones
             </th>
@@ -80,12 +79,13 @@ const Table = ({ words, setWords, handleEdit, handleDelete }) => {
                 {/* <td>{Word.id}</td> */}
                 <td>{Word.data().word}</td>
                 <td>{Word.data().description}</td>
-                <td>{Word.data().category}</td>
+                <td className="text-center">{Word.data().category}</td>
                 {Word.data().forAppMobile &&(
-                    <td className="text-center">✅</td>
+                    <td className="text-center" style={{color: '#a78bfa'}}>✓</td>
+                    
                 )}
                 {!Word.data().forAppMobile &&(
-                    <td className="text-center">❌</td>
+                    <td className="text-center" style={{color: '#51437a'}}>✕</td>
                 )}
                 <td className="text-right">
                   <button

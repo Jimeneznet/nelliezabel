@@ -50,7 +50,7 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
         return Swal.fire({
           icon:'error',
           title:'Error!',
-          text:'La palabra contiene números o caracteres especiales',
+          text:'La palabra contiene números o caracteres especiales.',
           showConfirmButton: true,
         });
       }
@@ -59,7 +59,7 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
         return Swal.fire({
           icon:'error',
           title:'Error!',
-          text:' La descripción contiene sólo números o sólo caracteres especiales',
+          text:' La descripción contiene sólo números o sólo caracteres especiales.',
           showConfirmButton: true,
         });
       }
@@ -67,6 +67,15 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
     let url = ""
     if(newVideo != "")
     {
+      if (newVideo.type!="video/mp4" && newVideo.type!="video/x-m4v" && newVideo.type!="video/*"){
+        setIsWaiting(false)
+        return Swal.fire({
+          icon: 'error',
+          title: 'Error!',
+          text: 'Solo se aceptan formatos de video en mp4.',
+          showConfirmButton: true,
+        });
+      }
       url = await uploadVideo(newVideo)
     }else{
       url = video
@@ -85,7 +94,7 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
       Swal.fire({
         icon: 'success',
         title: 'Modificado!',
-        text: `La palabra ${WordAEditar.word} ha sido editada con éxito`,
+        text: `La palabra ${WordAEditar.word} ha sido editada con éxito.`,
         showConfirmButton: false,
         timer: 1500,
       });

@@ -38,7 +38,7 @@ const Add = ({ words, setWords, setIsAdding, setAdded }) => {
       return Swal.fire({
         icon: 'error',
         title: 'Error!',
-        text: 'Todos los campos son requeridos',
+        text: 'Todos los campos son requeridos.',
         showConfirmButton: true,
       });
     }else{
@@ -47,7 +47,7 @@ const Add = ({ words, setWords, setIsAdding, setAdded }) => {
         return Swal.fire({
           icon:'error',
           title:'Error!',
-          text:'La palabra contiene números o caracteres especiales',
+          text:'La palabra contiene números o caracteres especiales.',
           showConfirmButton: true,
         });
       }
@@ -56,11 +56,21 @@ const Add = ({ words, setWords, setIsAdding, setAdded }) => {
         return Swal.fire({
           icon:'error',
           title:'Error!',
-          text:' La descripción contiene sólo números o sólo caracteres especiales',
+          text:' La descripción contiene sólo números o sólo caracteres especiales.',
+          showConfirmButton: true,
+        });
+      }
+      if (video.type!="video/mp4" && video.type!="video/x-m4v" && video.type!="video/*"){
+        setIsWaiting(false)
+        return Swal.fire({
+          icon: 'error',
+          title: 'Error!',
+          text: 'Solo se aceptan formatos de video en mp4.',
           showConfirmButton: true,
         });
       }
     }
+
     try{
     //AGREGADO
     const url = await uploadVideo(video)    //Se almacena el video en Firebase Storage    
@@ -68,7 +78,7 @@ const Add = ({ words, setWords, setIsAdding, setAdded }) => {
     Swal.fire({
       icon: 'success',
       title: 'Agregada!',
-      text: `La palabra ${word} ha sido añadida`,
+      text: `La palabra ${word} ha sido añadida.`,
       showConfirmButton: false,
       timer: 1500,
     });
