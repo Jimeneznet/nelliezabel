@@ -27,7 +27,7 @@ const SideNavbar = () => {
   );
 
   const wrapperClasses = ClassNames(
-    "h-screen px-4 pt-8 pb-4 bg-light flex justify-between flex-col shadow-2xl",
+    "px-4 pt-8 pb-4 bg-light flex justify-between flex-col shadow-2xl",
     {
       ["w-80"]: !toggleCollapse,
       ["w-20"]: toggleCollapse,

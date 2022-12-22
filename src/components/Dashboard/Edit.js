@@ -120,7 +120,7 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
       
       <form className="w-5/6 m-8" onSubmit={handleUpdate}>
         <div className=''>
-          <h1 className="bg-secondaryHeader  h-[4rem] shadow-2xl z-1  font-bold indent-12 text-white align-baseline text-center mt-3">Modificar palabra</h1>
+          <h1 className="bg-secondaryHeader  h-[3rem] shadow-2xl z-1  font-bold indent-12 text-white align-baseline text-center mt-3">Modificar palabra</h1>
         </div>
         
         <div className='flex items-baseline space-x-5 text-3xl' > 
