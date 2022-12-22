@@ -50,39 +50,6 @@ const Header = ({ children }: any) => {
           )}
         </div>
       </div>
-      <div className="navbar-center">
-        {user ? null : (
-          <div>
-            <Link className="text-[#fbfbfb] text-xl mx-16 w-40" to="/">
-              Portal de noticias
-            </Link>
-            <Link
-              className="text-[#fbfbfb] text-xl mx-16 w-40"
-              to="/dictionary"
-            >
-              Diccionario
-            </Link>
-          </div>
-        )}
-      </div>
-      <div className="navbar-end">
-        {user ? (
-          <div>
-            <button
-              className="btn btn-ghost mx-4 text-white"
-              onClick={() => logout()}
-            >
-              Cerrar Sesión
-            </button>
-          </div>
-        ) : (
-          <div>
-            <Link className="text-[#fbfbfb] mx-9 text-xl" to="/login">
-              Iniciar Sesion
-            </Link>
-          </div>
-        )}
-      </div>
     </div>
   );
 };

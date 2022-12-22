@@ -9,8 +9,10 @@ const users = () => {
       <div className="">
         <Header>Centro de Administracion</Header>
         <Layout>
-          Noticias
-          <NewsCrud></NewsCrud>
+          <div className="p-4 text-5xl text-black">
+            Noticias
+            <NewsCrud />
+          </div>
         </Layout>
       </div>
     </div>
