@@ -10,6 +10,7 @@ const Add = ({ words, setWords, setIsAdding, setAdded }) => {
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
   const [video, setVideo] = useState('');
+  const [isChecked, setIsChecked] = useState(false);
 
   function containsNumbers(x){
     return /\d/.test(x);
@@ -23,6 +24,9 @@ const Add = ({ words, setWords, setIsAdding, setAdded }) => {
     return pattern.test(x);
   }
   
+  const handleOnChange = () => {
+    setIsChecked(!isChecked);
+  };
 
   const handleAdd = async(e) => {
     e.preventDefault()
@@ -60,7 +64,7 @@ const Add = ({ words, setWords, setIsAdding, setAdded }) => {
     try{
     //AGREGADO
     const url = await uploadVideo(video)    //Se almacena el video en Firebase Storage    
-    newWord(word,description,category,url)
+    newWord(word,description,category,url,isChecked)
     Swal.fire({
       icon: 'success',
       title: 'Agregada!',
@@ -131,7 +135,17 @@ const Add = ({ words, setWords, setIsAdding, setAdded }) => {
             <option value="Jurídico">Jurídico</option>
           </select>
         </div>
-        
+        <div className='flex items-baseline space-x-5 text-3xl'>
+        <label htmlFor="isForMobile">Para App Mobile</label>
+        <input
+           type="checkbox"
+           id="isForMobile"
+           name="isForMobile"
+           value=""
+           checked={isChecked}
+           onChange={handleOnChange}
+         />
+        </div>
         <div className='flex items-baseline space-x-5 text-3xl'>
           <label htmlFor="video">Subir video </label>
         </div>

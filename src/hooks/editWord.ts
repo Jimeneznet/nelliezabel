@@ -8,7 +8,8 @@ async function editWord(word:any) {
         word: word.word,
         description: word.description,
         category: word.category,
-        video: word.url
+        video: word.url,
+        forAppMobile: word.isChecked
     }
     const words_collection_ref = collection(db,'words')
     const word_to_edit = doc(words_collection_ref,word.id)

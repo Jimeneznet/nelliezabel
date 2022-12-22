@@ -15,6 +15,7 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
   const [category, setCategory] = useState(selectedWord.data().category);
   const [video, setVideo] = useState(selectedWord.data().video);
   const [newVideo, setNewVideo] = useState("");
+  const [isChecked, setIsChecked] = useState(selectedWord.data().forAppMobile);
 
   function containsNumbers(x){
     return /\d/.test(x);
@@ -27,6 +28,10 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
     const pattern = /^[^a-zA-Z0-9]+$/;
     return pattern.test(x);
   }
+
+  const handleOnChange = () => {
+    setIsChecked(!isChecked);
+  };
 
   const handleUpdate = async(e) => {
     e.preventDefault();
@@ -72,6 +77,7 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
       description,
       category,
       url,
+      isChecked,
     };
     try{
       editWord(WordAEditar)
@@ -120,8 +126,42 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
           />
         </div>
 
+
         <div className='flex items-baseline space-x-5 text-3xl' > 
           <label className="" htmlFor="word" style={{width:'20%'}}>Descripción</label>
+        <input
+          className="bg-white"
+          id="description"
+          type="text"
+          name="description"
+          value={description}
+          onChange={e => setDescription(e.target.value)}
+        />
+        </div>
+        <div className='flex items-baseline space-x-5 text-3xl'>
+        <label htmlFor="category">Categoría</label>
+        <input
+          id="category"
+          type="text"
+          name="category"
+          value={category}
+          onChange={e => setCategory(e.target.value)}
+        />
+        </div>
+        <div className='flex items-baseline space-x-5 text-3xl'>
+        <label htmlFor="isForMobile">Para App Mobile</label>
+        <input
+           type="checkbox"
+           id="isForMobile"
+           name="isForMobile"
+           value=""
+           checked={isChecked}
+           onChange={handleOnChange}
+         />
+        </div>
+        <div className='flex items-baseline space-x-5 text-3xl'>
+        <label htmlFor="video">Cambiar video </label>
+
         <input
             id="description"
             type="text"
