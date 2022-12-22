@@ -139,13 +139,14 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
         />
         </div>
         <div className='flex items-baseline space-x-5 text-3xl'>
-        <label htmlFor="category">Categoría</label>
+        <label style={{width:'20%'}} htmlFor="category">Categoría</label>
         <input
           id="category"
           type="text"
           name="category"
           value={category}
           onChange={e => setCategory(e.target.value)}
+          class="mr-3"
         />
         </div>
         <div className='flex items-baseline space-x-5 text-3xl'>
@@ -159,38 +160,7 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
            onChange={handleOnChange}
          />
         </div>
-        <div className='flex items-baseline space-x-5 text-3xl'>
-        <label htmlFor="video">Cambiar video </label>
-
-        <input
-            id="description"
-            type="text"
-            name="description"
-            value={description}
-            onChange={e => setDescription(e.target.value)}
-            placeholder="Escriba la descripción.."
-          />        
-          </div>
-        
-        <div className='flex items-baseline space-x-5 text-3xl' > 
-          <label htmlFor="category" style={{width:'20%'}}>Categoría</label>
-          <select 
-            className='form-select'
-            name="category" 
-            id="category"
-            value={category}
-            onChange={e => setCategory(e.target.value)}   
-          >
-            <option value="">Selecciona una categoría</option>
-            <option value="Educación">Educación</option>
-            <option value="Psicología">Psicología</option>
-            <option value="Jurídico">Jurídico</option>
-          </select>
-        </div>
-
-       
         <div>
-
           <div className='grid grid-flow-col auto-cols-max gap-x-16'>        
             
             <div className='col-span-1'>

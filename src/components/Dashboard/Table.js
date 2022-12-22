@@ -66,6 +66,7 @@ const Table = ({ words, setWords, handleEdit, handleDelete }) => {
             <th>Palabra</th>
             <th>Descripción</th>
             <th>Categoría</th>
+            <th className="text-center">Para niños</th>
             <th colSpan={2} className="text-center">
               Acciones
             </th>
@@ -80,6 +81,12 @@ const Table = ({ words, setWords, handleEdit, handleDelete }) => {
                 <td>{Word.data().word}</td>
                 <td>{Word.data().description}</td>
                 <td>{Word.data().category}</td>
+                {Word.data().forAppMobile &&(
+                    <td className="text-center">✅</td>
+                )}
+                {!Word.data().forAppMobile &&(
+                    <td className="text-center">❌</td>
+                )}
                 <td className="text-right">
                   <button
                     onClick={() => handleEdit(Word.id)}
