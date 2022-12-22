@@ -42,7 +42,7 @@ const Table = ({ words, setWords, handleEdit, handleDelete }) => {
           <input value={search} onChange={Searcher} type="text" placeholder='Buscar palabra' className='form-control' />      
         </div>
 
-        <div className='text-end '>
+        <div className='text-end w-64'>
           <select 
             className='form-select'
             name="filtrar" 
