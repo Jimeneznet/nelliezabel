@@ -7,7 +7,7 @@ export type Word = {
 };
 
 export enum WordCategory {
-  Education = "education",
-  Law = "law",
-  Psychology = "psychology",
+  Education = "Educación",
+  Law = "Jurídico",
+  Psychology = "Psicología",
 }
