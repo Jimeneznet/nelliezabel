@@ -209,7 +209,11 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
 
             <div className='col-span-1'>
               <label className='text-3xl' >Video actual</label>
-              <iframe width="560" height="315" src={video} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+              <video width="560" height="315" controls autoPlay muted>
+                  <source src={video} type="video/mp4"/>
+              </video>
+
             </div>  
 
           </div>
