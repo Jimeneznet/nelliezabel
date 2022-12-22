@@ -21,7 +21,6 @@ const RegisterView = ({ submitHandler }:any) => {
                             Agregar Usuario
                             </h2>
                         </div>	
-
                         <div className='card-body'> 
                             <form onSubmit={submitHandler}>
                                 <div className="-space-y-px rounded-md shadow-sm">
@@ -30,29 +29,25 @@ const RegisterView = ({ submitHandler }:any) => {
                                     <input type="text" id="name" required autoComplete="Nombre" className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"/>
                                     </label>
                                     <br></br>
-
                                     <label>
                                         Rut:
                                     <input type="text" id="rut" required autoComplete="Rut" className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"/>
                                     </label>
                                     <br></br>
-
                                     <label>
                                         Correo electrónico:
                                     <input type="email" id="email" required autoComplete="Correo Electronico" className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"/>
                                     </label>
                                     <br></br>
-
-                                    
-                                    <select id="rol" className="select select-bordered w-full max-w-xs">
-                                        <option disabled selected value="" >Rol del Usuario</option>
-                                        <option value="Administrador">Administrador</option>
-                                        <option value="Consultor">Consultor</option>
-                                    </select>
-
+                                    <div>
+                                      <select id="rol" className="select select-bordered w-full max-w-xs mb-14">
+                                          <option disabled selected value="" >Rol del Usuario</option>
+                                          <option value="Administrador">Administrador</option>
+                                          <option value="Consultor">Consultor</option>
+                                      </select>
+                                    </div>
                                     <div className='flex flex-col items-center'>
                                         <button type="submit" className="btn btn-wide">Registrar</button>
-
                                     </div>  
                                 </div>
                             </form>

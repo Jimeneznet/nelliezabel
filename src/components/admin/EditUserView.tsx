@@ -31,16 +31,16 @@ const EditUserView = ({ submitHandler,nombre,rol,setNombre,setRol }:any) => {
                                     <input value={nombre} onChange={(e)=>setNombre(e.target.value)} type="text" id="name" required autoComplete="Nombre" className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"/>
                                     </label>
                                     <br></br>
-
-                                    <label>
-                                        Rol:
-                                        <select id="rol" onChange={(e)=>setRol(e.target.value)} className="select select-bordered w-full max-w-xs">
-                                        <option disabled selected value={rol}>{rol} - Actual</option>
-                                        <option value="Administrador">Administrador</option>
-                                        <option value="Consultor">Consultor</option>
-                                    </select>
-                                    </label>
-                                    <br></br>
+                                    <div>
+                                      <label>
+                                          Rol:
+                                          <select id="rol" onChange={(e)=>setRol(e.target.value)} className="select select-bordered w-full max-w-xs mb-14">
+                                          <option disabled selected value={rol}>{rol} - Actual</option>
+                                          <option value="Administrador">Administrador</option>
+                                          <option value="Consultor">Consultor</option>
+                                      </select>
+                                      </label>
+                                    </div>
 
                                     <div className='flex flex-col items-center'>
                                         <button type="submit" className="btn btn-wide">Editar</button>
