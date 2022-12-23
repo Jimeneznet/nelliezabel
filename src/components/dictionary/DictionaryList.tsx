@@ -9,7 +9,9 @@ const DictionaryList = ({ words }: { words: Word[] }) => {
 
   if (currentWords.length === 0) {
     return (
-      <div className="flex justify-center mt-10">
+      <div className="flex justify-center mt-10 flex-col items-center gap-4">
+        <h2 className="text-3xl">No hay palabras para mostrar.</h2>
+        <h2 className=" italic">(O se están cargando)</h2>
         <progress className="progress w-1/2 progress-primary" />
       </div>
     );
