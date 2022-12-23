@@ -14,7 +14,7 @@ export const filterCategory = (
 ) => {
   const filteredCategories = categoriesControl
     .map((element) => {
-      if (element.categoryEnabled) return element.categoryName;
+      return element.categoryEnabled ? element.categoryName : null;
     })
     .filter((element) => {
       return element != null && element !== undefined && element !== "";

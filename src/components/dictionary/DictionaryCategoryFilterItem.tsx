@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-
 export interface ICategoryFilter {
   categoryName: string;
   categoryEnabled: boolean;

@@ -6,7 +6,6 @@ import { useEffect, useState, useRef } from "react";
 import { filterWords } from "../components/utils/Filter";
 import { Word } from "@lib/types/word.types";
 import DictionarySearchInput from "../components/dictionary/DictionarySearchInput";
-import Checkbox from "../components/utils/Checkbox";
 
 import { useHandleHistory, useHistory } from "hooks/dictionary/history.hooks";
 import { ICategoryFilterList } from "@components/dictionary/DictionaryCategoryFilterList";
@@ -14,13 +13,10 @@ import { ICategoryFilterList } from "@components/dictionary/DictionaryCategoryFi
 const Dictionary = () => {
   const { words } = useWord();
   const { history, setHistory } = useHistory();
-  const searchButtonRef = useRef<HTMLButtonElement>(null);
+  const searchButtonRef = useRef<HTMLLabelElement>(null);
   const handleHistory = useHandleHistory();
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredWords, setFilteredWords] = useState<Word[]>([]);
-  const [isCheckedA, setIsCheckedA] = useState(false);
-  const [isCheckedB, setIsCheckedB] = useState(false);
-  const [isCheckedC, setIsCheckedC] = useState(false);
   const categories = ["Psicología", "Jurídico", "Educación"];
   const [categoriesControl, setCategories] = useState(
     categories.map((category) => {
@@ -64,18 +60,6 @@ const Dictionary = () => {
   const categoryProp: ICategoryFilterList = {
     categories: categoriesControl,
     callback: categoryToggleCallbackFunction,
-  };
-
-  const handleChangeA = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setIsCheckedA(e.target.checked);
-  };
-
-  const handleChangeB = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setIsCheckedB(e.target.checked);
-  };
-
-  const handleChangeC = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setIsCheckedC(e.target.checked);
   };
 
   return (

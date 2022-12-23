@@ -4,14 +4,13 @@ import {
   DictionaryCategoryFilterList,
   ICategoryFilterList,
 } from "./DictionaryCategoryFilterList";
-import { ICategoryFilter } from "./DictionaryCategoryFilterItem";
 
 export interface IDictionarySearchInput {
   handleSearch: () => void;
   handleInputChange: (value: string) => void;
   history: string[];
   searchQuery: string;
-  searchButtonRef: RefObject<HTMLButtonElement>;
+  searchButtonRef: RefObject<HTMLLabelElement>;
   categories?: ICategoryFilterList;
 }
 const inputStyles: CSS.Properties = {
@@ -67,13 +66,27 @@ const DictionarySearchInput: React.FC<IDictionarySearchInput> = (props) => {
             ""
           )}
 
-          <button
-            className="btn btn-square w-full md:w-56 btn-primary"
+          <label
+            className="btn btn-square btn-primary m-0 w-fit px-2 md:px-4"
             onClick={handleSearchLocal}
             ref={props.searchButtonRef}
           >
-            Buscar
-          </button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6 mx-2"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+              />
+            </svg>
+            <div className="inline">Buscar</div>
+          </label>
         </div>
       </div>
       <div></div>
