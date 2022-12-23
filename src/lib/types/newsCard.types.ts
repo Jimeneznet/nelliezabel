@@ -2,6 +2,8 @@ export type newsCard = {
     id: string,
     title: string,
     date: string,
+    uploadDate: string,
     author: string,
-    url: string,
+    imgUrl: string,
+    videoUrl: string,
 }
