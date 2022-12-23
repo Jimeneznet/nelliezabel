@@ -31,8 +31,14 @@ const Header = ({ children }: any) => {
         <div className="navbar-end">
           {user ? (
             <div>
+              <Link
+                className="btn btn-ghost text-xs lg:mx-4 lg:text-base text-white"
+                to="/user/credentials"
+              >
+                Cambiar Credenciales
+              </Link>
               <button
-                className="btn btn-ghost text-xs lg:mx-4 text-white"
+                className="btn btn-ghost text-xs lg:mx-4 lg:text-base text-white"
                 onClick={() => logout()}
               >
                 Cerrar Sesión
