@@ -31,7 +31,6 @@ const handleMenuItems = (user: User) => {
         { id: 1, label: "Administración de Noticias", icon: ArticleIcon, link: "/admin/news" },
         { id: 2, label: "Administración de Palabras", icon: HomeIcon, link: "/admin/dictionary" },
       ];
-
     default:
       return [];
   }
