@@ -12,7 +12,7 @@ const Header = ({ setIsAdding, setIsAuthenticated }) => {
           {/* <Datalist/> */}
         </div>
         <div className='text-end flex-1 w-32'>
-          <button className=' btn mt-5 border-secondaryHeader bg-secondaryHeader hover:bg-primaryHeader hover:border-primaryHeader' onClick={() => setIsAdding(true)}>Agregar palabra</button>
+          <button className=' btn mt-5 border-secondaryHeader bg-secondaryHeader hover:bg-primaryHeader hover:border-primaryHeader mx-5 my-1' onClick={() => setIsAdding(true)}>Agregar palabra</button>
         </div>
       </div>
     </header>

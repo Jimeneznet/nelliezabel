@@ -133,14 +133,14 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
   };
 
   return (
-    <div className="contain-table">
+    <div className="overflow-x-auto mx-14">
       
       <form className="w-5/6 m-8" onSubmit={handleUpdate}>
         <div className=''>
-          <h1 className="bg-secondaryHeader  h-[3rem] shadow-2xl z-1  font-bold indent-12 text-white align-baseline text-center mt-3">Modificar palabra</h1>
+          <h1 className="bg-secondaryHeader rounded-lg h-[3rem] font-bold text-3xl indent-12 text-white align-baseline text-center mt-3">Modificar palabra</h1>
         </div>
         
-        <div className='flex items-baseline space-x-5 text-3xl' > 
+        <div className='flex items-baseline space-x-5 text-3xl mt-4' > 
           <label className="" htmlFor="word"style={{width:'20%'}}>Palabra</label>
           <input
             id="word"
@@ -149,6 +149,7 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
             value={word}
             onChange={e => setWord(e.target.value)}
             placeholder="Escriba la palabra.."
+            className='input w-full mb-4'
           />
         </div>
 
@@ -156,18 +157,19 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
         <div className='flex items-baseline space-x-5 text-3xl' > 
           <label className="" htmlFor="word" style={{width:'20%'}}>Descripción</label>
         <input
-          className="bg-white"
+          className="input w-full mb-4"
           id="description"
           type="text"
           name="description"
           value={description}
           onChange={e => setDescription(e.target.value)}
+          
         />
         </div>
         <div className='flex items-baseline space-x-5 text-3xl' > 
-        <label htmlFor="category" style={{width:'20.2%'}}>Categoría</label>
+        <label htmlFor="category" style={{width:'16.3%'}}>Categoría</label>
           <select 
-            className='form-select'
+            className='select w-full max-w-xs '
             name="category" 
             id="category"
             onChange={e => setCategory(e.target.value)}   
@@ -178,17 +180,26 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
             <option id="option3"value="Jurídico">Jurídico</option>
           </select>
         </div>
-        <div className='flex items-baseline space-x-5 text-3xl'>
-        <label htmlFor="isForMobile">Para niños</label>
-        <input
-           type="checkbox"
-           id="isForMobile"
-           name="isForMobile"
-           value=""
-           checked={isChecked}
-           onChange={handleOnChange}
-         />
+
+        <div className='grid grid-flow-col auto-cols-max gap-x-16'>
+
+          <div className='flex items-baseline space-x-5 text-3xl mt-3 '>
+            <label htmlFor="isForMobile">Para niños</label> 
+          </div>
+
+          <div className="mt-5">
+            <input
+              type="checkbox"
+              id="isForMobile"
+              name="isForMobile"
+              value=""
+              checked={isChecked}
+              onChange={handleOnChange}
+              className="checkbox"
+            />
+          </div>
         </div>
+
         <div>
           <div className='grid grid-flow-col auto-cols-max gap-x-16'>        
             
@@ -206,6 +217,7 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
                     type="file"
                     name="video"
                     accept="video/mp4,video/x-m4v,video/*"
+                    className='file-input file-input-bordered w-full max-w-xs ' 
                     onChange={e => setVideo(e.target.files[0])}
                   />
                 </div>

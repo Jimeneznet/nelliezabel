@@ -99,16 +99,16 @@ const Add = ({ words, setWords, setIsAdding, setAdded }) => {
 
   return (
 
-    <div className="mx-auto max-w-screen-xl p-0.5">
+    <div className=" overflow-x-auto mx-14  ">
       <div>
         
       </div>  
       <form className="w-5/6 m-8" onSubmit={handleAdd}>
         
-        <h1 className="bg-secondaryHeader  h-[3rem] shadow-2xl z-1 text-center font-bold indent-12 text-white align-baseline">Nueva palabra</h1>
+        <h1 className="bg-secondaryHeader rounded-lg h-[3rem]  z-1 text-center font-bold text-3xl indent-12 text-white align-baseline">Nueva palabra</h1>
 
-        <div className='flex items-baseline space-x-5 text-3xl' > 
-          <label className="" htmlFor="word" style={{width:'20.5%'}} >Palabra</label>
+        <div className='flex items-baseline space-x-5 text-3xl mt-4' > 
+          <label className="" htmlFor="word" style={{width:'20%'}} >Palabra</label>
           <input
             id="word"
             type="text"
@@ -116,6 +116,7 @@ const Add = ({ words, setWords, setIsAdding, setAdded }) => {
             value={word}
             onChange={e => setWord(e.target.value)}
             placeholder="Escriba la palabra.."
+            className='input w-full mb-4'
           />
         </div>
 
@@ -128,16 +129,18 @@ const Add = ({ words, setWords, setIsAdding, setAdded }) => {
               value={description}
               onChange={e => setDescription(e.target.value)}
               placeholder="Escriba la descripción.."
+              className='input w-full mb-4'
             />        
         </div>
         
         <div className='flex items-baseline space-x-5 text-3xl' > 
-        <label htmlFor="category" style={{width:'20.2%'}}>Categoría</label>
+        <label htmlFor="category" style={{width:'16.3%'}}>Categoría</label>
           <select 
-            className='form-select'
+            className='select w-full max-w-xs '
             name="category" 
             id="category"
-            onChange={e => setCategory(e.target.value)}   
+            onChange={e => setCategory(e.target.value)}  
+             
           >
             <option value="">Selecciona una categoría</option>
             <option value="Educación">Educación</option>
@@ -145,22 +148,31 @@ const Add = ({ words, setWords, setIsAdding, setAdded }) => {
             <option value="Jurídico">Jurídico</option>
           </select>
         </div>
-        <div className='flex items-baseline space-x-5 text-3xl'>
-        <label htmlFor="isForMobile">Para niños</label>
-        <input
-           type="checkbox"
-           id="isForMobile"
-           name="isForMobile"
-           value=""
-           checked={isChecked}
-           onChange={handleOnChange}
-         />
+        
+        <div className='grid grid-flow-col auto-cols-max gap-x-16'>
+
+          <div className='flex items-baseline space-x-5 text-3xl mt-3 '>
+            <label htmlFor="isForMobile">Para niños</label> 
+          </div>
+
+          <div className="mt-5">
+            <input
+              type="checkbox"
+              id="isForMobile"
+              name="isForMobile"
+              value=""
+              checked={isChecked}
+              onChange={handleOnChange}
+              className="checkbox"
+            />
+          </div>
         </div>
-        <div className='flex items-baseline space-x-5 text-3xl'>
+        
+        <div className='flex items-baseline space-x-5 text-3xl mt-5'>
           <label htmlFor="video">Subir video </label>
         </div>
 
-        <div className='flex items-baseline space-x-5 text-3xl' > 
+        <div className='flex items-baseline space-x-5 text-3xl mt-4' > 
         <input
           id="video"
           type="file"
