@@ -218,7 +218,7 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
                     name="video"
                     accept="video/mp4,video/x-m4v,video/*"
                     className='file-input file-input-bordered w-full max-w-xs ' 
-                    onChange={e => setVideo(e.target.files[0])}
+                    onChange={e => setNewVideo(e.target.files[0])}
                   />
                 </div>
 
