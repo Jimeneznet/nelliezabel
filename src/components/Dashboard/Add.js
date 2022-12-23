@@ -99,7 +99,7 @@ const Add = ({ words, setWords, setIsAdding, setAdded }) => {
 
   return (
 
-    <div className="container">
+    <div className="mx-auto max-w-screen-xl p-0.5">
       <div>
         
       </div>  
@@ -166,6 +166,7 @@ const Add = ({ words, setWords, setIsAdding, setAdded }) => {
           type="file"
           name="video"
           accept="video/mp4,video/x-m4v,video/*"
+          className='file-input file-input-bordered w-full max-w-xs '
           onChange={e => setVideo(e.target.files[0])}
         />
         </div>

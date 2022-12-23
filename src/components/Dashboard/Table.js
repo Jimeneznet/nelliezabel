@@ -33,17 +33,17 @@ const Table = ({ words, setWords, handleEdit, handleDelete }) => {
 
   
   return (
-    <div className="contain-table">
+    <div className="overflow-x-auto mx-4" style={{}}>
 
       <div className='flex justify-content-center gap-5'>        
 
         <div className='grow w-16 mr-1'>           
-          <input value={search} onChange={Searcher} type="text" placeholder='Buscar palabra' className='form-control' />      
+          <input value={search} onChange={Searcher} type="text" placeholder='Buscar palabra' className='input w-full max-w-xs mt-1 ml-1' />      
         </div>
 
-        <div className='text-end w-64'>
+        <div className='text-end w-64 mr-1 mt-1'>
           <select 
-            className='form-select'
+            className='select w-full max-w-xs '
             name="filtrar" 
             id="filtrar"
             onChange={Filtrar}    
@@ -57,16 +57,16 @@ const Table = ({ words, setWords, handleEdit, handleDelete }) => {
       </div>
 
 
-      <table className="striped-table mt-2">
-        <thead className='text-3xl'>
-          <tr className="bg-secondaryHeader h-[5rem] shadow-lg z-1 text-white mr-3">
-            <th>ID.</th>
+      <table className="table mt-2">
+        <thead className='text-3xl '>
+          <tr className=" h-[5rem] z-1 text-white mr-3">
+            <th className='text-3xl text-white bg-secondaryHeader'>ID.</th>
             {/* <th>Código Serial.</th> */}
-            <th>Palabra</th>
-            <th>Descripción</th>
-            <th className="text-center">Categoría</th>
-            <th className="text-center">Infantil</th>
-            <th colSpan={2} className="text-center">
+            <th className='text-3xl text-white bg-secondaryHeader'>Palabra</th>
+            <th className='text-3xl text-white bg-secondaryHeader'>Descripción</th>
+            <th className="text-center text-3xl text-white bg-secondaryHeader">Categoría</th>
+            <th className="text-center text-3xl text-white bg-secondaryHeader">Infantil</th>
+            <th colSpan={2} className="text-center text-3xl text-white bg-secondaryHeader">
               Acciones
             </th>
           </tr>
