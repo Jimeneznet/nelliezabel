@@ -24,6 +24,7 @@ export const DictionaryCategoryFilterItem: React.FC<ICategoryFilter> = (
           type="checkbox"
           className="toggle toggle-secondary"
           checked={props.categoryEnabled}
+          onChange={() => {}}
         />
       </label>
     </div>

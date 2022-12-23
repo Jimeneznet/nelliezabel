@@ -16,7 +16,7 @@ export const DictionaryCategoryFilterList: React.FC<ICategoryFilterList> = (
   return (
     <div className="dropdown">
       <label className="btn rounded-none bordered m-0" tabIndex={0}>
-        Categorías
+        <div className="hidden md:inline">Categorías</div>
       </label>
       <ul
         tabIndex={0}

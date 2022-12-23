@@ -8,31 +8,8 @@ export const filterQuery = (sentence: string) => {
     .filter((item) => item !== "");
   return search;
 };
-export const filterCategory = (
-  isCheckedA: boolean,
-  isCheckedB: boolean,
-  isCheckedC: boolean
-) => {
-  let categories = ["Educación", "Jurídico", "Psicología"];
-  isCheckedA === true && isCheckedB === true && isCheckedC === true
-    ? console.log("without filters")
-    : isCheckedA === true && isCheckedB === true
-    ? categories.splice(2, 1)
-    : isCheckedB === true && isCheckedC === true
-    ? categories.splice(0, 1)
-    : isCheckedA === true && isCheckedC === true
-    ? categories.splice(1, 1)
-    : isCheckedA === true
-    ? (categories = categories.filter((tech) => tech === "Educación"))
-    : isCheckedB === true
-    ? (categories = categories.filter((tech) => tech === "Jurídico"))
-    : isCheckedC === true
-    ? (categories = categories.filter((tech) => tech === "Psicología"))
-    : console.log("without filters");
-  return categories;
-};
 
-export const filterCategory2 = (
+export const filterCategory = (
   categoriesControl: Array<{ categoryName: string; categoryEnabled: boolean }>
 ) => {
   const filteredCategories = categoriesControl
@@ -50,7 +27,7 @@ export const filterWords = (
   searchQuery: string,
   categoriesControl: Array<{ categoryName: string; categoryEnabled: boolean }>
 ) => {
-  const categories = filterCategory2(categoriesControl);
+  const categories = filterCategory(categoriesControl);
   const parsedFilter = filterQuery(searchQuery);
   let parsedWords: Word[] = [];
 
@@ -70,17 +47,14 @@ export const filterWords = (
       }
     }
   }
-  console.log(categories);
 
   if (parsedWords.length === 0) return [];
   if (categories.length !== 3) {
     for (let i = 0; i < parsedWords.length; i++) {
       const category = parsedWords[i].category;
-      console.log(category);
       if (!categories.includes(category)) {
         delete parsedWords[i];
       } else {
-        console.log(category);
       }
     }
   }
@@ -88,7 +62,6 @@ export const filterWords = (
   parsedWords = parsedWords.filter((element) => {
     return element != null && element !== undefined;
   });
-  console.log(parsedWords);
 
   return parsedWords;
 };
