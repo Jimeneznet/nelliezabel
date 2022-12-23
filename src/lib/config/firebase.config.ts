@@ -79,13 +79,16 @@ const logInWithEmailAndPassword = async (email:any, password:any) => {
     await signInWithEmailAndPassword(auth, email, password);
   } catch (err:any) {
     console.error(err);
-    alert(err.message);
+    alert("Ha ocurrido un error al iniciar sesión, compruebe que haya ingresado bien sus credenciales");
   }
 };
 const registerWithEmailAndPassword = async (rol:any, email:any, password:any, rut:any,nombre:any,status:any) => {
   try {
+    const currentUser = auth.currentUser;
     const res = await createUserWithEmailAndPassword(auth, email, password);
+    await auth.updateCurrentUser(currentUser);
     const user = res.user;
+
     await addDoc(collection(db, "usuarios"), {
       uid: user.uid,
       rol,

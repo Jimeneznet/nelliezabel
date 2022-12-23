@@ -3,7 +3,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
 
 const Header = ({ children }: any) => {
-  const [user, loading] = useAuthState(auth);
+  const [user] = useAuthState(auth);
   return (
     <div>
       <div className="navbar bg-secondaryHeader  h-[7rem] shadow-2xl z-1">

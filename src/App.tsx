@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Word from './pages/admin/Word';
-import Game from './pages/admin/Game';
+import Auth from './pages/admin/Auth';
 import News from './pages/admin/News';
 import Users from './pages/admin/Users';
 import Home from './pages/Home';
@@ -13,9 +13,14 @@ import CreateNews from 'pages/news/CreateNews';
 import EditNews from 'pages/news/EditNews';
 //import {CrudDictionary} from './pages/admin/CrudDictionary';
 import CrudDictionary from "./pages/admin/CrudDictionary";
+import { ProtectedRoute } from './lib/context/user.context';
+import EditCredentialsView from './pages/admin/EditCredentials';
+import ForgotPassword from 'pages/ForgotPassword';
+import { useAuthStateChange } from './hooks/auth/auth.hooks';
 
 
 function App() {
+  useAuthStateChange();
   return (
       <Router>
       <Routes>
@@ -26,17 +31,18 @@ function App() {
 
             <Route path='/admin/crud-dictionary' element={ <CrudDictionary /> }/>
 
-            
+            <Route path='/forgot-password' element={ <ForgotPassword /> }/>
+
             <Route path='/admin/dictionary' element={
-              // <ProtectedRoute>
+              <ProtectedRoute>
                 <Word />
-              // </ProtectedRoute>
+              </ProtectedRoute>
             } />
             <Route path='/register' element={ <Register /> }/>
             <Route path='/admin/news' element={
-              //<ProtectedRoute>
+              <ProtectedRoute>
                 <News />
-              //</ProtectedRoute>
+              </ProtectedRoute>
             }/>
             <Route path='/admin/news/create' element={
               //<ProtectedRoute>
@@ -49,15 +55,19 @@ function App() {
               //</ProtectedRoute>
             }/>
             <Route path='/admin/users' element={
-              //<ProtectedRoute>
+              <ProtectedRoute>
                 <Users />
-              //</ProtectedRoute>
+              </ProtectedRoute>
             }/>
             <Route path='/admin/users/edit/:uid' element={ <UserEdit /> }/>
-            <Route path='/admin/game' element={
-              //<ProtectedRoute>
-                <Game />
-              //</ProtectedRoute>
+            <Route path='/user/credentials' element={
+                <EditCredentialsView /> 
+            }
+            />
+            <Route path='/admin' element={
+              <ProtectedRoute>
+                <Auth />
+              </ProtectedRoute>
             }/>
             <Route path='*' element={<h1>404 Page Not Found</h1>}/>
           </Routes>
