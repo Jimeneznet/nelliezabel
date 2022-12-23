@@ -8,10 +8,11 @@ import Login from './pages/Login';
 import Dictionary from 'pages/Dictionary';
 import Register from 'pages/Register';
 import UserEdit from 'pages/admin/UserEdit';
+
+
 import NewsDetail from 'pages/news/NewsDetail';
 import CreateNews from 'pages/news/CreateNews';
 import EditNews from 'pages/news/EditNews';
-//import {CrudDictionary} from './pages/admin/CrudDictionary';
 import CrudDictionary from "./pages/admin/CrudDictionary";
 import { ProtectedRoute } from './lib/context/user.context';
 import EditCredentialsView from './pages/admin/EditCredentials';
@@ -29,7 +30,6 @@ function App() {
             <Route path='/dictionary' element={ <Dictionary /> }/>
             <Route path='/news/:newsId' element={ <NewsDetail /> }/>
 
-            <Route path='/admin/crud-dictionary' element={ <CrudDictionary /> }/>
 
             <Route path='/forgot-password' element={ <ForgotPassword /> }/>
 

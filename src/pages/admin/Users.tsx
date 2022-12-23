@@ -57,7 +57,7 @@ const Users = () => {
 
   return (
     <div>
-      <Header>Administración de usuarios</Header>
+      <Header>Administración de Usuarios</Header>
       <Layout>
         <AdminView
           userDoc={userDoc}

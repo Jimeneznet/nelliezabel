@@ -9,7 +9,7 @@ const Word = () => {
     <div>
       <div className="">      
 
-        <Header>Centro de Administracion</Header>
+        <Header>Administración del Diccionario de señas</Header>
         <Layout>
 
        
