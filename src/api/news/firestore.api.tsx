@@ -18,7 +18,7 @@ const validateNewsData = (
 
 const validateFilesType = (img: File | null, video: File | null) => {
   if (
-    !img?.name.match(/\.(jpf|jpeg|png|gif)$/) ||
+    !img?.name.match(/\.(jpg|jpeg|png|gif)$/) ||
     !video?.name.match(/\.(mp4|mkv)$/)
   ) {
     return false;
