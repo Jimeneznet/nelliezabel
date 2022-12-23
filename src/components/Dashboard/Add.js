@@ -149,13 +149,13 @@ const Add = ({ words, setWords, setIsAdding, setAdded }) => {
           </select>
         </div>
         
-        <div className='grid grid-flow-col auto-cols-max gap-x-16'>
+        <div className='grid grid-flow-col auto-cols-max'>
 
           <div className='flex items-baseline space-x-5 text-3xl mt-3 '>
             <label htmlFor="isForMobile">Para niños</label> 
           </div>
 
-          <div className="mt-5">
+          <div className="mt-5 ml-10">
             <input
               type="checkbox"
               id="isForMobile"
@@ -190,12 +190,19 @@ const Add = ({ words, setWords, setIsAdding, setAdded }) => {
             <button class="btn btn-success disabled:opacity-50">Añadir</button>
           )}
         
+          {!isWaiting &&(
+            <button hidden={false} class="btn btn-error" style={{ marginLeft: '12px'}}onClick={() => setIsAdding(false)}>Cancelar</button>
+          )}
+
           {isWaiting &&(
-            <div className="flex items-center justify-center ">
-              <div className="w-16 h-16 border-b-2 border-purple-700 rounded-full animate-spin"></div>
+            <div className="flex items-center justify-center mt-10">
+              <progress className="progress w-80"></progress>
             </div>
           )}
-        <button hidden={isWaiting == true ? true : false }class="btn btn-error" style={{ marginLeft: '12px'}}onClick={() => setIsAdding(false)}>Cancelar</button>
+
+
+          
+        
         </div>
       </form>
       <div class=" mt-40">
