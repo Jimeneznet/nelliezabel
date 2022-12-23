@@ -42,7 +42,7 @@ const Add = ({ words, setWords, setIsAdding, setAdded }) => {
         showConfirmButton: true,
       });
     }else{
-      if (containsNumbers(word) || containsSpecialChars(word)){
+      if (containsNumbers(word) || containsSpecialChars(word) || hasOnlySpecialChars(word)){
         setIsWaiting(false)
         return Swal.fire({
           icon:'error',
@@ -105,7 +105,7 @@ const Add = ({ words, setWords, setIsAdding, setAdded }) => {
       </div>  
       <form className="w-5/6 m-8" onSubmit={handleAdd}>
         
-        <h1 className="bg-secondaryHeader  h-[4rem] shadow-2xl z-1 text-center font-bold indent-12 text-white align-baseline ">Nueva palabra</h1>
+        <h1 className="bg-secondaryHeader  h-[3rem] shadow-2xl z-1 text-center font-bold indent-12 text-white align-baseline">Nueva palabra</h1>
 
         <div className='flex items-baseline space-x-5 text-3xl' > 
           <label className="" htmlFor="word" style={{width:'20.5%'}} >Palabra</label>
@@ -132,7 +132,7 @@ const Add = ({ words, setWords, setIsAdding, setAdded }) => {
         </div>
         
         <div className='flex items-baseline space-x-5 text-3xl' > 
-        <label htmlFor="category" style={{width:'20.8%'}}>Categoría</label>
+        <label htmlFor="category" style={{width:'20.2%'}}>Categoría</label>
           <select 
             className='form-select'
             name="category" 
@@ -146,7 +146,7 @@ const Add = ({ words, setWords, setIsAdding, setAdded }) => {
           </select>
         </div>
         <div className='flex items-baseline space-x-5 text-3xl'>
-        <label htmlFor="isForMobile">Para App Mobile</label>
+        <label htmlFor="isForMobile">Para niños</label>
         <input
            type="checkbox"
            id="isForMobile"
@@ -186,6 +186,9 @@ const Add = ({ words, setWords, setIsAdding, setAdded }) => {
         <button hidden={isWaiting == true ? true : false }class="btn btn-error" style={{ marginLeft: '12px'}}onClick={() => setIsAdding(false)}>Cancelar</button>
         </div>
       </form>
+      <div class=" mt-40">
+
+        </div>
     </div>
   );
 };

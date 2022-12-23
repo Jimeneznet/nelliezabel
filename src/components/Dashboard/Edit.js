@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import Swal from 'sweetalert2';
 import { editWord } from 'hooks/editWord';
 import {doc,getDoc} from 'firebase/firestore';
@@ -17,6 +17,11 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
   const [newVideo, setNewVideo] = useState("");
   const [isChecked, setIsChecked] = useState(selectedWord.data().forAppMobile);
 
+  useEffect(() => {
+    categorySelected();
+  }, []);
+
+
   function containsNumbers(x){
     return /\d/.test(x);
   }
@@ -28,7 +33,19 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
     const pattern = /^[^a-zA-Z0-9]+$/;
     return pattern.test(x);
   }
+  function categorySelected(){
+    const comboBox = document.getElementById("category");
+    if (selectedWord.data().category == "Educación"){
+      comboBox.options[0].selected = true; 
+    }
+    if(selectedWord.data().category == "Psicología"){
+      comboBox.options[1].selected = true; 
+    }
+    if(selectedWord.data().category == "Jurídico"){
+      comboBox.options[2].selected = true; 
+    }
 
+  }
   const handleOnChange = () => {
     setIsChecked(!isChecked);
   };
@@ -45,7 +62,7 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
         showConfirmButton: true,
       });
     }else{
-      if (containsNumbers(word) || containsSpecialChars(word)){
+      if (containsNumbers(word) || containsSpecialChars(word) || hasOnlySpecialChars(word)){
         setIsWaiting(false)
         return Swal.fire({
           icon:'error',
@@ -120,7 +137,7 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
       
       <form className="w-5/6 m-8" onSubmit={handleUpdate}>
         <div className=''>
-          <h1 className="bg-secondaryHeader  h-[4rem] shadow-2xl z-1  font-bold indent-12 text-white align-baseline text-center mt-3">Modificar palabra</h1>
+          <h1 className="bg-secondaryHeader  h-[3rem] shadow-2xl z-1  font-bold indent-12 text-white align-baseline text-center mt-3">Modificar palabra</h1>
         </div>
         
         <div className='flex items-baseline space-x-5 text-3xl' > 
@@ -147,19 +164,22 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
           onChange={e => setDescription(e.target.value)}
         />
         </div>
-        <div className='flex items-baseline space-x-5 text-3xl'>
-        <label style={{width:'20%'}} htmlFor="category">Categoría</label>
-        <input
-          id="category"
-          type="text"
-          name="category"
-          value={category}
-          onChange={e => setCategory(e.target.value)}
-          class="mr-3"
-        />
+        <div className='flex items-baseline space-x-5 text-3xl' > 
+        <label htmlFor="category" style={{width:'20.2%'}}>Categoría</label>
+          <select 
+            className='form-select'
+            name="category" 
+            id="category"
+            onChange={e => setCategory(e.target.value)}   
+            
+          >
+            <option id="option1"value="Educación">Educación</option>
+            <option id="option2"value="Psicología">Psicología</option>
+            <option id="option3"value="Jurídico">Jurídico</option>
+          </select>
         </div>
         <div className='flex items-baseline space-x-5 text-3xl'>
-        <label htmlFor="isForMobile">Para App Mobile</label>
+        <label htmlFor="isForMobile">Para niños</label>
         <input
            type="checkbox"
            id="isForMobile"
@@ -209,7 +229,11 @@ const Edit = ({ words, selectedWord, setWords, setIsEditing,setEdited }) => {
 
             <div className='col-span-1'>
               <label className='text-3xl' >Video actual</label>
-              <iframe width="560" height="315" src={video} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+              <video width="560" height="315" controls autoPlay muted>
+                  <source src={video} type="video/mp4"/>
+              </video>
+
             </div>  
 
           </div>
