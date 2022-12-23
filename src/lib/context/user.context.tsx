@@ -64,3 +64,11 @@ export const ProtectedRoute = ({ children }: any) => {
   return children;
 };
 
+export const PublicRoute = ({children}: any) => {
+  const [user] = useAuthState(auth);
+  const navigate = useNavigate();
+
+  if(!user) return children;
+  navigate("/admin");
+  return;
+}
