@@ -1,5 +1,5 @@
 import React, { RefObject } from "react";
-import CSS from "csstype";
+import styles from "./dictionary.module.css"
 import {
   DictionaryCategoryFilterList,
   ICategoryFilterList,
@@ -13,11 +13,6 @@ export interface IDictionarySearchInput {
   searchButtonRef: RefObject<HTMLLabelElement>;
   categories?: ICategoryFilterList;
 }
-const inputStyles: CSS.Properties = {
-  borderRadius: 0,
-  borderTopLeftRadius: "6px",
-  borderBottomLeftRadius: "6px",
-};
 
 const DictionarySearchInput: React.FC<IDictionarySearchInput> = (props) => {
   const handleSearchLocal = (e: React.MouseEvent<HTMLElement>) => {
@@ -28,13 +23,12 @@ const DictionarySearchInput: React.FC<IDictionarySearchInput> = (props) => {
   return (
     <div className="flex gap-2 w-full flex-col md:flex-row my-4">
       <div className="flex-1">
-        <div className="input-group">
+        <div className="md:input-group">
           <div className="dropdown w-full">
             <input
               type="text"
               placeholder="Escribe una palabra"
-              className="input input-bordered w-full"
-              style={inputStyles}
+              className={`input input-bordered w-full ${styles.dictionaryInput} rounded-b-none`}
               onChange={(event) => props.handleInputChange(event.target.value)}
               value={props.searchQuery}
             />
@@ -59,7 +53,6 @@ const DictionarySearchInput: React.FC<IDictionarySearchInput> = (props) => {
               ))}
             </ul>
           </div>
-
           {props.categories ? (
             <DictionaryCategoryFilterList {...props.categories} />
           ) : (
@@ -67,7 +60,7 @@ const DictionarySearchInput: React.FC<IDictionarySearchInput> = (props) => {
           )}
 
           <label
-            className="btn btn-square btn-primary m-0 w-fit px-2 md:px-4"
+            className="btn btn-square btn-primary m-0 w-1/2 md:w-fit px-2 md:px-4 rounded-none rounded-br-md md:rounded-sm"
             onClick={handleSearchLocal}
             ref={props.searchButtonRef}
           >
